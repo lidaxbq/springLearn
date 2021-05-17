@@ -28,7 +28,7 @@ git clone https://gitee.com/zhong96/spring-framework-5.1.x.git
 >
 > ![添加cglib和objenesis](https://img-blog.csdnimg.cn/20190910100845635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dhbnF1YW56aG9uZw==,size_16,color_FFFFFF,t_70)
 
-3. `Aspectj`编译问题解决，主要是`aspectj`关键字Java语法违背，需要使用ajc编译器执行。下面就切换ajc编译器，首先需要下载`aspectj`，并且安装。   
+3. `Aspectj`编译问题解决sdfsdg，主要是`aspectj`关键字Java语法违背，需要使用ajc编译器执行。下面就切换ajc编译器，首先需要下载`aspectj`，并且安装。   
 - 为spring-aspect工程添加Facets属性
 ![为spring-aspect工程添加Facets属性](https://img-blog.csdnimg.cn/20191204100207422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dhbnF1YW56aG9uZw==,size_16,color_FFFFFF,t_70)
 - 编译器要改为`Ajc`，同时要设置Ajc的安装目录，如图1-27所示。记住，要选择到a spec飞jtools.jar这个层面，同时，务必要边择`Delegateto Javac`选顷，它的作用是只编译AspectJ的Facets项目，而其他则使用JDK代理。如果不勾选，则全部使用Ajc编译，那么会导致编译错误。
