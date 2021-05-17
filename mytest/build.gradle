@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'org.springframework'
+version '5.0.2.RELEASE'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":spring-beans"))
+    compile(project(":spring-context"))
+    compile(project(":spring-aop"))
+    compile(project(":spring-jdbc"))
+}
+
+test {
+//    useJUnitPlatform()
+}
