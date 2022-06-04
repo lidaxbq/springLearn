@@ -104,18 +104,18 @@ public abstract class DataSourceUtils {
 		if (conHolder != null && (conHolder.hasConnection() || conHolder.isSynchronizedWithTransaction())) {
 			conHolder.requested();
 			if (!conHolder.hasConnection()) {
-				logger.debug("Fetching resumed JDBC Connection from DataSource");
+				logger.info("Fetching resumed JDBC Connection from DataSource");
 				conHolder.setConnection(fetchConnection(dataSource));
 			}
 			return conHolder.getConnection();
 		}
 		// Else we either got no holder or an empty thread-bound holder here.
 
-		logger.debug("Fetching JDBC Connection from DataSource");
+		logger.info("Fetching JDBC Connection from DataSource");
 		Connection con = fetchConnection(dataSource);
 		// 当前线程支持同步
 		if (TransactionSynchronizationManager.isSynchronizationActive()) {
-			logger.debug("Registering transaction synchronization for JDBC Connection");
+			logger.info("Registering transaction synchronization for JDBC Connection");
 			// Use same Connection for further JDBC actions within the transaction.
 			// Thread-bound object will get removed by synchronization at transaction completion.
 			//	对事务中的进一步JDBC操作使用相同的Connection
@@ -175,7 +175,7 @@ public abstract class DataSourceUtils {
 		if (definition != null && definition.isReadOnly()) {
 			try {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Setting JDBC Connection [" + con + "] read-only");
+					logger.info("Setting JDBC Connection [" + con + "] read-only");
 				}
 				con.setReadOnly(true);
 			}
@@ -189,7 +189,7 @@ public abstract class DataSourceUtils {
 					exToCheck = exToCheck.getCause();
 				}
 				// "read-only not supported" SQLException -> ignore, it's just a hint anyway
-				logger.debug("Could not set JDBC Connection read-only", ex);
+				logger.info("Could not set JDBC Connection read-only", ex);
 			}
 		}
 
@@ -197,7 +197,7 @@ public abstract class DataSourceUtils {
 		Integer previousIsolationLevel = null;
 		if (definition != null && definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Changing isolation level of JDBC Connection [" + con + "] to " +
+				logger.info("Changing isolation level of JDBC Connection [" + con + "] to " +
 						definition.getIsolationLevel());
 			}
 			int currentIsolation = con.getTransactionIsolation();
@@ -223,7 +223,7 @@ public abstract class DataSourceUtils {
 			// Reset transaction isolation to previous value, if changed for the transaction.
 			if (previousIsolationLevel != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Resetting isolation level of JDBC Connection [" +
+					logger.info("Resetting isolation level of JDBC Connection [" +
 							con + "] to " + previousIsolationLevel);
 				}
 				con.setTransactionIsolation(previousIsolationLevel);
@@ -232,13 +232,13 @@ public abstract class DataSourceUtils {
 			// Reset read-only flag.
 			if (con.isReadOnly()) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Resetting read-only flag of JDBC Connection [" + con + "]");
+					logger.info("Resetting read-only flag of JDBC Connection [" + con + "]");
 				}
 				con.setReadOnly(false);
 			}
 		}
 		catch (Throwable ex) {
-			logger.debug("Could not reset JDBC Connection after transaction", ex);
+			logger.info("Could not reset JDBC Connection after transaction", ex);
 		}
 	}
 
@@ -309,10 +309,10 @@ public abstract class DataSourceUtils {
 			doReleaseConnection(con, dataSource);
 		}
 		catch (SQLException ex) {
-			logger.debug("Could not close JDBC Connection", ex);
+			logger.info("Could not close JDBC Connection", ex);
 		}
 		catch (Throwable ex) {
-			logger.debug("Unexpected exception on closing JDBC Connection", ex);
+			logger.info("Unexpected exception on closing JDBC Connection", ex);
 		}
 	}
 
@@ -339,7 +339,7 @@ public abstract class DataSourceUtils {
 				return;
 			}
 		}
-		logger.debug("Returning JDBC Connection to DataSource");
+		logger.info("Returning JDBC Connection to DataSource");
 		doCloseConnection(con, dataSource);
 	}
 

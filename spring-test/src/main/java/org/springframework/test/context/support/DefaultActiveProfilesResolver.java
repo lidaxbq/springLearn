@@ -65,7 +65,7 @@ public class DefaultActiveProfilesResolver implements ActiveProfilesResolver {
 
 		if (descriptor == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format(
+				logger.info(String.format(
 					"Could not find an 'annotation declaring class' for annotation type [%s] and class [%s]",
 					annotationType.getName(), testClass.getName()));
 			}

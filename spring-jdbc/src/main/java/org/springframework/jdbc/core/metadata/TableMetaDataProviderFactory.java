@@ -67,7 +67,7 @@ public class TableMetaDataProviderFactory {
 					provider = new GenericTableMetaDataProvider(databaseMetaData);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Using " + provider.getClass().getSimpleName());
+					logger.info("Using " + provider.getClass().getSimpleName());
 				}
 				provider.initializeWithMetaData(databaseMetaData);
 				if (accessTableColumnMetaData) {

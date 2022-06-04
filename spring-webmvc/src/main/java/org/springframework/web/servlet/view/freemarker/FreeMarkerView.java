@@ -229,7 +229,7 @@ public class FreeMarkerView extends AbstractTemplateView {
 		}
 		catch (FileNotFoundException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("No FreeMarker view found for URL: " + url);
+				logger.info("No FreeMarker view found for URL: " + url);
 			}
 			return false;
 		}
@@ -302,7 +302,7 @@ public class FreeMarkerView extends AbstractTemplateView {
 		SimpleHash fmModel = buildTemplateModel(model, request, response);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rendering FreeMarker template [" + getUrl() + "] in FreeMarkerView '" + getBeanName() + "'");
+			logger.info("Rendering FreeMarker template [" + getUrl() + "] in FreeMarkerView '" + getBeanName() + "'");
 		}
 		// Grab the locale-specific version of the template.
 		Locale locale = RequestContextUtils.getLocale(request);

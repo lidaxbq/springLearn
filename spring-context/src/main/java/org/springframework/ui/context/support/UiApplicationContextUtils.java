@@ -66,7 +66,7 @@ public abstract class UiApplicationContextUtils {
 				}
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using ThemeSource [" + themeSource + "]");
+				logger.info("Using ThemeSource [" + themeSource + "]");
 			}
 			return themeSource;
 		}
@@ -82,7 +82,7 @@ public abstract class UiApplicationContextUtils {
 				themeSource = new ResourceBundleThemeSource();
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Unable to locate ThemeSource with name '" + THEME_SOURCE_BEAN_NAME +
+				logger.info("Unable to locate ThemeSource with name '" + THEME_SOURCE_BEAN_NAME +
 						"': using default [" + themeSource + "]");
 			}
 			return themeSource;

@@ -1,6 +1,8 @@
 package com.lida;
 
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -15,11 +17,39 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class XmlMainTest {
 	public static void main(String[] args) {
 
-		testBeanFactory();
-		testContext();
-		testJdbc();
-		testMybatis();
+//		testBeanFactory();
+//		testContext();
+//		testJdbc();
+//		testMybatis();
+//		测试动态网容器中增加或者删除bean
+		testAddAndDelete();
+	}
 
+	private static void testAddAndDelete() {
+		//		 (ApplicationContext在读取配置文件的时候,配置文件中的bena就会被初始化(不考虑bean的作用域))
+		ClassPathXmlApplicationContext  applicationContext = new ClassPathXmlApplicationContext("springContext.xml");
+		TestBean testBean = (TestBean) applicationContext.getBean("testBean");
+		System.out.println(testBean.getName());
+		TestBean testBean2 = (TestBean) applicationContext.getBean("testBean");
+		System.out.println(testBean.equals(testBean2));
+		BeanDefinitionRegistry beanDefReg = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+//		beanDefReg.getBeanDefinition(beanName);
+		beanDefReg.removeBeanDefinition("testBean");
+		try {
+			testBean = (TestBean) applicationContext.getBean("testBean");
+			System.out.println(testBean.getName());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+		BeanDefinitionBuilder beanDefBuilder = BeanDefinitionBuilder.genericBeanDefinition(TestBean.class);
+		BeanDefinition beanDef = beanDefBuilder.getBeanDefinition();
+		if (!beanDefReg.containsBeanDefinition("testBean")) {
+			beanDefReg.registerBeanDefinition("testBean", beanDef);
+		}
+		testBean2 = (TestBean) applicationContext.getBean("testBean");
+		System.out.println(testBean.equals(testBean2));
+		System.out.println(testBean2.getName());
 	}
 
 	private static void testMybatis() {

@@ -279,7 +279,7 @@ public class TransportHandlingSockJsService extends AbstractSockJsService implem
 				else {
 					response.setStatusCode(HttpStatus.NOT_FOUND);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Session not found, sessionId=" + sessionId +
+						logger.info("Session not found, sessionId=" + sessionId +
 								". The session may have been closed " +
 								"(e.g. missed heart-beat) while a message was coming in.");
 					}
@@ -289,13 +289,13 @@ public class TransportHandlingSockJsService extends AbstractSockJsService implem
 			else {
 				if (session.getPrincipal() != null) {
 					if (!session.getPrincipal().equals(request.getPrincipal())) {
-						logger.debug("The user for the session does not match the user for the request.");
+						logger.info("The user for the session does not match the user for the request.");
 						response.setStatusCode(HttpStatus.NOT_FOUND);
 						return;
 					}
 				}
 				if (!transportHandler.checkSessionType(session)) {
-					logger.debug("Session type does not match the transport type for the request.");
+					logger.info("Session type does not match the transport type for the request.");
 					response.setStatusCode(HttpStatus.NOT_FOUND);
 					return;
 				}
@@ -382,11 +382,11 @@ public class TransportHandlingSockJsService extends AbstractSockJsService implem
 					}
 					catch (Throwable ex) {
 						// Could be part of normal workflow (e.g. browser tab closed)
-						logger.debug("Failed to close " + session, ex);
+						logger.info("Failed to close " + session, ex);
 					}
 				}
 				if (logger.isDebugEnabled() && !removedIds.isEmpty()) {
-					logger.debug("Closed " + removedIds.size() + " sessions: " + removedIds);
+					logger.info("Closed " + removedIds.size() + " sessions: " + removedIds);
 				}
 			}, getDisconnectDelay());
 		}

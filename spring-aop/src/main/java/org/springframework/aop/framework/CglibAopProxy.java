@@ -158,7 +158,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 	@Override
 	public Object getProxy(@Nullable ClassLoader classLoader) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Creating CGLIB proxy: target source is " + this.advised.getTargetSource());
+			logger.info("Creating CGLIB proxy: target source is " + this.advised.getTargetSource());
 		}
 
 		try {
@@ -175,8 +175,9 @@ class CglibAopProxy implements AopProxy, Serializable {
 			}
 
 			// Validate the class, writing log messages as necessary.
+//			校验class
 			validateClassIfNecessary(proxySuperClass, classLoader);
-
+//    		配置enhancer
 			// Configure CGLIB Enhancer...
 			Enhancer enhancer = createEnhancer();
 			if (classLoader != null) {
@@ -190,7 +191,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			enhancer.setInterfaces(AopProxyUtils.completeProxiedInterfaces(this.advised));
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
 			enhancer.setStrategy(new ClassLoaderAwareUndeclaredThrowableStrategy(classLoader));
-
+//			设置拦截器
 			Callback[] callbacks = getCallbacks(rootClass);
 			Class<?>[] types = new Class<?>[callbacks.length];
 			for (int x = 0; x < types.length; x++) {
@@ -811,24 +812,24 @@ class CglibAopProxy implements AopProxy, Serializable {
 		@Override
 		public int accept(Method method) {
 			if (AopUtils.isFinalizeMethod(method)) {
-				logger.debug("Found finalize() method - using NO_OVERRIDE");
+				logger.info("Found finalize() method - using NO_OVERRIDE");
 				return NO_OVERRIDE;
 			}
 			if (!this.advised.isOpaque() && method.getDeclaringClass().isInterface() &&
 					method.getDeclaringClass().isAssignableFrom(Advised.class)) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Method is declared on Advised interface: " + method);
+					logger.info("Method is declared on Advised interface: " + method);
 				}
 				return DISPATCH_ADVISED;
 			}
 			// We must always proxy equals, to direct calls to this.
 			if (AopUtils.isEqualsMethod(method)) {
-				logger.debug("Found 'equals' method: " + method);
+				logger.info("Found 'equals' method: " + method);
 				return INVOKE_EQUALS;
 			}
 			// We must always calculate hashCode based on the proxy.
 			if (AopUtils.isHashCodeMethod(method)) {
-				logger.debug("Found 'hashCode' method: " + method);
+				logger.info("Found 'hashCode' method: " + method);
 				return INVOKE_HASHCODE;
 			}
 			Class<?> targetClass = this.advised.getTargetClass();
@@ -842,7 +843,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				// If exposing the proxy, then AOP_PROXY must be used.
 				if (exposeProxy) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Must expose proxy on advised method: " + method);
+						logger.info("Must expose proxy on advised method: " + method);
 					}
 					return AOP_PROXY;
 				}
@@ -851,7 +852,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				// Else use the AOP_PROXY.
 				if (isStatic && isFrozen && this.fixedInterceptorMap.containsKey(key)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Method has advice and optimizations are enabled: " + method);
+						logger.info("Method has advice and optimizations are enabled: " + method);
 					}
 					// We know that we are optimizing so we can use the FixedStaticChainInterceptors.
 					int index = this.fixedInterceptorMap.get(key);
@@ -859,7 +860,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				}
 				else {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Unable to apply any optimizations to advised method: " + method);
+						logger.info("Unable to apply any optimizations to advised method: " + method);
 					}
 					return AOP_PROXY;
 				}
@@ -876,14 +877,14 @@ class CglibAopProxy implements AopProxy, Serializable {
 				Class<?> returnType = method.getReturnType();
 				if (targetClass != null && returnType.isAssignableFrom(targetClass)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Method return type is assignable from target type and " +
+						logger.info("Method return type is assignable from target type and " +
 								"may therefore return 'this' - using INVOKE_TARGET: " + method);
 					}
 					return INVOKE_TARGET;
 				}
 				else {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Method return type ensures 'this' cannot be returned - " +
+						logger.info("Method return type ensures 'this' cannot be returned - " +
 								"using DISPATCH_TARGET: " + method);
 					}
 					return DISPATCH_TARGET;

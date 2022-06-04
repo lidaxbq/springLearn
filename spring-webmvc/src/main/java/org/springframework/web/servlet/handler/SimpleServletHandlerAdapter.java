@@ -25,6 +25,8 @@ import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * 基于 javax.servlet.Servlet 的 HandlerAdapter 实现类
+ *
  * Adapter to use the Servlet interface with the generic DispatcherServlet.
  * Calls the Servlet's {@code service} method to handle a request.
  *

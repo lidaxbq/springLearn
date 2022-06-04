@@ -146,7 +146,7 @@ public class ResourceArrayPropertyEditor extends PropertyEditorSupport {
 					catch (IOException ex) {
 						// ignore - might be an unresolved placeholder or non-existing base directory
 						if (logger.isDebugEnabled()) {
-							logger.debug("Could not retrieve resources for pattern '" + pattern + "'", ex);
+							logger.info("Could not retrieve resources for pattern '" + pattern + "'", ex);
 						}
 					}
 				}

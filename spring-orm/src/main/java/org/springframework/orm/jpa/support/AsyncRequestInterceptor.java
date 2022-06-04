@@ -95,7 +95,7 @@ class AsyncRequestInterceptor implements CallableProcessingInterceptor, Deferred
 
 	private void closeEntityManager() {
 		if (this.timeoutInProgress || this.errorInProgress) {
-			logger.debug("Closing JPA EntityManager after async request timeout/error");
+			logger.info("Closing JPA EntityManager after async request timeout/error");
 			EntityManagerFactoryUtils.closeEntityManager(emHolder.getEntityManager());
 		}
 	}

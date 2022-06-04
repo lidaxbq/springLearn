@@ -210,7 +210,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 			//向要包含的过滤规则添加JavaEE6的@ManagedBean注解
 			this.includeFilters.add(new AnnotationTypeFilter(
 					((Class<? extends Annotation>) ClassUtils.forName("javax.annotation.ManagedBean", cl)), false));
-			logger.debug("JSR-250 'javax.annotation.ManagedBean' found and supported for component scanning");
+			logger.info("JSR-250 'javax.annotation.ManagedBean' found and supported for component scanning");
 		}
 		catch (ClassNotFoundException ex) {
 			// JSR-250 1.1 API (as included in Java EE 6) not available - simply skip.
@@ -219,7 +219,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 			//向要包含的过滤规则添加@Named注解
 			this.includeFilters.add(new AnnotationTypeFilter(
 					((Class<? extends Annotation>) ClassUtils.forName("javax.inject.Named", cl)), false));
-			logger.debug("JSR-330 'javax.inject.Named' annotation found and supported for component scanning");
+			logger.info("JSR-330 'javax.inject.Named' annotation found and supported for component scanning");
 		}
 		catch (ClassNotFoundException ex) {
 			// JSR-330 API not available - simply skip.
@@ -397,13 +397,13 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 							metadataReader.getAnnotationMetadata());
 					if (isCandidateComponent(sbd)) {
 						if (debugEnabled) {
-							logger.debug("Using candidate component class from index: " + type);
+							logger.info("Using candidate component class from index: " + type);
 						}
 						candidates.add(sbd);
 					}
 					else {
 						if (debugEnabled) {
-							logger.debug("Ignored because not a concrete top-level class: " + type);
+							logger.info("Ignored because not a concrete top-level class: " + type);
 						}
 					}
 				}
@@ -441,13 +441,13 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 							sbd.setSource(resource);
 							if (isCandidateComponent(sbd)) {
 								if (debugEnabled) {
-									logger.debug("Identified candidate component class: " + resource);
+									logger.info("Identified candidate component class: " + resource);
 								}
 								candidates.add(sbd);
 							}
 							else {
 								if (debugEnabled) {
-									logger.debug("Ignored because not a concrete top-level class: " + resource);
+									logger.info("Ignored because not a concrete top-level class: " + resource);
 								}
 							}
 						}

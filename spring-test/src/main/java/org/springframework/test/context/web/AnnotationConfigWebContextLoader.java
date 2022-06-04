@@ -167,7 +167,7 @@ public class AnnotationConfigWebContextLoader extends AbstractGenericWebContextL
 			WebMergedContextConfiguration webMergedConfig) {
 		Class<?>[] annotatedClasses = webMergedConfig.getClasses();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Registering annotated classes: " + ObjectUtils.nullSafeToString(annotatedClasses));
+			logger.info("Registering annotated classes: " + ObjectUtils.nullSafeToString(annotatedClasses));
 		}
 		new AnnotatedBeanDefinitionReader(context).register(annotatedClasses);
 	}

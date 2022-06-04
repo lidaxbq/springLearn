@@ -140,7 +140,7 @@ public class DriverManagerDataSource extends AbstractDriverBasedDataSource {
 		String url = getUrl();
 		Assert.state(url != null, "'url' not set");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Creating new JDBC DriverManager Connection to [" + url + "]");
+			logger.info("Creating new JDBC DriverManager Connection to [" + url + "]");
 		}
 		return getConnectionFromDriverManager(url, props);
 	}

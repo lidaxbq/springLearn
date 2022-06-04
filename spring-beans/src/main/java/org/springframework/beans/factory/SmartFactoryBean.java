@@ -74,6 +74,7 @@ public interface SmartFactoryBean<T> extends FactoryBean<T> {
 	 * @return whether eager initialization applies
 	 * @see org.springframework.beans.factory.config.ConfigurableListableBeanFactory#preInstantiateSingletons()
 	 */
+	//是否立即初始化 applicationContext 在执行缓存单例bean的操作中，会getBean 这个工厂，并是否需要立即getBean这个工厂生产的对象
 	default boolean isEagerInit() {
 		return false;
 	}

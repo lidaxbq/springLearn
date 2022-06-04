@@ -213,7 +213,7 @@ public class EhCacheFactoryBean extends CacheConfiguration implements FactoryBea
 		// If no CacheManager given, fetch the default.
 		if (this.cacheManager == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using default EhCache CacheManager for cache region '" + cacheName + "'");
+				logger.info("Using default EhCache CacheManager for cache region '" + cacheName + "'");
 			}
 			this.cacheManager = CacheManager.getInstance();
 		}
@@ -225,13 +225,13 @@ public class EhCacheFactoryBean extends CacheConfiguration implements FactoryBea
 
 			if (cacheExists) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Using existing EhCache cache region '" + cacheName + "'");
+					logger.info("Using existing EhCache cache region '" + cacheName + "'");
 				}
 				rawCache = this.cacheManager.getEhcache(cacheName);
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Creating new EhCache cache region '" + cacheName + "'");
+					logger.info("Creating new EhCache cache region '" + cacheName + "'");
 				}
 				rawCache = createCache();
 				rawCache.setBootstrapCacheLoader(this.bootstrapCacheLoader);

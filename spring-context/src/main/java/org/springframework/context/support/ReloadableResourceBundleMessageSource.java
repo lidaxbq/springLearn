@@ -414,7 +414,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 					fileTimestamp = resource.lastModified();
 					if (propHolder != null && propHolder.getFileTimestamp() == fileTimestamp) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Re-caching properties for filename [" + filename + "] - file hasn't been modified");
+							logger.info("Re-caching properties for filename [" + filename + "] - file hasn't been modified");
 						}
 						propHolder.setRefreshTimestamp(refreshTimestamp);
 						return propHolder;
@@ -423,7 +423,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 				catch (IOException ex) {
 					// Probably a class path resource: cache it forever.
 					if (logger.isDebugEnabled()) {
-						logger.debug(resource + " could not be resolved in the file system - assuming that it hasn't changed", ex);
+						logger.info(resource + " could not be resolved in the file system - assuming that it hasn't changed", ex);
 					}
 					fileTimestamp = -1;
 				}
@@ -444,7 +444,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 		else {
 			// Resource does not exist.
 			if (logger.isDebugEnabled()) {
-				logger.debug("No properties file found for [" + filename + "] - neither plain properties nor XML");
+				logger.info("No properties file found for [" + filename + "] - neither plain properties nor XML");
 			}
 			// Empty holder representing "not found".
 			propHolder = new PropertiesHolder();
@@ -469,7 +469,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 			String resourceFilename = resource.getFilename();
 			if (resourceFilename != null && resourceFilename.endsWith(XML_SUFFIX)) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Loading properties [" + resource.getFilename() + "]");
+					logger.info("Loading properties [" + resource.getFilename() + "]");
 				}
 				this.propertiesPersister.loadFromXml(props, is);
 			}
@@ -483,13 +483,13 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 				}
 				if (encoding != null) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Loading properties [" + resource.getFilename() + "] with encoding '" + encoding + "'");
+						logger.info("Loading properties [" + resource.getFilename() + "] with encoding '" + encoding + "'");
 					}
 					this.propertiesPersister.load(props, new InputStreamReader(is, encoding));
 				}
 				else {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Loading properties [" + resource.getFilename() + "]");
+						logger.info("Loading properties [" + resource.getFilename() + "]");
 					}
 					this.propertiesPersister.load(props, is);
 				}
@@ -520,7 +520,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 	 * Subsequent resolve calls will lead to reloading of the properties files.
 	 */
 	public void clearCache() {
-		logger.debug("Clearing entire resource bundle cache");
+		logger.info("Clearing entire resource bundle cache");
 		this.cachedProperties.clear();
 		this.cachedMergedProperties.clear();
 	}

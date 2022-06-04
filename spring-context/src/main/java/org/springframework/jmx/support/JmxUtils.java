@@ -124,7 +124,7 @@ public abstract class JmxUtils {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Found MBeanServer: " + server);
+			logger.info("Found MBeanServer: " + server);
 		}
 		return server;
 	}

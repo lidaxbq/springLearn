@@ -92,7 +92,7 @@ public class NameMatchTransactionAttributeSource implements TransactionAttribute
 	 */
 	public void addTransactionalMethod(String methodName, TransactionAttribute attr) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding transactional method [" + methodName + "] with attribute [" + attr + "]");
+			logger.info("Adding transactional method [" + methodName + "] with attribute [" + attr + "]");
 		}
 		this.nameMap.put(methodName, attr);
 	}

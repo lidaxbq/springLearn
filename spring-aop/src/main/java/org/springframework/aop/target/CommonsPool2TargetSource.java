@@ -201,7 +201,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	 */
 	@Override
 	protected final void createPool() {
-		logger.debug("Creating Commons object pool");
+		logger.info("Creating Commons object pool");
 		this.pool = createObjectPool();
 	}
 
@@ -262,7 +262,7 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 	@Override
 	public void destroy() throws Exception {
 		if (this.pool != null) {
-			logger.debug("Closing Commons ObjectPool");
+			logger.info("Closing Commons ObjectPool");
 			this.pool.close();
 		}
 	}

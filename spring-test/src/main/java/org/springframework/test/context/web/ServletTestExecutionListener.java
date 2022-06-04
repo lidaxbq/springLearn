@@ -163,7 +163,7 @@ public class ServletTestExecutionListener extends AbstractTestExecutionListener 
 	public void afterTestMethod(TestContext testContext) throws Exception {
 		if (Boolean.TRUE.equals(testContext.getAttribute(RESET_REQUEST_CONTEXT_HOLDER_ATTRIBUTE))) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("Resetting RequestContextHolder for test context %s.", testContext));
+				logger.info(String.format("Resetting RequestContextHolder for test context %s.", testContext));
 			}
 			RequestContextHolder.resetRequestAttributes();
 			testContext.setAttribute(DependencyInjectionTestExecutionListener.REINJECT_DEPENDENCIES_ATTRIBUTE,
@@ -197,7 +197,7 @@ public class ServletTestExecutionListener extends AbstractTestExecutionListener 
 						testContext));
 
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format(
+				logger.info(String.format(
 						"Setting up MockHttpServletRequest, MockHttpServletResponse, ServletWebRequest, and RequestContextHolder for test context %s.",
 						testContext));
 			}

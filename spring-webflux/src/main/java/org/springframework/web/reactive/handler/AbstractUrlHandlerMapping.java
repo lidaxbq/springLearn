@@ -93,7 +93,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 		}
 
 		if (handler != null && logger.isDebugEnabled()) {
-			logger.debug("Mapping [" + lookupPath + "] to " + handler);
+			logger.info("Mapping [" + lookupPath + "] to " + handler);
 		}
 		else if (handler == null && logger.isTraceEnabled()) {
 			logger.trace("No handler mapping found for [" + lookupPath + "]");
@@ -124,7 +124,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 				.map(entry -> {
 					PathPattern pattern = entry.getKey();
 					if (logger.isDebugEnabled()) {
-						logger.debug("Matching pattern for request [" + lookupPath + "] is " + pattern);
+						logger.info("Matching pattern for request [" + lookupPath + "] is " + pattern);
 					}
 					PathContainer pathWithinMapping = pattern.extractPathWithinPattern(lookupPath);
 					return handleMatch(entry.getValue(), pattern, pathWithinMapping, exchange);

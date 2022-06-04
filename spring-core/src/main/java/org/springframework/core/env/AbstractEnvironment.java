@@ -122,7 +122,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	public AbstractEnvironment() {
 		customizePropertySources(this.propertySources);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Initialized " + getClass().getSimpleName() + " with PropertySources " + this.propertySources);
+			logger.info("Initialized " + getClass().getSimpleName() + " with PropertySources " + this.propertySources);
 		}
 	}
 
@@ -262,7 +262,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	@Override
 	public void addActiveProfile(String profile) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Activating profile '" + profile + "'");
+			logger.info("Activating profile '" + profile + "'");
 		}
 		validateProfile(profile);
 		doGetActiveProfiles();

@@ -68,11 +68,11 @@ public abstract class JdbcUtils {
 				con.close();
 			}
 			catch (SQLException ex) {
-				logger.debug("Could not close JDBC Connection", ex);
+				logger.info("Could not close JDBC Connection", ex);
 			}
 			catch (Throwable ex) {
 				// We don't trust the JDBC driver: It might throw RuntimeException or Error.
-				logger.debug("Unexpected exception on closing JDBC Connection", ex);
+				logger.info("Unexpected exception on closing JDBC Connection", ex);
 			}
 		}
 	}
@@ -212,13 +212,13 @@ public abstract class JdbcUtils {
 				return rs.getObject(index, requiredType);
 			}
 			catch (AbstractMethodError err) {
-				logger.debug("JDBC driver does not implement JDBC 4.1 'getObject(int, Class)' method", err);
+				logger.info("JDBC driver does not implement JDBC 4.1 'getObject(int, Class)' method", err);
 			}
 			catch (SQLFeatureNotSupportedException ex) {
-				logger.debug("JDBC driver does not support JDBC 4.1 'getObject(int, Class)' method", ex);
+				logger.info("JDBC driver does not support JDBC 4.1 'getObject(int, Class)' method", ex);
 			}
 			catch (SQLException ex) {
-				logger.debug("JDBC driver has limited support for JDBC 4.1 'getObject(int, Class)' method", ex);
+				logger.info("JDBC driver has limited support for JDBC 4.1 'getObject(int, Class)' method", ex);
 			}
 
 			// Corresponding SQL types for JSR-310 / Joda-Time types, left up
@@ -393,16 +393,16 @@ public abstract class JdbcUtils {
 			DatabaseMetaData dbmd = con.getMetaData();
 			if (dbmd != null) {
 				if (dbmd.supportsBatchUpdates()) {
-					logger.debug("JDBC driver supports batch updates");
+					logger.info("JDBC driver supports batch updates");
 					return true;
 				}
 				else {
-					logger.debug("JDBC driver does not support batch updates");
+					logger.info("JDBC driver does not support batch updates");
 				}
 			}
 		}
 		catch (SQLException ex) {
-			logger.debug("JDBC driver 'supportsBatchUpdates' method threw exception", ex);
+			logger.info("JDBC driver 'supportsBatchUpdates' method threw exception", ex);
 		}
 		return false;
 	}

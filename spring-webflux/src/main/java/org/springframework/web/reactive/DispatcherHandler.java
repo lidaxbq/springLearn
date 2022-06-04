@@ -148,7 +148,7 @@ public class DispatcherHandler implements WebHandler, ApplicationContextAware {
 	public Mono<Void> handle(ServerWebExchange exchange) {
 		if (logger.isDebugEnabled()) {
 			ServerHttpRequest request = exchange.getRequest();
-			logger.debug("Processing " + request.getMethodValue() + " request for [" + request.getURI() + "]");
+			logger.info("Processing " + request.getMethodValue() + " request for [" + request.getURI() + "]");
 		}
 		if (this.handlerMappings == null) {
 			return Mono.error(HANDLER_NOT_FOUND_EXCEPTION);

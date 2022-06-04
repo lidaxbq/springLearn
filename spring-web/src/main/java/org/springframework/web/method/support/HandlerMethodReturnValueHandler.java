@@ -21,6 +21,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.NativeWebRequest;
 
 /**
+ * 是否支持该类型
  * Strategy interface to handle the value returned from the invocation of a
  * handler method .
  *
@@ -40,6 +41,8 @@ public interface HandlerMethodReturnValueHandler {
 	boolean supportsReturnType(MethodParameter returnType);
 
 	/**
+	 * 处理返回值，设置到 {@param mavContainer} 中
+	 *
 	 * Handle the given return value by adding attributes to the model and
 	 * setting a view or setting the
 	 * {@link ModelAndViewContainer#setRequestHandled} flag to {@code true}

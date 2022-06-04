@@ -549,7 +549,7 @@ public class AsyncRestTemplate extends org.springframework.http.client.support.I
 	private void logResponseStatus(HttpMethod method, URI url, ClientHttpResponse response) {
 		if (logger.isDebugEnabled()) {
 			try {
-				logger.debug("Async " + method.name() + " request for \"" + url + "\" resulted in " +
+				logger.info("Async " + method.name() + " request for \"" + url + "\" resulted in " +
 						response.getRawStatusCode() + " (" + response.getStatusText() + ")");
 			}
 			catch (IOException ex) {

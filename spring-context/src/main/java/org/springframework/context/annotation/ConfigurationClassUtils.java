@@ -103,7 +103,7 @@ abstract class ConfigurationClassUtils {
 			}
 			catch (IOException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not find class file for introspecting configuration annotations: " + className, ex);
+					logger.info("Could not find class file for introspecting configuration annotations: " + className, ex);
 				}
 				return false;
 			}
@@ -177,7 +177,7 @@ abstract class ConfigurationClassUtils {
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to introspect @Bean methods on class [" + metadata.getClassName() + "]: " + ex);
+				logger.info("Failed to introspect @Bean methods on class [" + metadata.getClassName() + "]: " + ex);
 			}
 			return false;
 		}

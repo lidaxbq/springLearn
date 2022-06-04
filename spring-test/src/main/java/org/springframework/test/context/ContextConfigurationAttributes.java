@@ -156,7 +156,7 @@ public class ContextConfigurationAttributes {
 		Assert.notNull(contextLoaderClass, "'contextLoaderClass' must not be null");
 
 		if (!ObjectUtils.isEmpty(locations) && !ObjectUtils.isEmpty(classes) && logger.isDebugEnabled()) {
-			logger.debug(String.format(
+			logger.info(String.format(
 					"Test class [%s] has been configured with @ContextConfiguration's 'locations' (or 'value') %s " +
 					"and 'classes' %s attributes. Most SmartContextLoader implementations support " +
 					"only one declaration of resources per @ContextConfiguration annotation.",

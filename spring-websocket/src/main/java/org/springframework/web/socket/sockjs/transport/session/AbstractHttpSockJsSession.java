@@ -339,7 +339,7 @@ public abstract class AbstractHttpSockJsSession extends AbstractSockJsSession {
 					}
 					catch (Throwable ex) {
 						// Could be part of normal workflow (e.g. browser tab closed)
-						logger.debug("Failed to complete request: " + ex.getMessage());
+						logger.info("Failed to complete request: " + ex.getMessage());
 					}
 				}
 			}

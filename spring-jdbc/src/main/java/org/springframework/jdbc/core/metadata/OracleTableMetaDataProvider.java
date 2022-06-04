@@ -90,7 +90,7 @@ public class OracleTableMetaDataProvider extends GenericTableMetaDataProvider {
 			}
 		}
 		catch (SQLException ex) {
-			logger.debug("Encountered exception during default schema lookup", ex);
+			logger.info("Encountered exception during default schema lookup", ex);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class OracleTableMetaDataProvider extends GenericTableMetaDataProvider {
 			throws SQLException {
 
 		if (!this.includeSynonyms) {
-			logger.debug("Defaulting to no synonyms in table metadata lookup");
+			logger.info("Defaulting to no synonyms in table metadata lookup");
 			super.initializeWithTableColumnMetaData(databaseMetaData, catalogName, schemaName, tableName);
 			return;
 		}
@@ -128,7 +128,7 @@ public class OracleTableMetaDataProvider extends GenericTableMetaDataProvider {
 			return;
 		}
 
-		logger.debug("Including synonyms in table metadata lookup");
+		logger.info("Including synonyms in table metadata lookup");
 		Method setIncludeSynonyms;
 		Boolean originalValueForIncludeSynonyms;
 

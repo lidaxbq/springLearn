@@ -218,7 +218,7 @@ public abstract class TestContextTransactionUtils {
 
 	private static void logBeansException(TestContext testContext, BeansException ex, Class<?> beanType) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Caught exception while retrieving %s for test context %s",
+			logger.info(String.format("Caught exception while retrieving %s for test context %s",
 				beanType.getSimpleName(), testContext), ex);
 		}
 	}

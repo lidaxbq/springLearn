@@ -16,9 +16,6 @@
 
 package org.springframework.web.servlet.handler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.PathMatcher;
@@ -26,7 +23,20 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
+ * 实现 HandlerInterceptor 接口，支持地址匹配的 HandlerInterceptor 实现类。
+ *
+ * <mvc:interceptors>
+ *     <mvc:interceptor>
+ *         <mvc:mapping path="/interceptor/**" />
+ *         <mvc:exclude-mapping path="/interceptor/b/*" />
+ *         <bean class="com.elim.learn.spring.mvc.interceptor.MyInterceptor" />
+ *     </mvc:interceptor>
+ * </mvc:interceptors>
+ *每一个 <mvc:interceptor /> 标签，将被解析成一个 MappedInterceptor Bean 对象
  * Contains and delegates calls to a {@link HandlerInterceptor} along with
  * include (and optionally exclude) path patterns to which the interceptor should apply.
  * Also provides matching logic to test if the interceptor applies to a given request path.
@@ -44,15 +54,23 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 3.0
  */
 public final class MappedInterceptor implements HandlerInterceptor {
-
+	/**
+	 * 匹配的路径
+	 */
 	@Nullable
 	private final String[] includePatterns;
-
+	/**
+	 * 不匹配的路径
+	 */
 	@Nullable
 	private final String[] excludePatterns;
-
+	/**
+	 * HandlerInterceptor 拦截器对象
+	 */
 	private final HandlerInterceptor interceptor;
-
+	/**
+	 * 路径匹配器
+	 */
 	@Nullable
 	private PathMatcher pathMatcher;
 
@@ -143,6 +161,7 @@ public final class MappedInterceptor implements HandlerInterceptor {
 	 * @param pathMatcher a path matcher for path pattern matching
 	 */
 	public boolean matches(String lookupPath, PathMatcher pathMatcher) {
+		// 先排重
 		PathMatcher pathMatcherToUse = (this.pathMatcher != null) ? this.pathMatcher : pathMatcher;
 		if (this.excludePatterns != null) {
 			for (String pattern : this.excludePatterns) {
@@ -151,6 +170,7 @@ public final class MappedInterceptor implements HandlerInterceptor {
 				}
 			}
 		}
+		// 特殊，如果包含为空，则默认就是包含
 		if (ObjectUtils.isEmpty(this.includePatterns)) {
 			return true;
 		}

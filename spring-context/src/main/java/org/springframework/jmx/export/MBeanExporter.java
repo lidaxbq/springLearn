@@ -538,7 +538,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 			}
 			if (mode == AUTODETECT_MBEAN || mode == AUTODETECT_ALL) {
 				// Autodetect any beans that are already MBeans.
-				logger.debug("Autodetecting user-defined JMX MBeans");
+				logger.info("Autodetecting user-defined JMX MBeans");
 				autodetect(this.beans, (beanClass, beanName) -> isMBean(beanClass));
 			}
 			// Allow the assembler a chance to vote for bean inclusion.
@@ -709,7 +709,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 			Object proxy = proxyFactory.getProxy(this.beanClassLoader);
 			ObjectName objectName = getObjectName(proxy, beanKey);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Located MBean '" + beanKey + "': registering with JMX server as lazy-init MBean [" +
+				logger.info("Located MBean '" + beanKey + "': registering with JMX server as lazy-init MBean [" +
 						objectName + "]");
 			}
 			doRegister(proxy, objectName);
@@ -726,7 +726,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 			Object proxy = proxyFactory.getProxy(this.beanClassLoader);
 			ObjectName objectName = getObjectName(proxy, beanKey);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Located simple bean '" + beanKey + "': registering with JMX server as lazy-init MBean [" +
+				logger.info("Located simple bean '" + beanKey + "': registering with JMX server as lazy-init MBean [" +
 						objectName + "]");
 			}
 			ModelMBean mbean = createAndConfigureMBean(proxy, beanKey);
@@ -898,7 +898,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 						}
 						else {
 							if (logger.isDebugEnabled()) {
-								logger.debug("Bean with name '" + beanName + "' is already registered for JMX exposure");
+								logger.info("Bean with name '" + beanName + "' is already registered for JMX exposure");
 							}
 						}
 					}
@@ -990,7 +990,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 					}
 					catch (Throwable ex) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Unable to unregister NotificationListener", ex);
+							logger.info("Unable to unregister NotificationListener", ex);
 						}
 					}
 				}

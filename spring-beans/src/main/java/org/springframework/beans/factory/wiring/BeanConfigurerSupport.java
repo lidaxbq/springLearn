@@ -125,7 +125,7 @@ public class BeanConfigurerSupport implements BeanFactoryAware, InitializingBean
 	public void configureBean(Object beanInstance) {
 		if (this.beanFactory == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("BeanFactory has not been set on " + ClassUtils.getShortName(getClass()) + ": " +
+				logger.info("BeanFactory has not been set on " + ClassUtils.getShortName(getClass()) + ": " +
 						"Make sure this configurer runs in a Spring container. Unable to configure bean of type [" +
 						ClassUtils.getDescriptiveType(beanInstance) + "]. Proceeding without injection.");
 			}
@@ -162,7 +162,7 @@ public class BeanConfigurerSupport implements BeanFactoryAware, InitializingBean
 				String bceBeanName = bce.getBeanName();
 				if (bceBeanName != null && beanFactory.isCurrentlyInCreation(bceBeanName)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Failed to create target bean '" + bce.getBeanName() +
+						logger.info("Failed to create target bean '" + bce.getBeanName() +
 								"' while configuring object of type [" + beanInstance.getClass().getName() +
 								"] - probably due to a circular reference. This is a common startup situation " +
 								"and usually not fatal. Proceeding without injection. Original exception: " + ex);

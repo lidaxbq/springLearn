@@ -91,7 +91,8 @@ public abstract class AopNamespaceUtils {
 				// 设置BeanDefinition定义属性
 				AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
 			}
-			// expose-proxy属性处理：暴露代理
+			// expose-proxy属性处理：目标代理对象内部的方法自调用是无法做代理的。如：a(){ this.b(); }, b方法不会被代理。设置为true之后,
+//			会变成(AopContext.currentProxy()).b();
 			boolean exposeProxy = Boolean.valueOf(sourceElement.getAttribute(EXPOSE_PROXY_ATTRIBUTE));
 			if (exposeProxy) {
 				AopConfigUtils.forceAutoProxyCreatorToExposeProxy(registry);

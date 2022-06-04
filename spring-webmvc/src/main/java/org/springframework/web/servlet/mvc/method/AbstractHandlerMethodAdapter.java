@@ -27,6 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.WebContentGenerator;
 
 /**
+ * 实现 HandlerAdapter、Ordered 接口，继承 WebContentGenerator 抽象类，
+ * 基于 org.springframework.web.method.HandlerMethod 的 HandlerMethodAdapter 抽象类。
  * Abstract base class for {@link HandlerAdapter} implementations that support
  * handlers of type {@link HandlerMethod}.
  *
@@ -40,6 +42,8 @@ public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator i
 
 	public AbstractHandlerMethodAdapter() {
 		// no restriction of HTTP methods by default
+		// 调用 WebContentGenerator 类的构造方法
+		// 参数 restrictDefaultSupportedMethods 参数为 false ，表示不需要严格校验 HttpMethod
 		super(false);
 	}
 
@@ -81,7 +85,7 @@ public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator i
 	 */
 	@Override
 	@Nullable
-	public final ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	public final ModelAndView  handle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
 		return handleInternal(request, response, (HandlerMethod) handler);

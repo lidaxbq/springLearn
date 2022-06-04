@@ -107,7 +107,7 @@ public class MultipartFilter extends OncePerRequestFilter {
 		HttpServletRequest processedRequest = request;
 		if (multipartResolver.isMultipart(processedRequest)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Resolving multipart request [" + processedRequest.getRequestURI() +
+				logger.info("Resolving multipart request [" + processedRequest.getRequestURI() +
 						"] with MultipartFilter");
 			}
 			processedRequest = multipartResolver.resolveMultipart(processedRequest);
@@ -115,7 +115,7 @@ public class MultipartFilter extends OncePerRequestFilter {
 		else {
 			// A regular request...
 			if (logger.isDebugEnabled()) {
-				logger.debug("Request [" + processedRequest.getRequestURI() + "] is not a multipart request");
+				logger.info("Request [" + processedRequest.getRequestURI() + "] is not a multipart request");
 			}
 		}
 
@@ -154,7 +154,7 @@ public class MultipartFilter extends OncePerRequestFilter {
 		String beanName = getMultipartResolverBeanName();
 		if (wac != null && wac.containsBean(beanName)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using MultipartResolver '" + beanName + "' for MultipartFilter");
+				logger.info("Using MultipartResolver '" + beanName + "' for MultipartFilter");
 			}
 			return wac.getBean(beanName, MultipartResolver.class);
 		}

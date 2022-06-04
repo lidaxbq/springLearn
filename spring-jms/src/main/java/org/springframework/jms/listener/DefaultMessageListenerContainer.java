@@ -560,13 +560,13 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	 */
 	@Override
 	protected void doShutdown() throws JMSException {
-		logger.debug("Waiting for shutdown of message listener invokers");
+		logger.info("Waiting for shutdown of message listener invokers");
 		try {
 			synchronized (this.lifecycleMonitor) {
 				// Waiting for AsyncMessageListenerInvokers to deactivate themselves...
 				while (this.activeInvokerCount > 0) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Still waiting for shutdown of " + this.activeInvokerCount +
+						logger.info("Still waiting for shutdown of " + this.activeInvokerCount +
 								" message listener invokers");
 					}
 					long timeout = getReceiveTimeout();
@@ -761,7 +761,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 						getIdleInvokerCount() < this.idleConsumerLimit) {
 					scheduleNewInvoker();
 					if (logger.isDebugEnabled()) {
-						logger.debug("Raised scheduled invoker count: " + this.scheduledInvokers.size());
+						logger.info("Raised scheduled invoker count: " + this.scheduledInvokers.size());
 					}
 				}
 			}
@@ -810,7 +810,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 			if (ex instanceof JMSException) {
 				invokeExceptionListener((JMSException) ex);
 			}
-			logger.debug("Could not establish shared JMS Connection - " +
+			logger.info("Could not establish shared JMS Connection - " +
 					"leaving it up to asynchronous invokers to establish a Connection as soon as possible", ex);
 		}
 	}
@@ -826,7 +826,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 			super.startSharedConnection();
 		}
 		catch (Exception ex) {
-			logger.debug("Connection start failed - relying on listeners to perform recovery", ex);
+			logger.info("Connection start failed - relying on listeners to perform recovery", ex);
 		}
 	}
 
@@ -841,7 +841,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 			super.stopSharedConnection();
 		}
 		catch (Exception ex) {
-			logger.debug("Connection stop failed - relying on listeners to perform recovery after restart", ex);
+			logger.info("Connection stop failed - relying on listeners to perform recovery after restart", ex);
 		}
 	}
 
@@ -870,7 +870,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 		else {
 			// Recovery during active operation..
 			if (alreadyRecovered) {
-				logger.debug("Setup of JMS message listener invoker failed - already recovered by other invoker", ex);
+				logger.info("Setup of JMS message listener invoker failed - already recovered by other invoker", ex);
 			}
 			else {
 				StringBuilder msg = new StringBuilder();
@@ -1108,7 +1108,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 						// We're shutting down completely.
 						scheduledInvokers.remove(this);
 						if (logger.isDebugEnabled()) {
-							logger.debug("Lowered scheduled invoker count: " + scheduledInvokers.size());
+							logger.info("Lowered scheduled invoker count: " + scheduledInvokers.size());
 						}
 						lifecycleMonitor.notifyAll();
 						clearResources();

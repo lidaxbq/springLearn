@@ -227,7 +227,7 @@ public abstract class AsyncExecutionAspectSupport implements BeanFactoryAware {
 				return beanFactory.getBean(TaskExecutor.class);
 			}
 			catch (NoUniqueBeanDefinitionException ex) {
-				logger.debug("Could not find unique TaskExecutor bean", ex);
+				logger.info("Could not find unique TaskExecutor bean", ex);
 				try {
 					return beanFactory.getBean(DEFAULT_TASK_EXECUTOR_BEAN_NAME, Executor.class);
 				}
@@ -240,7 +240,7 @@ public abstract class AsyncExecutionAspectSupport implements BeanFactoryAware {
 				}
 			}
 			catch (NoSuchBeanDefinitionException ex) {
-				logger.debug("Could not find default TaskExecutor bean", ex);
+				logger.info("Could not find default TaskExecutor bean", ex);
 				try {
 					return beanFactory.getBean(DEFAULT_TASK_EXECUTOR_BEAN_NAME, Executor.class);
 				}

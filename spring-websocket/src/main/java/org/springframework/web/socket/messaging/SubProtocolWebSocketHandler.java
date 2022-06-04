@@ -330,7 +330,7 @@ public class SubProtocolWebSocketHandler
 		if (holder == null) {
 			if (logger.isDebugEnabled()) {
 				// The broker may not have removed the session yet
-				logger.debug("No session for " + message);
+				logger.info("No session for " + message);
 			}
 			return;
 		}
@@ -342,20 +342,20 @@ public class SubProtocolWebSocketHandler
 		catch (SessionLimitExceededException ex) {
 			try {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Terminating '" + session + "'", ex);
+					logger.info("Terminating '" + session + "'", ex);
 				}
 				this.stats.incrementLimitExceededCount();
 				clearSession(session, ex.getStatus()); // clear first, session may be unresponsive
 				session.close(ex.getStatus());
 			}
 			catch (Exception secondException) {
-				logger.debug("Failure while closing session " + sessionId + ".", secondException);
+				logger.info("Failure while closing session " + sessionId + ".", secondException);
 			}
 		}
 		catch (Exception ex) {
 			// Could be part of normal workflow (e.g. browser tab closed)
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to send message to client in " + session + ": " + message, ex);
+				logger.info("Failed to send message to client in " + session + ": " + message, ex);
 			}
 		}
 	}
@@ -493,7 +493,7 @@ public class SubProtocolWebSocketHandler
 
 	private void clearSession(WebSocketSession session, CloseStatus closeStatus) throws Exception {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Clearing session " + session.getId());
+			logger.info("Clearing session " + session.getId());
 		}
 		if (this.sessions.remove(session.getId()) != null) {
 			this.stats.decrementSessionCount(session);

@@ -96,7 +96,7 @@ public abstract class AbstractFlashMapManager implements FlashMapManager {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Retrieved FlashMap(s): " + allFlashMaps);
+			logger.info("Retrieved FlashMap(s): " + allFlashMaps);
 		}
 		List<FlashMap> mapsToRemove = getExpiredFlashMaps(allFlashMaps);
 		FlashMap match = getMatchingFlashMap(allFlashMaps, request);
@@ -106,7 +106,7 @@ public abstract class AbstractFlashMapManager implements FlashMapManager {
 
 		if (!mapsToRemove.isEmpty()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Removing FlashMap(s): " + mapsToRemove);
+				logger.info("Removing FlashMap(s): " + mapsToRemove);
 			}
 			Object mutex = getFlashMapsMutex(request);
 			if (mutex != null) {
@@ -155,7 +155,7 @@ public abstract class AbstractFlashMapManager implements FlashMapManager {
 		if (!result.isEmpty()) {
 			Collections.sort(result);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Found matching FlashMap(s): " + result);
+				logger.info("Found matching FlashMap(s): " + result);
 			}
 			return result.get(0);
 		}
@@ -205,7 +205,7 @@ public abstract class AbstractFlashMapManager implements FlashMapManager {
 		flashMap.setTargetRequestPath(path);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Saving FlashMap=" + flashMap);
+			logger.info("Saving FlashMap=" + flashMap);
 		}
 		flashMap.startExpirationPeriod(getFlashMapTimeout());
 

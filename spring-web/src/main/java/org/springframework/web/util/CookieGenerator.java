@@ -196,7 +196,7 @@ public class CookieGenerator {
 		}
 		response.addCookie(cookie);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Added cookie with name [" + getCookieName() + "] and value [" + cookieValue + "]");
+			logger.info("Added cookie with name [" + getCookieName() + "] and value [" + cookieValue + "]");
 		}
 	}
 
@@ -221,7 +221,7 @@ public class CookieGenerator {
 		}
 		response.addCookie(cookie);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Removed cookie with name [" + getCookieName() + "]");
+			logger.info("Removed cookie with name [" + getCookieName() + "]");
 		}
 	}
 

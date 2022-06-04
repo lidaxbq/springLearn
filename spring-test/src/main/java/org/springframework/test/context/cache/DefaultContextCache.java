@@ -291,7 +291,7 @@ public class DefaultContextCache implements ContextCache {
 	@Override
 	public void logStatistics() {
 		if (statsLogger.isDebugEnabled()) {
-			statsLogger.debug("Spring test ApplicationContext cache statistics: " + this);
+			statslogger.info("Spring test ApplicationContext cache statistics: " + this);
 		}
 	}
 

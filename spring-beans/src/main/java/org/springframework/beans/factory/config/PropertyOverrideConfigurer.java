@@ -111,7 +111,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 					throw new BeanInitializationException(msg, ex);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug(msg, ex);
+					logger.info(msg, ex);
 				}
 			}
 		}
@@ -133,7 +133,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 		this.beanNames.add(beanName);
 		applyPropertyValue(factory, beanName, beanProperty, value);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Property '" + key + "' set to value [" + value + "]");
+			logger.info("Property '" + key + "' set to value [" + value + "]");
 		}
 	}
 

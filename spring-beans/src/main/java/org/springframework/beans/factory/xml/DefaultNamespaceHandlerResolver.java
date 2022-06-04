@@ -160,7 +160,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 						Properties mappings =
 								PropertiesLoaderUtils.loadAllProperties(this.handlerMappingsLocation, this.classLoader);
 						if (logger.isDebugEnabled()) {
-							logger.debug("Loaded NamespaceHandler mappings: " + mappings);
+							logger.info("Loaded NamespaceHandler mappings: " + mappings);
 						}
 						Map<String, Object> mappingsToUse = new ConcurrentHashMap<>(mappings.size());
 						CollectionUtils.mergePropertiesIntoMap(mappings, mappingsToUse);

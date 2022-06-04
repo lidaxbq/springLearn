@@ -99,7 +99,7 @@ public class SpelCompiler implements Opcodes {
 	public CompiledExpression compile(SpelNodeImpl expression) {
 		if (expression.isCompilable()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("SpEL: compiling " + expression.toStringAST());
+				logger.info("SpEL: compiling " + expression.toStringAST());
 			}
 			Class<? extends CompiledExpression> clazz = createExpressionClass(expression);
 			if (clazz != null) {
@@ -113,7 +113,7 @@ public class SpelCompiler implements Opcodes {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("SpEL: unable to compile " + expression.toStringAST());
+			logger.info("SpEL: unable to compile " + expression.toStringAST());
 		}
 		return null;
 	}
@@ -160,7 +160,7 @@ public class SpelCompiler implements Opcodes {
 		}
 		catch (IllegalStateException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(expressionToCompile.getClass().getSimpleName() +
+				logger.info(expressionToCompile.getClass().getSimpleName() +
 						".generateCode opted out of compilation: " + ex.getMessage());
 			}
 			return null;

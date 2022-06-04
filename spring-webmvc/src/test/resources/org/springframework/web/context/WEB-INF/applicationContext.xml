@@ -1,29 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd" [
-<!ENTITY contextInclude SYSTEM "org/springframework/web/context/WEB-INF/contextInclude.xml">
-]>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<beans>
 
-	<import resource="resources/messageSource.xml"/>
-
-	<import resource="/resources/../resources/themeSource.xml"/>
 
 	<bean id="lifecyclePostProcessor" class="org.springframework.tests.sample.beans.LifecycleBean$PostProcessor"/>
-
-	<!--
-	<bean
-		name="performanceMonitor" class="org.springframework.context.support.TestListener"
-	/>
-	-->
-
-	<!--
-	<bean name="aca" class="org.springframework.context.ACATest">
-	</bean>
-
-	<bean name="aca-prototype" class="org.springframework.context.ACATest" scope="prototype">
-	</bean>
-	-->
 
 	<bean id="beanThatListens" class="org.springframework.context.BeanThatListens"/>
 
@@ -54,7 +35,6 @@
 		<property name="initMethodDeclared"><value>true</value></property>
 	</bean>
 
-	&contextInclude;
 
 	<bean id="myOverride" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
 		<property name="location">
@@ -67,7 +47,6 @@
 			<list>
 				<value>classpath:/org/springframework/web/context/WEB-INF/myplace*.properties</value>
 				<value>classpath:/org/springframework/web/context/WEB-INF/myover*.properties</value>
-				<value>${myDir}/myover*.properties</value>
 			</list>
 		</property>
 	</bean>

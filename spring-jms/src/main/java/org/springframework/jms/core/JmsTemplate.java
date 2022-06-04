@@ -499,7 +499,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 				sessionToUse = sessionToClose;
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Executing callback on JMS Session: " + sessionToUse);
+				logger.info("Executing callback on JMS Session: " + sessionToUse);
 			}
 			return action.doInJms(sessionToUse);
 		}
@@ -603,7 +603,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 		try {
 			Message message = messageCreator.createMessage(session);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Sending created message: " + message);
+				logger.info("Sending created message: " + message);
 			}
 			doSend(producer, message);
 			// Check commit - avoid commit call within a JTA transaction.
@@ -924,7 +924,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 			consumer = session.createConsumer(responseQueue);
 			requestMessage.setJMSReplyTo(responseQueue);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Sending created message: " + requestMessage);
+				logger.info("Sending created message: " + requestMessage);
 			}
 			doSend(producer, requestMessage);
 			return receiveFromConsumer(consumer, getReceiveTimeout());
@@ -955,7 +955,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 				con.start();
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Executing callback on JMS Session: " + session);
+				logger.info("Executing callback on JMS Session: " + session);
 			}
 			return action.doInJms(session);
 		}

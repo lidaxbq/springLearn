@@ -493,7 +493,7 @@ public class MvcUriComponentsBuilder {
 	private static UriComponents applyContributors(UriComponentsBuilder builder, Method method, Object... args) {
 		CompositeUriComponentsContributor contributor = getConfiguredUriComponentsContributor();
 		if (contributor == null) {
-			logger.debug("Using default CompositeUriComponentsContributor");
+			logger.info("Using default CompositeUriComponentsContributor");
 			contributor = defaultUriComponentsContributor;
 		}
 
@@ -531,7 +531,7 @@ public class MvcUriComponentsBuilder {
 		}
 		catch (NoSuchBeanDefinitionException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("No CompositeUriComponentsContributor bean with name '" +
+				logger.info("No CompositeUriComponentsContributor bean with name '" +
 						MVC_URI_COMPONENTS_CONTRIBUTOR_BEAN_NAME + "'");
 			}
 			return null;
@@ -556,7 +556,7 @@ public class MvcUriComponentsBuilder {
 	private static WebApplicationContext getWebApplicationContext() {
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 		if (requestAttributes == null) {
-			logger.debug("No request bound to the current thread: not in a DispatcherServlet request?");
+			logger.info("No request bound to the current thread: not in a DispatcherServlet request?");
 			return null;
 		}
 
@@ -564,7 +564,7 @@ public class MvcUriComponentsBuilder {
 		WebApplicationContext wac = (WebApplicationContext)
 				request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 		if (wac == null) {
-			logger.debug("No WebApplicationContext found: not in a DispatcherServlet request?");
+			logger.info("No WebApplicationContext found: not in a DispatcherServlet request?");
 			return null;
 		}
 		return wac;
@@ -639,7 +639,7 @@ public class MvcUriComponentsBuilder {
 					proxy = objenesis.newInstance(proxyClass, enhancer.getUseCache());
 				}
 				catch (ObjenesisException ex) {
-					logger.debug("Unable to instantiate controller proxy using Objenesis, " +
+					logger.info("Unable to instantiate controller proxy using Objenesis, " +
 							"falling back to regular construction", ex);
 				}
 			}

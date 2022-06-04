@@ -653,7 +653,7 @@ public class ResolvableMethod {
 					proxy = objenesis.newInstance(proxyClass, enhancer.getUseCache());
 				}
 				catch (ObjenesisException ex) {
-					logger.debug("Objenesis failed, falling back to default constructor", ex);
+					logger.info("Objenesis failed, falling back to default constructor", ex);
 				}
 			}
 

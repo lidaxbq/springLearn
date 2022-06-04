@@ -124,11 +124,11 @@ public abstract class ConnectionFactoryUtils {
 			return conHolder.getConnection();
 		}
 
-		logger.debug("Opening CCI Connection");
+		logger.info("Opening CCI Connection");
 		Connection con = cf.getConnection();
 
 		if (TransactionSynchronizationManager.isSynchronizationActive()) {
-			logger.debug("Registering transaction synchronization for CCI Connection");
+			logger.info("Registering transaction synchronization for CCI Connection");
 			conHolder = new ConnectionHolder(con);
 			conHolder.setSynchronizedWithTransaction(true);
 			TransactionSynchronizationManager.registerSynchronization(new ConnectionSynchronization(conHolder, cf));
@@ -168,11 +168,11 @@ public abstract class ConnectionFactoryUtils {
 			doReleaseConnection(con, cf);
 		}
 		catch (ResourceException ex) {
-			logger.debug("Could not close CCI Connection", ex);
+			logger.info("Could not close CCI Connection", ex);
 		}
 		catch (Throwable ex) {
 			// We don't trust the CCI driver: It might throw RuntimeException or Error.
-			logger.debug("Unexpected exception on closing CCI Connection", ex);
+			logger.info("Unexpected exception on closing CCI Connection", ex);
 		}
 	}
 

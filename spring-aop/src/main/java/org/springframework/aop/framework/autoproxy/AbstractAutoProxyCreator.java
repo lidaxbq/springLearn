@@ -131,7 +131,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 	@Nullable
 	private BeanFactory beanFactory;
-
+//	代理过的beanName，或者做过是否要代理判断的bean,就无需判断，直接返回
 	private final Set<String> targetSourcedBeans = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 
 	private final Set<Object> earlyProxyReferences = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
@@ -247,13 +247,15 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-
+//		构造缓存key
 		Object cacheKey = getCacheKey(beanClass, beanName);
 
 		if (!StringUtils.hasLength(beanName) || !this.targetSourcedBeans.contains(beanName)) {
+//			如果增强过bean
 			if (this.advisedBeans.containsKey(cacheKey)) {
 				return null;
 			}
+//			如果是内部使用的基础设施类或者需要忽略的，不需要自动代理
 			if (isInfrastructureClass(beanClass) || shouldSkip(beanClass, beanName)) {
 				this.advisedBeans.put(cacheKey, Boolean.FALSE);
 				return null;
@@ -268,7 +270,9 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			if (StringUtils.hasLength(beanName)) {
 				this.targetSourcedBeans.add(beanName);
 			}
+//			如果存在增强方法，则自动代理
 			Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(beanClass, beanName, targetSource);
+//			创建代理
 			Object proxy = createProxy(beanClass, beanName, specificInterceptors, targetSource);
 			this.proxyTypes.put(cacheKey, proxy.getClass());
 			return proxy;
@@ -426,7 +430,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 				if (ts != null) {
 					// Found a matching TargetSource.
 					if (logger.isDebugEnabled()) {
-						logger.debug("TargetSourceCreator [" + tsc +
+						logger.info("TargetSourceCreator [" + tsc +
 								" found custom TargetSource for bean with name '" + beanName + "'");
 					}
 					return ts;
@@ -457,27 +461,30 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		}
 
 		ProxyFactory proxyFactory = new ProxyFactory();
+//		获取当前类中相关属性
 		proxyFactory.copyFrom(this);
-
+//		检查是否使用jdk还是cglib代理
 		if (!proxyFactory.isProxyTargetClass()) {
 			if (shouldProxyTargetClass(beanClass, beanName)) {
+//				使用cglib
 				proxyFactory.setProxyTargetClass(true);
 			}
 			else {
 				evaluateProxyInterfaces(beanClass, proxyFactory);
 			}
 		}
-
+//		将拦截器、增强器、增强方法等统一封装下为Advisor
 		Advisor[] advisors = buildAdvisors(beanName, specificInterceptors);
 		proxyFactory.addAdvisors(advisors);
 		proxyFactory.setTargetSource(targetSource);
+//		定制代理，扩展点，给子类实现
 		customizeProxyFactory(proxyFactory);
-
-		proxyFactory.setFrozen(this.freezeProxy);
+//		设置是否冻结代理工厂配置
+  		proxyFactory.setFrozen(this.freezeProxy);
 		if (advisorsPreFiltered()) {
 			proxyFactory.setPreFiltered(true);
 		}
-
+//		代理
 		return proxyFactory.getProxy(getProxyClassLoader());
 	}
 
@@ -519,12 +526,14 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	protected Advisor[] buildAdvisors(@Nullable String beanName, @Nullable Object[] specificInterceptors) {
 		// Handle prototypes correctly...
+//		解析注册的所有公用拦截器名字
 		Advisor[] commonInterceptors = resolveInterceptorNames();
 
 		List<Object> allInterceptors = new ArrayList<>();
 		if (specificInterceptors != null) {
 			allInterceptors.addAll(Arrays.asList(specificInterceptors));
 			if (commonInterceptors.length > 0) {
+//				是否允许放在第一位
 				if (this.applyCommonInterceptorsFirst) {
 					allInterceptors.addAll(0, Arrays.asList(commonInterceptors));
 				}
@@ -536,12 +545,13 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (logger.isDebugEnabled()) {
 			int nrOfCommonInterceptors = commonInterceptors.length;
 			int nrOfSpecificInterceptors = (specificInterceptors != null ? specificInterceptors.length : 0);
-			logger.debug("Creating implicit proxy for bean '" + beanName + "' with " + nrOfCommonInterceptors +
+			logger.info("Creating implicit proxy for bean '" + beanName + "' with " + nrOfCommonInterceptors +
 					" common interceptors and " + nrOfSpecificInterceptors + " specific interceptors");
 		}
 
 		Advisor[] advisors = new Advisor[allInterceptors.size()];
 		for (int i = 0; i < allInterceptors.size(); i++) {
+//			封装
 			advisors[i] = this.advisorAdapterRegistry.wrap(allInterceptors.get(i));
 		}
 		return advisors;

@@ -70,7 +70,7 @@ public class FixedContentTypeResolver implements RequestedContentTypeResolver {
 	@Override
 	public List<MediaType> resolveMediaTypes(ServerWebExchange exchange) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Requested media types: " + this.mediaTypes);
+			logger.info("Requested media types: " + this.mediaTypes);
 		}
 		return this.mediaTypes;
 	}

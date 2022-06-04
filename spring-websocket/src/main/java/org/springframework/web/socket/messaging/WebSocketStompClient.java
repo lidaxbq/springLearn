@@ -411,7 +411,7 @@ public class WebSocketStompClient extends StompClientSupport implements SmartLif
 					}
 					catch (Throwable ex) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("ReadInactivityTask failure", ex);
+							logger.info("ReadInactivityTask failure", ex);
 						}
 					}
 				}
@@ -431,7 +431,7 @@ public class WebSocketStompClient extends StompClientSupport implements SmartLif
 						}
 						catch (Throwable ex) {
 							if (logger.isDebugEnabled()) {
-								logger.debug("WriteInactivityTask failure", ex);
+								logger.info("WriteInactivityTask failure", ex);
 							}
 						}
 					}
@@ -448,7 +448,7 @@ public class WebSocketStompClient extends StompClientSupport implements SmartLif
 				}
 				catch (IOException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Failed to close session: " + session.getId(), ex);
+						logger.info("Failed to close session: " + session.getId(), ex);
 					}
 				}
 			}

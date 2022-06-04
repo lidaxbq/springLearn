@@ -56,7 +56,7 @@ class ConnectorDelegate {
 
 		if (serviceUrl != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Connecting to remote MBeanServer at URL [" + serviceUrl + "]");
+				logger.info("Connecting to remote MBeanServer at URL [" + serviceUrl + "]");
 			}
 			try {
 				this.connector = JMXConnectorFactory.connect(serviceUrl, environment);
@@ -67,7 +67,7 @@ class ConnectorDelegate {
 			}
 		}
 		else {
-			logger.debug("Attempting to locate local MBeanServer");
+			logger.info("Attempting to locate local MBeanServer");
 			return JmxUtils.locateMBeanServer(agentId);
 		}
 	}
@@ -81,7 +81,7 @@ class ConnectorDelegate {
 				this.connector.close();
 			}
 			catch (IOException ex) {
-				logger.debug("Could not close JMX connector", ex);
+				logger.info("Could not close JMX connector", ex);
 			}
 		}
 	}

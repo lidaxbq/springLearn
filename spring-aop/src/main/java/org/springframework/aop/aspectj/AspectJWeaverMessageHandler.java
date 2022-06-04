@@ -53,7 +53,7 @@ public class AspectJWeaverMessageHandler implements IMessageHandler {
 		Kind messageKind = message.getKind();
 		if (messageKind == IMessage.DEBUG) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(makeMessageFor(message));
+				logger.info(makeMessageFor(message));
 				return true;
 			}
 		}

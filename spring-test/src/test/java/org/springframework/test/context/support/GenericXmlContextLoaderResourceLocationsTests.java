@@ -128,10 +128,10 @@ public class GenericXmlContextLoaderResourceLocationsTests {
 		final String[] processedLocations = contextLoader.processLocations(this.testClass, configuredLocations);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("----------------------------------------------------------------------");
-			logger.debug("Configured locations: " + ObjectUtils.nullSafeToString(configuredLocations));
-			logger.debug("Expected   locations: " + ObjectUtils.nullSafeToString(this.expectedLocations));
-			logger.debug("Processed  locations: " + ObjectUtils.nullSafeToString(processedLocations));
+			logger.info("----------------------------------------------------------------------");
+			logger.info("Configured locations: " + ObjectUtils.nullSafeToString(configuredLocations));
+			logger.info("Expected   locations: " + ObjectUtils.nullSafeToString(this.expectedLocations));
+			logger.info("Processed  locations: " + ObjectUtils.nullSafeToString(processedLocations));
 		}
 
 		assertArrayEquals("Verifying locations for test [" + this.testClass + "].", this.expectedLocations,

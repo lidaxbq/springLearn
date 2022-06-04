@@ -303,7 +303,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 			Message message = receiveMessage(consumerToUse);
 			if (message != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Received message of type [" + message.getClass() + "] from consumer [" +
+					logger.info("Received message of type [" + message.getClass() + "] from consumer [" +
 							consumerToUse + "] of " + (transactional ? "transactional " : "") + "session [" +
 							sessionToUse + "]");
 				}
@@ -320,7 +320,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 				catch (Throwable ex) {
 					if (status != null) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Rolling back transaction because of listener exception thrown: " + ex);
+							logger.info("Rolling back transaction because of listener exception thrown: " + ex);
 						}
 						status.setRollbackOnly();
 					}
@@ -393,7 +393,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 	 * @param ex the thrown listener exception or error
 	 */
 	private void rollbackOnException(PlatformTransactionManager manager, TransactionStatus status, Throwable ex) {
-		logger.debug("Initiating transaction rollback on listener exception", ex);
+		logger.info("Initiating transaction rollback on listener exception", ex);
 		try {
 			manager.rollback(status);
 		}

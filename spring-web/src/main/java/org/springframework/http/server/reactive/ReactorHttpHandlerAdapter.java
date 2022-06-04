@@ -77,7 +77,7 @@ public class ReactorHttpHandlerAdapter
 					response.status(HttpResponseStatus.INTERNAL_SERVER_ERROR);
 					return Mono.empty();
 				})
-				.doOnSuccess(aVoid -> logger.debug("Successfully completed request"));
+				.doOnSuccess(aVoid -> logger.info("Successfully completed request"));
 	}
 
 }

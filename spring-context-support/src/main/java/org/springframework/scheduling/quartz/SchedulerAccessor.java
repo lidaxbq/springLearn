@@ -325,7 +325,7 @@ public abstract class SchedulerAccessor implements ResourceLoaderAware {
 			}
 			catch (ObjectAlreadyExistsException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Unexpectedly found existing trigger, assumably due to cluster race condition: " +
+					logger.info("Unexpectedly found existing trigger, assumably due to cluster race condition: " +
 							ex.getMessage() + " - can safely be ignored");
 				}
 				if (this.overwriteExistingJobs) {

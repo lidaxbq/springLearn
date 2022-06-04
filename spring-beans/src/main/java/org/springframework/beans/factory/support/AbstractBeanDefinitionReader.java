@@ -231,7 +231,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 					}
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Loaded " + loadCount + " bean definitions from location pattern [" + location + "]");
+					logger.info("Loaded " + loadCount + " bean definitions from location pattern [" + location + "]");
 				}
 				return loadCount;
 			}
@@ -251,7 +251,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 				actualResources.add(resource);
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Loaded " + loadCount + " bean definitions from location [" + location + "]");
+				logger.info("Loaded " + loadCount + " bean definitions from location [" + location + "]");
 			}
 			return loadCount;
 		}

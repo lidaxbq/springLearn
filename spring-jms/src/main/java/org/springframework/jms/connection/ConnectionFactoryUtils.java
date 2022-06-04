@@ -74,14 +74,14 @@ public abstract class ConnectionFactoryUtils {
 				con.stop();
 			}
 			catch (Throwable ex) {
-				logger.debug("Could not stop JMS Connection before closing it", ex);
+				logger.info("Could not stop JMS Connection before closing it", ex);
 			}
 		}
 		try {
 			con.close();
 		}
 		catch (Throwable ex) {
-			logger.debug("Could not close JMS Connection", ex);
+			logger.info("Could not close JMS Connection", ex);
 		}
 	}
 

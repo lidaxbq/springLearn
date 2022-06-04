@@ -176,7 +176,7 @@ public class HandshakeWebSocketService implements WebSocketService, Lifecycle {
 		HttpHeaders headers = request.getHeaders();
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Handling " + request.getURI() + " with headers: " + headers);
+			logger.info("Handling " + request.getURI() + " with headers: " + headers);
 		}
 
 		if (HttpMethod.GET != method) {
@@ -204,7 +204,7 @@ public class HandshakeWebSocketService implements WebSocketService, Lifecycle {
 
 	private Mono<Void> handleBadRequest(String reason) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(reason);
+			logger.info(reason);
 		}
 		return Mono.error(new ServerWebInputException(reason));
 	}

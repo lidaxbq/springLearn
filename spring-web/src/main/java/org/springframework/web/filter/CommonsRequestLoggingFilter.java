@@ -44,7 +44,7 @@ public class CommonsRequestLoggingFilter extends AbstractRequestLoggingFilter {
 	 */
 	@Override
 	protected void beforeRequest(HttpServletRequest request, String message) {
-		logger.debug(message);
+		logger.info(message);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class CommonsRequestLoggingFilter extends AbstractRequestLoggingFilter {
 	 */
 	@Override
 	protected void afterRequest(HttpServletRequest request, String message) {
-		logger.debug(message);
+		logger.info(message);
 	}
 
 }

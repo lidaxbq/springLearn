@@ -99,7 +99,7 @@ public abstract class JndiLocatorSupport extends JndiAccessor {
 			if (!convertedName.equals(jndiName)) {
 				// Try fallback to originally specified name...
 				if (logger.isDebugEnabled()) {
-					logger.debug("Converted JNDI name [" + convertedName +
+					logger.info("Converted JNDI name [" + convertedName +
 							"] not found - trying original name [" + jndiName + "]. " + ex);
 				}
 				jndiObject = getJndiTemplate().lookup(jndiName, requiredType);
@@ -109,7 +109,7 @@ public abstract class JndiLocatorSupport extends JndiAccessor {
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Located object with JNDI name [" + convertedName + "]");
+			logger.info("Located object with JNDI name [" + convertedName + "]");
 		}
 		return jndiObject;
 	}

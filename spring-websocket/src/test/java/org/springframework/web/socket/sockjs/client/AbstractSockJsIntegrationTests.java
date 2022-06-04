@@ -108,7 +108,7 @@ public abstract class AbstractSockJsIntegrationTests {
 
 	@Before
 	public void setup() throws Exception {
-		logger.debug("Setting up '" + this.testName.getMethodName() + "'");
+		logger.info("Setting up '" + this.testName.getMethodName() + "'");
 		this.testFilter = new TestFilter();
 
 		this.wac = new AnnotationConfigWebApplicationContext();

@@ -111,7 +111,7 @@ public abstract class AbstractGenericWebContextLoader extends AbstractContextLoa
 		WebMergedContextConfiguration webMergedConfig = (WebMergedContextConfiguration) mergedConfig;
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Loading WebApplicationContext for merged context configuration %s.",
+			logger.info(String.format("Loading WebApplicationContext for merged context configuration %s.",
 				webMergedConfig));
 		}
 

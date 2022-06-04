@@ -292,7 +292,7 @@ public abstract class SharedEntityManagerCreator {
 			// Regular EntityManager operations.
 			boolean isNewEm = false;
 			if (target == null) {
-				logger.debug("Creating new EntityManager for shared EntityManager invocation");
+				logger.info("Creating new EntityManager for shared EntityManager invocation");
 				target = (!CollectionUtils.isEmpty(this.properties) ?
 						this.targetFactory.createEntityManager(this.properties) :
 						this.targetFactory.createEntityManager());

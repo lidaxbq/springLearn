@@ -106,7 +106,7 @@ public abstract class AbstractGenericContextLoader extends AbstractContextLoader
 	@Override
 	public final ConfigurableApplicationContext loadContext(MergedContextConfiguration mergedConfig) throws Exception {
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Loading ApplicationContext for merged context configuration [%s].",
+			logger.info(String.format("Loading ApplicationContext for merged context configuration [%s].",
 				mergedConfig));
 		}
 
@@ -181,7 +181,7 @@ public abstract class AbstractGenericContextLoader extends AbstractContextLoader
 	@Override
 	public final ConfigurableApplicationContext loadContext(String... locations) throws Exception {
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Loading ApplicationContext for locations [%s].",
+			logger.info(String.format("Loading ApplicationContext for locations [%s].",
 				StringUtils.arrayToCommaDelimitedString(locations)));
 		}
 		GenericApplicationContext context = new GenericApplicationContext();

@@ -149,7 +149,7 @@ public class ResourceBundleThemeSource implements HierarchicalThemeSource, BeanC
 					initParent(theme);
 					this.themeCache.put(themeName, theme);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Theme created: name '" + themeName + "', basename [" + basename + "]");
+						logger.info("Theme created: name '" + themeName + "', basename [" + basename + "]");
 					}
 				}
 			}

@@ -570,7 +570,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 					this.beanFactory.registerDependentBean(autowiredBeanName, beanName);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Autowiring by type from bean name '" + beanName +
+					logger.info("Autowiring by type from bean name '" + beanName +
 							"' to bean named '" + autowiredBeanName + "'");
 				}
 			}

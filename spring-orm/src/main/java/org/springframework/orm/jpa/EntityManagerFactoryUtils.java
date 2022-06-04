@@ -212,7 +212,7 @@ public abstract class EntityManagerFactoryUtils {
 							emHolder.getEntityManager().joinTransaction();
 						}
 						catch (TransactionRequiredException ex) {
-							logger.debug("Could not join transaction because none was actually active", ex);
+							logger.info("Could not join transaction because none was actually active", ex);
 						}
 					}
 					if (TransactionSynchronizationManager.isSynchronizationActive()) {
@@ -252,7 +252,7 @@ public abstract class EntityManagerFactoryUtils {
 		}
 
 		// Create a new EntityManager for use within the current transaction.
-		logger.debug("Opening JPA EntityManager");
+		logger.info("Opening JPA EntityManager");
 		EntityManager em = null;
 		if (!synchronizedWithTransaction) {
 			try {
@@ -269,7 +269,7 @@ public abstract class EntityManagerFactoryUtils {
 
 		// Use same EntityManager for further JPA operations within the transaction.
 		// Thread-bound object will get removed by synchronization at transaction completion.
-		logger.debug("Registering transaction synchronization for JPA EntityManager");
+		logger.info("Registering transaction synchronization for JPA EntityManager");
 		emHolder = new EntityManagerHolder(em);
 		if (synchronizedWithTransaction) {
 			Object transactionData = prepareTransaction(em, emf);
@@ -416,17 +416,17 @@ public abstract class EntityManagerFactoryUtils {
 	 */
 	public static void closeEntityManager(@Nullable EntityManager em) {
 		if (em != null) {
-			logger.debug("Closing JPA EntityManager");
+			logger.info("Closing JPA EntityManager");
 			try {
 				if (em.isOpen()) {
 					em.close();
 				}
 			}
 			catch (PersistenceException ex) {
-				logger.debug("Could not close JPA EntityManager", ex);
+				logger.info("Could not close JPA EntityManager", ex);
 			}
 			catch (Throwable ex) {
-				logger.debug("Unexpected exception on closing JPA EntityManager", ex);
+				logger.info("Unexpected exception on closing JPA EntityManager", ex);
 			}
 		}
 	}

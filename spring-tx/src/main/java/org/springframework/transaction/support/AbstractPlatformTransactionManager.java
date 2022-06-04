@@ -365,7 +365,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 				definition.getPropagationBehavior() == TransactionDefinition.PROPAGATION_NESTED) {
 			SuspendedResourcesHolder suspendedResources = suspend(null);
 			if (debugEnabled) {
-				logger.debug("Creating new transaction with name [" + definition.getName() + "]: " + definition);
+				logger.info("Creating new transaction with name [" + definition.getName() + "]: " + definition);
 			}
 			try {
 				boolean newSynchronization = (getTransactionSynchronization() != SYNCHRONIZATION_NEVER);
@@ -405,7 +405,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 		if (definition.getPropagationBehavior() == TransactionDefinition.PROPAGATION_NOT_SUPPORTED) {
 			if (debugEnabled) {
-				logger.debug("Suspending current transaction");
+				logger.info("Suspending current transaction");
 			}
 			Object suspendedResources = suspend(transaction);
 			boolean newSynchronization = (getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS);
@@ -415,7 +415,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 		if (definition.getPropagationBehavior() == TransactionDefinition.PROPAGATION_REQUIRES_NEW) {
 			if (debugEnabled) {
-				logger.debug("Suspending current transaction, creating new transaction with name [" +
+				logger.info("Suspending current transaction, creating new transaction with name [" +
 						definition.getName() + "]");
 			}
 			SuspendedResourcesHolder suspendedResources = suspend(transaction);
@@ -440,7 +440,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 						"specify 'nestedTransactionAllowed' property with value 'true'");
 			}
 			if (debugEnabled) {
-				logger.debug("Creating nested transaction with name [" + definition.getName() + "]");
+				logger.info("Creating nested transaction with name [" + definition.getName() + "]");
 			}
 			if (useSavepointForNestedTransaction()) {
 				// Create savepoint within existing Spring-managed transaction,
@@ -466,7 +466,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 		// Assumably PROPAGATION_SUPPORTS or PROPAGATION_REQUIRED.
 		if (debugEnabled) {
-			logger.debug("Participating in existing transaction");
+			logger.info("Participating in existing transaction");
 		}
 		if (isValidateExistingTransaction()) {
 			if (definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT) {
@@ -693,7 +693,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 		DefaultTransactionStatus defStatus = (DefaultTransactionStatus) status;
 		if (defStatus.isLocalRollbackOnly()) {
 			if (defStatus.isDebug()) {
-				logger.debug("Transactional code has requested rollback");
+				logger.info("Transactional code has requested rollback");
 			}
 			processRollback(defStatus, false);
 			return;
@@ -701,7 +701,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 		if (!shouldCommitOnGlobalRollbackOnly() && defStatus.isGlobalRollbackOnly()) {
 			if (defStatus.isDebug()) {
-				logger.debug("Global transaction is marked as rollback-only but transactional code requested commit");
+				logger.info("Global transaction is marked as rollback-only but transactional code requested commit");
 			}
 			processRollback(defStatus, true);
 			return;
@@ -729,14 +729,14 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 				if (status.hasSavepoint()) {
 					if (status.isDebug()) {
-						logger.debug("Releasing transaction savepoint");
+						logger.info("Releasing transaction savepoint");
 					}
 					unexpectedRollback = status.isGlobalRollbackOnly();
 					status.releaseHeldSavepoint();
 				}
 				else if (status.isNewTransaction()) {
 					if (status.isDebug()) {
-						logger.debug("Initiating transaction commit");
+						logger.info("Initiating transaction commit");
 					}
 					unexpectedRollback = status.isGlobalRollbackOnly();
 					doCommit(status);
@@ -823,13 +823,13 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 				if (status.hasSavepoint()) {
 					if (status.isDebug()) {
-						logger.debug("Rolling back transaction to savepoint");
+						logger.info("Rolling back transaction to savepoint");
 					}
 					status.rollbackToHeldSavepoint();
 				}
 				else if (status.isNewTransaction()) {
 					if (status.isDebug()) {
-						logger.debug("Initiating transaction rollback");
+						logger.info("Initiating transaction rollback");
 					}
 					doRollback(status);
 				}
@@ -838,18 +838,18 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 					if (status.hasTransaction()) {
 						if (status.isLocalRollbackOnly() || isGlobalRollbackOnParticipationFailure()) {
 							if (status.isDebug()) {
-								logger.debug("Participating transaction failed - marking existing transaction as rollback-only");
+								logger.info("Participating transaction failed - marking existing transaction as rollback-only");
 							}
 							doSetRollbackOnly(status);
 						}
 						else {
 							if (status.isDebug()) {
-								logger.debug("Participating transaction failed - letting transaction originator decide on rollback");
+								logger.info("Participating transaction failed - letting transaction originator decide on rollback");
 							}
 						}
 					}
 					else {
-						logger.debug("Should roll back transaction but cannot - no transaction available");
+						logger.info("Should roll back transaction but cannot - no transaction available");
 					}
 					// Unexpected rollback only matters here if we're asked to fail early
 					if (!isFailEarlyOnGlobalRollbackOnly()) {
@@ -886,13 +886,13 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 		try {
 			if (status.isNewTransaction()) {
 				if (status.isDebug()) {
-					logger.debug("Initiating transaction rollback after commit exception", ex);
+					logger.info("Initiating transaction rollback after commit exception", ex);
 				}
 				doRollback(status);
 			}
 			else if (status.hasTransaction() && isGlobalRollbackOnParticipationFailure()) {
 				if (status.isDebug()) {
-					logger.debug("Marking existing transaction as rollback-only after commit exception", ex);
+					logger.info("Marking existing transaction as rollback-only after commit exception", ex);
 				}
 				doSetRollbackOnly(status);
 			}
@@ -1004,7 +1004,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 		}
 		if (status.getSuspendedResources() != null) {
 			if (status.isDebug()) {
-				logger.debug("Resuming suspended transaction after completion of inner transaction");
+				logger.info("Resuming suspended transaction after completion of inner transaction");
 			}
 			Object transaction = (status.hasTransaction() ? status.getTransaction() : null);
 			resume(transaction, (SuspendedResourcesHolder) status.getSuspendedResources());
@@ -1236,7 +1236,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	protected void registerAfterCompletionWithExistingTransaction(
 			Object transaction, List<TransactionSynchronization> synchronizations) throws TransactionException {
 
-		logger.debug("Cannot register Spring after-completion synchronization with existing transaction - " +
+		logger.info("Cannot register Spring after-completion synchronization with existing transaction - " +
 				"processing Spring after-completion callbacks immediately, with outcome status 'unknown'");
 		invokeAfterCompletion(synchronizations, TransactionSynchronization.STATUS_UNKNOWN);
 	}

@@ -27,6 +27,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 
 /**
+ * 基于 Bean 的名字从容器中获得 View 对象的
  * A simple implementation of {@link org.springframework.web.servlet.ViewResolver}
  * that interprets a view name as a bean name in the current application context,
  * i.e. typically in the XML file of the executing {@code DispatcherServlet}.
@@ -53,7 +54,9 @@ import org.springframework.web.servlet.ViewResolver;
  * @see UrlBasedViewResolver
  */
 public class BeanNameViewResolver extends WebApplicationObjectSupport implements ViewResolver, Ordered {
-
+	/**
+	 * 顺序，优先级最低      和数值反着来的
+	 */
 	private int order = Integer.MAX_VALUE;  // default: same as non-Ordered
 
 
@@ -70,23 +73,26 @@ public class BeanNameViewResolver extends WebApplicationObjectSupport implements
 	@Override
 	@Nullable
 	public View resolveViewName(String viewName, Locale locale) throws BeansException {
+		// 如果 Bean 对应的 Bean 对象不存在，则返回 null
 		ApplicationContext context = obtainApplicationContext();
 		if (!context.containsBean(viewName)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("No matching bean found for view name '" + viewName + "'");
+				logger.info("No matching bean found for view name '" + viewName + "'");
 			}
 			// Allow for ViewResolver chaining...
 			return null;
 		}
+		// 如果 Bean 对应的 Bean 类型不是 View ，则返回 null
 		if (!context.isTypeMatch(viewName, View.class)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Found matching bean for view name '" + viewName +
+				logger.info("Found matching bean for view name '" + viewName +
 						"' - to be ignored since it does not implement View");
 			}
 			// Since we're looking into the general ApplicationContext here,
 			// let's accept this as a non-match and allow for chaining as well...
 			return null;
 		}
+		// 获得 Bean 名字对应的 View 对象
 		return context.getBean(viewName, View.class);
 	}
 

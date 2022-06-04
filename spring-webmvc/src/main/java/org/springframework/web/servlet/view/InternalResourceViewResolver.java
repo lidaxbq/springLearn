@@ -20,6 +20,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**
+ * 继承 UrlBasedViewResolver 类，解析出 JSP 的 ViewResolver 实现类。
  * Convenient subclass of {@link UrlBasedViewResolver} that supports
  * {@link InternalResourceView} (i.e. Servlets and JSPs) and subclasses
  * such as {@link JstlView}.
@@ -61,10 +62,12 @@ public class InternalResourceViewResolver extends UrlBasedViewResolver {
 	 * is present.
 	 */
 	public InternalResourceViewResolver() {
+		// 获得 viewClass,视图名会是 InternalResourceView 或 JstlView 类,实际上，JstlView 是 InternalResourceView 的子类。
 		Class<?> viewClass = requiredViewClass();
 		if (InternalResourceView.class == viewClass && jstlPresent) {
 			viewClass = JstlView.class;
 		}
+		// 设置 viewClass
 		setViewClass(viewClass);
 	}
 
@@ -103,7 +106,9 @@ public class InternalResourceViewResolver extends UrlBasedViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView buildView(String viewName) throws Exception {
+		// 调用父方法
 		InternalResourceView view = (InternalResourceView) super.buildView(viewName);
+		// 设置 View 对象的相关属性
 		if (this.alwaysInclude != null) {
 			view.setAlwaysInclude(this.alwaysInclude);
 		}

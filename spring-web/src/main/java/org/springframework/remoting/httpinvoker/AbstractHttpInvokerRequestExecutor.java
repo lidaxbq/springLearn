@@ -134,7 +134,7 @@ public abstract class AbstractHttpInvokerRequestExecutor implements HttpInvokerR
 
 		ByteArrayOutputStream baos = getByteArrayOutputStream(invocation);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Sending HTTP invoker request for service at [" + config.getServiceUrl() +
+			logger.info("Sending HTTP invoker request for service at [" + config.getServiceUrl() +
 					"], with size " + baos.size());
 		}
 		return doExecuteRequest(config, baos);

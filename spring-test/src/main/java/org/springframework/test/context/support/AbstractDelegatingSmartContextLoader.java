@@ -94,7 +94,7 @@ public abstract class AbstractDelegatingSmartContextLoader implements SmartConte
 
 	private static void delegateProcessing(SmartContextLoader loader, ContextConfigurationAttributes configAttributes) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Delegating to %s to process context configuration %s.", name(loader),
+			logger.info(String.format("Delegating to %s to process context configuration %s.", name(loader),
 				configAttributes));
 		}
 		loader.processContextConfiguration(configAttributes);
@@ -104,7 +104,7 @@ public abstract class AbstractDelegatingSmartContextLoader implements SmartConte
 			throws Exception {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Delegating to %s to load context from %s.", name(loader), mergedConfig));
+			logger.info(String.format("Delegating to %s to load context from %s.", name(loader), mergedConfig));
 		}
 		return loader.loadContext(mergedConfig);
 	}

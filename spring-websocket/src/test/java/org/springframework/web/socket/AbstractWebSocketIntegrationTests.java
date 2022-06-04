@@ -72,7 +72,7 @@ public abstract class AbstractWebSocketIntegrationTests {
 
 	@Before
 	public void setup() throws Exception {
-		logger.debug("Setting up '" + this.testName.getMethodName() + "', client=" +
+		logger.info("Setting up '" + this.testName.getMethodName() + "', client=" +
 				this.webSocketClient.getClass().getSimpleName() + ", server=" +
 				this.server.getClass().getSimpleName());
 

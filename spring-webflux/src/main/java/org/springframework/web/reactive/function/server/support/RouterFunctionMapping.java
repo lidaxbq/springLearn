@@ -108,7 +108,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 	 */
 	protected void initRouterFunctions() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for router functions in application context: " +
+			logger.info("Looking for router functions in application context: " +
 					getApplicationContext());
 		}
 

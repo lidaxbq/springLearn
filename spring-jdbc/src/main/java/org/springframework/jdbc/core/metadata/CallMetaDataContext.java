@@ -338,7 +338,7 @@ public class CallMetaDataContext {
 					if (isFunction() && !metaDataParamNames.contains(paramNameToMatch)) {
 						if (!returnDeclared) {
 							if (logger.isDebugEnabled()) {
-								logger.debug("Using declared out parameter '" + paramName +
+								logger.info("Using declared out parameter '" + paramName +
 										"' for function return value");
 							}
 							setFunctionReturnName(paramName);
@@ -393,7 +393,7 @@ public class CallMetaDataContext {
 				if (param != null) {
 					workParams.add(param);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Using declared parameter for '" +
+						logger.info("Using declared parameter for '" +
 								(paramNameToUse != null ? paramNameToUse : getFunctionReturnName()) + "'");
 					}
 				}
@@ -403,7 +403,7 @@ public class CallMetaDataContext {
 					if (!isFunction() && !isReturnValueRequired() && paramName != null &&
 							provider.byPassReturnParameter(paramName)) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Bypassing metadata return parameter for '" + paramName + "'");
+							logger.info("Bypassing metadata return parameter for '" + paramName + "'");
 						}
 					}
 					else {
@@ -415,7 +415,7 @@ public class CallMetaDataContext {
 							outParamNames.add(returnNameToUse);
 						}
 						if (logger.isDebugEnabled()) {
-							logger.debug("Added metadata return parameter for '" + returnNameToUse + "'");
+							logger.info("Added metadata return parameter for '" + returnNameToUse + "'");
 						}
 					}
 				}
@@ -427,14 +427,14 @@ public class CallMetaDataContext {
 						workParams.add(provider.createDefaultOutParameter(paramNameToUse, meta));
 						outParamNames.add(paramNameToUse);
 						if (logger.isDebugEnabled()) {
-							logger.debug("Added metadata out parameter for '" + paramNameToUse + "'");
+							logger.info("Added metadata out parameter for '" + paramNameToUse + "'");
 						}
 					}
 					else if (meta.getParameterType() == DatabaseMetaData.procedureColumnInOut) {
 						workParams.add(provider.createDefaultInOutParameter(paramNameToUse, meta));
 						outParamNames.add(paramNameToUse);
 						if (logger.isDebugEnabled()) {
-							logger.debug("Added metadata in out parameter for '" + paramNameToUse + "'");
+							logger.info("Added metadata in out parameter for '" + paramNameToUse + "'");
 						}
 					}
 					else {
@@ -442,12 +442,12 @@ public class CallMetaDataContext {
 								limitedInParamNamesMap.containsKey(lowerCase(paramNameToUse))) {
 							workParams.add(provider.createDefaultInParameter(paramNameToUse, meta));
 							if (logger.isDebugEnabled()) {
-								logger.debug("Added metadata in parameter for '" + paramNameToUse + "'");
+								logger.info("Added metadata in parameter for '" + paramNameToUse + "'");
 							}
 						}
 						else {
 							if (logger.isDebugEnabled()) {
-								logger.debug("Limited set of parameters " + limitedInParamNamesMap.keySet() +
+								logger.info("Limited set of parameters " + limitedInParamNamesMap.keySet() +
 										" skipped parameter for '" + paramNameToUse + "'");
 							}
 						}
@@ -516,8 +516,8 @@ public class CallMetaDataContext {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Matching " + caseInsensitiveParameterNames.values() + " with " + callParameterNames.values());
-			logger.debug("Found match for " + matchedParameters.keySet());
+			logger.info("Matching " + caseInsensitiveParameterNames.values() + " with " + callParameterNames.values());
+			logger.info("Found match for " + matchedParameters.keySet());
 		}
 		return matchedParameters;
 	}
@@ -555,7 +555,7 @@ public class CallMetaDataContext {
 						value = ((SqlParameterValue)value).getValue();
 					}
 					if (value != null) {
-						logger.debug("Unable to locate the corresponding IN or IN-OUT parameter for \"" + parameterName +
+						logger.info("Unable to locate the corresponding IN or IN-OUT parameter for \"" + parameterName +
 								"\" in the parameters used: " + callParameterNames.keySet());
 					}
 				}
@@ -577,8 +577,8 @@ public class CallMetaDataContext {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Matching " + inParameters.keySet() + " with " + callParameterNames.values());
-			logger.debug("Found match for " + matchedParameters.keySet());
+			logger.info("Matching " + inParameters.keySet() + " with " + callParameterNames.values());
+			logger.info("Found match for " + matchedParameters.keySet());
 		}
 		return matchedParameters;
 	}

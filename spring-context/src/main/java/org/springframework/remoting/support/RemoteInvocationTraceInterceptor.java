@@ -71,13 +71,13 @@ public class RemoteInvocationTraceInterceptor implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		Method method = invocation.getMethod();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Incoming " + this.exporterNameClause + "remote call: " +
+			logger.info("Incoming " + this.exporterNameClause + "remote call: " +
 					ClassUtils.getQualifiedMethodName(method));
 		}
 		try {
 			Object retVal = invocation.proceed();
 			if (logger.isDebugEnabled()) {
-				logger.debug("Finished processing of " + this.exporterNameClause + "remote call: " +
+				logger.info("Finished processing of " + this.exporterNameClause + "remote call: " +
 						ClassUtils.getQualifiedMethodName(method));
 			}
 			return retVal;

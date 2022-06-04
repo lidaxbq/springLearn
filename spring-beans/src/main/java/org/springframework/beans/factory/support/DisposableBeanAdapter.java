@@ -243,7 +243,7 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 
 		if (this.invokeDisposableBean) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Invoking destroy() on bean with name '" + this.beanName + "'");
+				logger.info("Invoking destroy() on bean with name '" + this.beanName + "'");
 			}
 			try {
 				if (System.getSecurityManager() != null) {
@@ -315,7 +315,7 @@ class DisposableBeanAdapter implements DisposableBean, Runnable, Serializable {
 			args[0] = Boolean.TRUE;
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Invoking destroy method '" + this.destroyMethodName +
+			logger.info("Invoking destroy method '" + this.destroyMethodName +
 					"' on bean with name '" + this.beanName + "'");
 		}
 		try {

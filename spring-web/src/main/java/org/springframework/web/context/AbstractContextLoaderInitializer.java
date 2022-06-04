@@ -64,7 +64,7 @@ public abstract class AbstractContextLoaderInitializer implements WebApplication
 			servletContext.addListener(listener);
 		}
 		else {
-			logger.debug("No ContextLoaderListener registered, as " +
+			logger.info("No ContextLoaderListener registered, as " +
 					"createRootApplicationContext() did not return an application context");
 		}
 	}

@@ -399,7 +399,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 				(SessionHolder) TransactionSynchronizationManager.getResource(sessionFactory);
 		if (sessionHolder != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Found thread-bound Session [" + sessionHolder.getSession() + "] for Hibernate transaction");
+				logger.info("Found thread-bound Session [" + sessionHolder.getSession() + "] for Hibernate transaction");
 			}
 			txObject.setSessionHolder(sessionHolder);
 		}
@@ -407,7 +407,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 			try {
 				Session session = sessionFactory.getCurrentSession();
 				if (logger.isDebugEnabled()) {
-					logger.debug("Found Hibernate-managed Session [" + session + "] for Spring-managed transaction");
+					logger.info("Found Hibernate-managed Session [" + session + "] for Spring-managed transaction");
 				}
 				txObject.setExistingSession(session);
 			}
@@ -455,7 +455,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 						obtainSessionFactory().withOptions().interceptor(entityInterceptor).openSession() :
 						obtainSessionFactory().openSession());
 				if (logger.isDebugEnabled()) {
-					logger.debug("Opened new Session [" + newSession + "] for Hibernate transaction");
+					logger.info("Opened new Session [" + newSession + "] for Hibernate transaction");
 				}
 				txObject.setSession(newSession);
 			}
@@ -465,7 +465,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 			if (this.prepareConnection && isSameConnectionForEntireSession(session)) {
 				// We're allowed to change the transaction settings of the JDBC Connection.
 				if (logger.isDebugEnabled()) {
-					logger.debug("Preparing JDBC Connection of Hibernate Session [" + session + "]");
+					logger.info("Preparing JDBC Connection of Hibernate Session [" + session + "]");
 				}
 				Connection con = ((SessionImplementor) session).connection();
 				Integer previousIsolationLevel = DataSourceUtils.prepareConnectionForTransaction(con, definition);
@@ -488,7 +488,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 							"Hibernate connection release mode is set to 'on_close' (the default for JDBC).");
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Not preparing JDBC Connection of Hibernate Session [" + session + "]");
+					logger.info("Not preparing JDBC Connection of Hibernate Session [" + session + "]");
 				}
 			}
 
@@ -533,7 +533,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 					conHolder.setTimeoutInSeconds(timeout);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Exposing Hibernate transaction as JDBC transaction [" + con + "]");
+					logger.info("Exposing Hibernate transaction as JDBC transaction [" + con + "]");
 				}
 				TransactionSynchronizationManager.bindResource(getDataSource(), conHolder);
 				txObject.setConnectionHolder(conHolder);
@@ -554,7 +554,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 					}
 				}
 				catch (Throwable ex2) {
-					logger.debug("Could not rollback Session after failed transaction begin", ex);
+					logger.info("Could not rollback Session after failed transaction begin", ex);
 				}
 				finally {
 					SessionFactoryUtils.closeSession(session);
@@ -601,7 +601,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 		Transaction hibTx = txObject.getSessionHolder().getTransaction();
 		Assert.state(hibTx != null, "No Hibernate transaction");
 		if (status.isDebug()) {
-			logger.debug("Committing Hibernate transaction on Session [" +
+			logger.info("Committing Hibernate transaction on Session [" +
 					txObject.getSessionHolder().getSession() + "]");
 		}
 
@@ -630,7 +630,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 		Transaction hibTx = txObject.getSessionHolder().getTransaction();
 		Assert.state(hibTx != null, "No Hibernate transaction");
 		if (status.isDebug()) {
-			logger.debug("Rolling back Hibernate transaction on Session [" +
+			logger.info("Rolling back Hibernate transaction on Session [" +
 					txObject.getSessionHolder().getSession() + "]");
 		}
 
@@ -663,7 +663,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 	protected void doSetRollbackOnly(DefaultTransactionStatus status) {
 		HibernateTransactionObject txObject = (HibernateTransactionObject) status.getTransaction();
 		if (status.isDebug()) {
-			logger.debug("Setting Hibernate transaction on Session [" +
+			logger.info("Setting Hibernate transaction on Session [" +
 					txObject.getSessionHolder().getSession() + "] rollback-only");
 		}
 		txObject.setRollbackOnly();
@@ -698,22 +698,22 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 				DataSourceUtils.resetConnectionAfterTransaction(con, txObject.getPreviousIsolationLevel());
 			}
 			catch (HibernateException ex) {
-				logger.debug("Could not access JDBC Connection of Hibernate Session", ex);
+				logger.info("Could not access JDBC Connection of Hibernate Session", ex);
 			}
 			catch (Throwable ex) {
-				logger.debug("Could not reset JDBC Connection after transaction", ex);
+				logger.info("Could not reset JDBC Connection after transaction", ex);
 			}
 		}
 
 		if (txObject.isNewSession()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Closing Hibernate Session [" + session + "] after transaction");
+				logger.info("Closing Hibernate Session [" + session + "] after transaction");
 			}
 			SessionFactoryUtils.closeSession(session);
 		}
 		else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Not closing pre-bound Hibernate Session [" + session + "] after transaction");
+				logger.info("Not closing pre-bound Hibernate Session [" + session + "] after transaction");
 			}
 			if (txObject.getSessionHolder().getPreviousFlushMode() != null) {
 				session.setFlushMode(txObject.getSessionHolder().getPreviousFlushMode());

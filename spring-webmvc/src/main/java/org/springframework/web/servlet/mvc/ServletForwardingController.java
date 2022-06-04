@@ -133,14 +133,14 @@ public class ServletForwardingController extends AbstractController implements B
 		if (useInclude(request, response)) {
 			rd.include(request, response);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Included servlet [" + this.servletName +
+				logger.info("Included servlet [" + this.servletName +
 						"] in ServletForwardingController '" + this.beanName + "'");
 			}
 		}
 		else {
 			rd.forward(request, response);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Forwarded to servlet [" + this.servletName +
+				logger.info("Forwarded to servlet [" + this.servletName +
 						"] in ServletForwardingController '" + this.beanName + "'");
 			}
 		}

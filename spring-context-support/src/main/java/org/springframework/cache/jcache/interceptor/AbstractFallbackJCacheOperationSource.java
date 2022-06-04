@@ -67,7 +67,7 @@ public abstract class AbstractFallbackJCacheOperationSource implements JCacheOpe
 			JCacheOperation<?> operation = computeCacheOperation(method, targetClass);
 			if (operation != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Adding cacheable method '" + method.getName() + "' with operation: " + operation);
+					logger.info("Adding cacheable method '" + method.getName() + "' with operation: " + operation);
 				}
 				this.cache.put(cacheKey, operation);
 			}

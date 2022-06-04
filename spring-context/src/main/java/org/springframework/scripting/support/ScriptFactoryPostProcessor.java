@@ -286,7 +286,7 @@ public class ScriptFactoryPostProcessor extends InstantiationAwareBeanPostProces
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not determine scripted object type for bean '" + beanName + "'", ex);
+					logger.info("Could not determine scripted object type for bean '" + beanName + "'", ex);
 				}
 			}
 		}

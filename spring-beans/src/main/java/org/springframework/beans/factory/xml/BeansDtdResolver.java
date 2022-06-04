@@ -72,13 +72,13 @@ public class BeansDtdResolver implements EntityResolver {
 					source.setPublicId(publicId);
 					source.setSystemId(systemId);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Found beans DTD [" + systemId + "] in classpath: " + dtdFile);
+						logger.info("Found beans DTD [" + systemId + "] in classpath: " + dtdFile);
 					}
 					return source;
 				}
 				catch (IOException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Could not resolve beans DTD [" + systemId + "]: not found in classpath", ex);
+						logger.info("Could not resolve beans DTD [" + systemId + "]: not found in classpath", ex);
 					}
 				}
 

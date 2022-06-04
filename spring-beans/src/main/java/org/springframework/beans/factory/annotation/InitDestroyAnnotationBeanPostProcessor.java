@@ -210,7 +210,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 						LifecycleElement element = new LifecycleElement(method);
 						currInitMethods.add(element);
 						if (debug) {
-							logger.debug("Found init method on class [" + clazz.getName() + "]: " + method);
+							logger.info("Found init method on class [" + clazz.getName() + "]: " + method);
 						}
 					}
 				}
@@ -218,7 +218,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 					if (method.getAnnotation(destroyAnnotationType) != null) {
 						currDestroyMethods.add(new LifecycleElement(method));
 						if (debug) {
-							logger.debug("Found destroy method on class [" + clazz.getName() + "]: " + method);
+							logger.info("Found destroy method on class [" + clazz.getName() + "]: " + method);
 						}
 					}
 				}
@@ -280,7 +280,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 					beanDefinition.registerExternallyManagedInitMethod(methodIdentifier);
 					checkedInitMethods.add(element);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Registered init method on class [" + this.targetClass.getName() + "]: " + element);
+						logger.info("Registered init method on class [" + this.targetClass.getName() + "]: " + element);
 					}
 				}
 			}
@@ -291,7 +291,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 					beanDefinition.registerExternallyManagedDestroyMethod(methodIdentifier);
 					checkedDestroyMethods.add(element);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Registered destroy method on class [" + this.targetClass.getName() + "]: " + element);
+						logger.info("Registered destroy method on class [" + this.targetClass.getName() + "]: " + element);
 					}
 				}
 			}
@@ -307,7 +307,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 				boolean debug = logger.isDebugEnabled();
 				for (LifecycleElement element : initMethodsToIterate) {
 					if (debug) {
-						logger.debug("Invoking init method on bean '" + beanName + "': " + element.getMethod());
+						logger.info("Invoking init method on bean '" + beanName + "': " + element.getMethod());
 					}
 					element.invoke(target);
 				}
@@ -322,7 +322,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 				boolean debug = logger.isDebugEnabled();
 				for (LifecycleElement element : destroyMethodsToUse) {
 					if (debug) {
-						logger.debug("Invoking destroy method on bean '" + beanName + "': " + element.getMethod());
+						logger.info("Invoking destroy method on bean '" + beanName + "': " + element.getMethod());
 					}
 					element.invoke(target);
 				}

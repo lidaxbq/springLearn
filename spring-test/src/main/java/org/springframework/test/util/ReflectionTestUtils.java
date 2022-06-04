@@ -188,7 +188,7 @@ public abstract class ReflectionTestUtils {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format(
+			logger.info(String.format(
 					"Setting field '%s' of type [%s] on %s or target class [%s] to value [%s]", name, type,
 					safeToString(targetObject), targetClass, value));
 		}
@@ -272,7 +272,7 @@ public abstract class ReflectionTestUtils {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Getting field '%s' from %s or target class [%s]", name,
+			logger.info(String.format("Getting field '%s' from %s or target class [%s]", name,
 					safeToString(targetObject), targetClass));
 		}
 		ReflectionUtils.makeAccessible(field);
@@ -346,7 +346,7 @@ public abstract class ReflectionTestUtils {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Invoking setter method '%s' on %s with value [%s]", setterMethodName,
+			logger.info(String.format("Invoking setter method '%s' on %s with value [%s]", setterMethodName,
 					safeToString(target), value));
 		}
 
@@ -394,7 +394,7 @@ public abstract class ReflectionTestUtils {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Invoking getter method '%s' on %s", getterMethodName, safeToString(target)));
+			logger.info(String.format("Invoking getter method '%s' on %s", getterMethodName, safeToString(target)));
 		}
 		ReflectionUtils.makeAccessible(method);
 		return ReflectionUtils.invokeMethod(method, target);
@@ -430,7 +430,7 @@ public abstract class ReflectionTestUtils {
 			methodInvoker.prepare();
 
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("Invoking method '%s' on %s with arguments %s", name, safeToString(target),
+				logger.info(String.format("Invoking method '%s' on %s with arguments %s", name, safeToString(target),
 						ObjectUtils.nullSafeToString(args)));
 			}
 

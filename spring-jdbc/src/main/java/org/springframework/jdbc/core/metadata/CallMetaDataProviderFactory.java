@@ -120,7 +120,7 @@ public class CallMetaDataProviderFactory {
 					provider = new GenericCallMetaDataProvider(databaseMetaData);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Using " + provider.getClass().getName());
+					logger.info("Using " + provider.getClass().getName());
 				}
 				provider.initializeWithMetaData(databaseMetaData);
 				if (accessProcedureColumnMetaData) {

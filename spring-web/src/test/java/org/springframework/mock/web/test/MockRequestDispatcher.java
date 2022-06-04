@@ -59,7 +59,7 @@ public class MockRequestDispatcher implements RequestDispatcher {
 		Assert.state(!response.isCommitted(), "Cannot perform forward - response is already committed");
 		getMockHttpServletResponse(response).setForwardedUrl(this.resource);
 		if (logger.isDebugEnabled()) {
-			logger.debug("MockRequestDispatcher: forwarding to [" + this.resource + "]");
+			logger.info("MockRequestDispatcher: forwarding to [" + this.resource + "]");
 		}
 	}
 
@@ -69,7 +69,7 @@ public class MockRequestDispatcher implements RequestDispatcher {
 		Assert.notNull(response, "Response must not be null");
 		getMockHttpServletResponse(response).addIncludedUrl(this.resource);
 		if (logger.isDebugEnabled()) {
-			logger.debug("MockRequestDispatcher: including [" + this.resource + "]");
+			logger.info("MockRequestDispatcher: including [" + this.resource + "]");
 		}
 	}
 

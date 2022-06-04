@@ -818,7 +818,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 				if (isSessionLocallyTransacted(session)) {
 					// Transacted session created by this container -> rollback.
 					if (logger.isDebugEnabled()) {
-						logger.debug("Initiating transaction rollback on application exception", ex);
+						logger.info("Initiating transaction rollback on application exception", ex);
 					}
 					JmsUtils.rollbackIfNecessary(session);
 				}
@@ -828,7 +828,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 			}
 		}
 		catch (IllegalStateException ex2) {
-			logger.debug("Could not roll back because Session already closed", ex2);
+			logger.info("Could not roll back because Session already closed", ex2);
 		}
 		catch (JMSException | RuntimeException | Error ex2) {
 			logger.error("Application exception overridden by rollback error", ex);
@@ -907,7 +907,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 		else {
 			// Rare case: listener thread failed after container shutdown.
 			// Log at debug level, to avoid spamming the shutdown log.
-			logger.debug("Listener exception after container shutdown", ex);
+			logger.info("Listener exception after container shutdown", ex);
 		}
 	}
 

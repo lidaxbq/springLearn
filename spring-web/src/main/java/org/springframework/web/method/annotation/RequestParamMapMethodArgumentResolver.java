@@ -31,6 +31,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
+ * 实现 HandlerMethodArgumentResolver 接口，处理带有 @RequestParam 注解，
+ * 但是注解上无 name 属性的 Map 类型的参数的 RequestParamMethodArgumentResolver 实现类。
  * Resolves {@link Map} method arguments annotated with an @{@link RequestParam}
  * where the annotation does not specify a request parameter name.
  * See {@link RequestParamMethodArgumentResolver} for resolving {@link Map}
@@ -62,9 +64,9 @@ public class RequestParamMapMethodArgumentResolver implements HandlerMethodArgum
 	@Override
 	public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
-
+		// 获得请求的参数集合
 		Class<?> paramType = parameter.getParameterType();
-
+		// MultiValueMap 类型的处理
 		Map<String, String[]> parameterMap = webRequest.getParameterMap();
 		if (MultiValueMap.class.isAssignableFrom(paramType)) {
 			MultiValueMap<String, String> result = new LinkedMultiValueMap<>(parameterMap.size());
@@ -75,6 +77,7 @@ public class RequestParamMapMethodArgumentResolver implements HandlerMethodArgum
 			}
 			return result;
 		}
+		// 普通 Map 类型的处理
 		else {
 			Map<String, String> result = new LinkedHashMap<>(parameterMap.size());
 			for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {

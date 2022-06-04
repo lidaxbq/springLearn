@@ -398,7 +398,7 @@ public class UndertowXhrTransport extends AbstractXhrTransport {
 		public void handleEvent(StreamSourceChannel channel) {
 			if (this.session.isDisconnected()) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("SockJS sockJsSession closed, closing response.");
+					logger.info("SockJS sockJsSession closed, closing response.");
 				}
 				IoUtils.safeClose(this.connection);
 				throw new SockJsException("Session closed.", this.session.getId(), null);

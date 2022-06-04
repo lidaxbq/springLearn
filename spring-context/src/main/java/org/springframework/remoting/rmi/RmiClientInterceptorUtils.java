@@ -100,7 +100,7 @@ public abstract class RmiClientInterceptorUtils {
 	 */
 	public static Exception convertRmiAccessException(Method method, Throwable ex, String message) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(message, ex);
+			logger.info(message, ex);
 		}
 		if (ReflectionUtils.declaresException(method, RemoteException.class)) {
 			return new RemoteException(message, ex);
@@ -138,7 +138,7 @@ public abstract class RmiClientInterceptorUtils {
 			Method method, RemoteException ex, boolean isConnectFailure, String serviceName) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Remote service [" + serviceName + "] threw exception", ex);
+			logger.info("Remote service [" + serviceName + "] threw exception", ex);
 		}
 		if (ReflectionUtils.declaresException(method, ex.getClass())) {
 			return ex;

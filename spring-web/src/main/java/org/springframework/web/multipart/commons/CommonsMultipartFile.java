@@ -167,7 +167,7 @@ public class CommonsMultipartFile implements MultipartFile, Serializable {
 				if (!this.fileItem.isInMemory()) {
 					action = (isAvailable() ? "copied" : "moved");
 				}
-				logger.debug("Multipart file '" + getName() + "' with original filename [" +
+				logger.info("Multipart file '" + getName() + "' with original filename [" +
 						getOriginalFilename() + "], stored " + getStorageDescription() + ": " +
 						action + " to [" + dest.getAbsolutePath() + "]");
 			}

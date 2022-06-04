@@ -201,7 +201,7 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 	public final void close(CloseStatus status) throws IOException {
 		if (isOpen()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Closing SockJS session " + getId() + " with " + status);
+				logger.info("Closing SockJS session " + getId() + " with " + status);
 			}
 			this.state = State.CLOSED;
 			try {
@@ -210,7 +210,7 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 						writeFrameInternal(SockJsFrame.closeFrame(status.getCode(), status.getReason()));
 					}
 					catch (Throwable ex) {
-						logger.debug("Failure while sending SockJS close frame", ex);
+						logger.info("Failure while sending SockJS close frame", ex);
 					}
 				}
 				updateLastActiveTime();
@@ -222,7 +222,7 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 					this.handler.afterConnectionClosed(this, status);
 				}
 				catch (Throwable ex) {
-					logger.debug("Error from WebSocketHandler.afterConnectionClosed in " + this, ex);
+					logger.info("Error from WebSocketHandler.afterConnectionClosed in " + this, ex);
 				}
 			}
 		}
@@ -350,13 +350,13 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 				disconnectedClientLogger.trace("Looks like the client has gone away", ex);
 			}
 			else if (disconnectedClientLogger.isDebugEnabled()) {
-				disconnectedClientLogger.debug("Looks like the client has gone away: " + ex +
+				disconnectedClientlogger.info("Looks like the client has gone away: " + ex +
 						" (For a full stack trace, set the log category '" + DISCONNECTED_CLIENT_LOG_CATEGORY +
 						"' to TRACE level.)");
 			}
 		}
 		else {
-			logger.debug("Terminating connection after failure to send message to client", ex);
+			logger.info("Terminating connection after failure to send message to client", ex);
 		}
 	}
 
@@ -419,20 +419,20 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 	 */
 	public void tryCloseWithSockJsTransportError(Throwable error, CloseStatus closeStatus) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Closing due to transport error for " + this);
+			logger.info("Closing due to transport error for " + this);
 		}
 		try {
 			delegateError(error);
 		}
 		catch (Throwable delegateException) {
 			// Ignore
-			logger.debug("Exception from error handling delegate", delegateException);
+			logger.info("Exception from error handling delegate", delegateException);
 		}
 		try {
 			close(closeStatus);
 		}
 		catch (Throwable closeException) {
-			logger.debug("Failure while closing " + this, closeException);
+			logger.info("Failure while closing " + this, closeException);
 		}
 	}
 

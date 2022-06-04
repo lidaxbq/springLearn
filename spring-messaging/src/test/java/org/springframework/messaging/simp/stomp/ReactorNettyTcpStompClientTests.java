@@ -63,7 +63,7 @@ public class ReactorNettyTcpStompClientTests {
 	@Before
 	public void setUp() throws Exception {
 
-		logger.debug("Setting up before '" + this.testName.getMethodName() + "'");
+		logger.info("Setting up before '" + this.testName.getMethodName() + "'");
 
 		int port = SocketUtils.findAvailableTcpPort(61613);
 
@@ -94,10 +94,10 @@ public class ReactorNettyTcpStompClientTests {
 		}
 		final CountDownLatch latch = new CountDownLatch(1);
 		this.activeMQBroker.addShutdownHook(latch::countDown);
-		logger.debug("Stopping ActiveMQ broker and will await shutdown");
+		logger.info("Stopping ActiveMQ broker and will await shutdown");
 		this.activeMQBroker.stop();
 		if (!latch.await(5, TimeUnit.SECONDS)) {
-			logger.debug("ActiveMQ broker did not shut in the expected time.");
+			logger.info("ActiveMQ broker did not shut in the expected time.");
 		}
 	}
 
@@ -189,14 +189,14 @@ public class ReactorNettyTcpStompClientTests {
 
 		public boolean awaitForSubscriptions(long millisToWait) throws InterruptedException {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Awaiting for subscription receipts");
+				logger.info("Awaiting for subscription receipts");
 			}
 			return this.subscriptionLatch.await(millisToWait, TimeUnit.MILLISECONDS);
 		}
 
 		public boolean awaitForMessageCount(int expected, long millisToWait) throws InterruptedException {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Awaiting for message count: " + expected);
+				logger.info("Awaiting for message count: " + expected);
 			}
 			long startTime = System.currentTimeMillis();
 			while (this.received.size() < expected) {

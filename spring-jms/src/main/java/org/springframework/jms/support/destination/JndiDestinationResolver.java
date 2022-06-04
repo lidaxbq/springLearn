@@ -115,7 +115,7 @@ public class JndiDestinationResolver extends JndiLocatorSupport implements Cachi
 			}
 			catch (NamingException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Destination [" + destinationName + "] not found in JNDI", ex);
+					logger.info("Destination [" + destinationName + "] not found in JNDI", ex);
 				}
 				if (this.fallbackToDynamicDestination) {
 					dest = this.dynamicDestinationResolver.resolveDestinationName(session, destinationName, pubSubDomain);

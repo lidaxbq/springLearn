@@ -107,7 +107,7 @@ public class UndertowHttpHandlerAdapter implements io.undertow.server.HttpHandle
 
 		@Override
 		public void onComplete() {
-			logger.debug("Successfully completed request");
+			logger.info("Successfully completed request");
 			this.exchange.endExchange();
 		}
 	}

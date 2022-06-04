@@ -98,7 +98,7 @@ class ConfigurationClassEnhancer {
 	public Class<?> enhance(Class<?> configClass, @Nullable ClassLoader classLoader) {
 		if (EnhancedConfiguration.class.isAssignableFrom(configClass)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("Ignoring request to enhance %s as it has " +
+				logger.info(String.format("Ignoring request to enhance %s as it has " +
 						"already been enhanced. This usually indicates that more than one " +
 						"ConfigurationClassPostProcessor has been registered (e.g. via " +
 						"<context:annotation-config>). This is harmless, but you may " +
@@ -109,7 +109,7 @@ class ConfigurationClassEnhancer {
 		}
 		Class<?> enhancedClass = createClass(newEnhancer(configClass, classLoader));
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Successfully enhanced %s; enhanced class name is: %s",
+			logger.info(String.format("Successfully enhanced %s; enhanced class name is: %s",
 					configClass.getName(), enhancedClass.getName()));
 		}
 		return enhancedClass;
@@ -393,7 +393,7 @@ class ConfigurationClassEnhancer {
 				if (!ClassUtils.isAssignableValue(beanMethod.getReturnType(), beanInstance)) {
 					if (beanInstance.equals(null)) {
 						if (logger.isDebugEnabled()) {
-							logger.debug(String.format("@Bean method %s.%s called as bean reference " +
+							logger.info(String.format("@Bean method %s.%s called as bean reference " +
 									"for type [%s] returned null bean; resolving to null value.",
 									beanMethod.getDeclaringClass().getSimpleName(), beanMethod.getName(),
 									beanMethod.getReturnType().getName()));
@@ -490,7 +490,7 @@ class ConfigurationClassEnhancer {
 				if (finalClass || finalMethod) {
 					if (exposedType.isInterface()) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Creating interface proxy for FactoryBean '" + beanName + "' of type [" +
+							logger.info("Creating interface proxy for FactoryBean '" + beanName + "' of type [" +
 									clazz.getName() + "] for use within another @Bean method because its " +
 									(finalClass ? "implementation class" : "getObject() method") +
 									" is final: Otherwise a getObject() call would not be routed to the factory.");
@@ -547,7 +547,7 @@ class ConfigurationClassEnhancer {
 					fbProxy = objenesis.newInstance(fbClass, enhancer.getUseCache());
 				}
 				catch (ObjenesisException ex) {
-					logger.debug("Unable to instantiate enhanced FactoryBean using Objenesis, " +
+					logger.info("Unable to instantiate enhanced FactoryBean using Objenesis, " +
 							"falling back to regular construction", ex);
 				}
 			}

@@ -99,7 +99,7 @@ public abstract class AbstractFallbackCacheOperationSource implements CacheOpera
 			Collection<CacheOperation> cacheOps = computeCacheOperations(method, targetClass);
 			if (cacheOps != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Adding cacheable method '" + method.getName() + "' with attribute: " + cacheOps);
+					logger.info("Adding cacheable method '" + method.getName() + "' with attribute: " + cacheOps);
 				}
 				this.attributeCache.put(cacheKey, cacheOps);
 			}

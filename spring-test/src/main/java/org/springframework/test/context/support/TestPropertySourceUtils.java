@@ -241,7 +241,7 @@ public abstract class TestPropertySourceUtils {
 		Assert.notNull(inlinedProperties, "'inlinedProperties' must not be null");
 		if (!ObjectUtils.isEmpty(inlinedProperties)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Adding inlined properties to environment: " +
+				logger.info("Adding inlined properties to environment: " +
 						ObjectUtils.nullSafeToString(inlinedProperties));
 			}
 			MapPropertySource ps = (MapPropertySource)

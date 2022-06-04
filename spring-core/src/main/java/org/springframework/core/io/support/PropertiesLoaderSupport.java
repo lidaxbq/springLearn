@@ -175,7 +175,7 @@ public abstract class PropertiesLoaderSupport {
 		if (this.locations != null) {
 			for (Resource location : this.locations) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Loading properties file from " + location);
+					logger.info("Loading properties file from " + location);
 				}
 				try {
 					PropertiesLoaderUtils.fillProperties(

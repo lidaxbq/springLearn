@@ -188,7 +188,7 @@ public class MappingJackson2JsonView extends AbstractJackson2View {
 				}
 				if (!isValidJsonpQueryParam(value)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Ignoring invalid jsonp parameter value: " + value);
+						logger.info("Ignoring invalid jsonp parameter value: " + value);
 					}
 					continue;
 				}

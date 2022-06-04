@@ -95,7 +95,7 @@ class AsyncRequestInterceptor implements CallableProcessingInterceptor, Deferred
 
 	private void closeSession() {
 		if (this.timeoutInProgress || this.errorInProgress) {
-			logger.debug("Closing Hibernate Session after async request timeout/error");
+			logger.info("Closing Hibernate Session after async request timeout/error");
 			SessionFactoryUtils.closeSession(this.sessionHolder.getSession());
 		}
 	}

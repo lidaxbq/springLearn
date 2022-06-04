@@ -554,7 +554,7 @@ public class DefaultPersistenceUnitManager
 								PersistenceUnitReader.determinePersistenceUnitRootUrl(ormXml));
 					}
 					catch (IOException ex) {
-						logger.debug("Failed to determine persistence unit root URL from orm.xml location", ex);
+						logger.info("Failed to determine persistence unit root URL from orm.xml location", ex);
 					}
 				}
 			}

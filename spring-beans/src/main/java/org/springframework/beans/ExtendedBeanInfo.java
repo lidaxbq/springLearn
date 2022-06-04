@@ -106,7 +106,7 @@ class ExtendedBeanInfo implements BeanInfo {
 			catch (IntrospectionException ex) {
 				// Probably simply a method that wasn't meant to follow the JavaBeans pattern...
 				if (logger.isDebugEnabled()) {
-					logger.debug("Ignoring invalid bean property '" + pd.getName() + "': " + ex.getMessage());
+					logger.info("Ignoring invalid bean property '" + pd.getName() + "': " + ex.getMessage());
 				}
 			}
 		}
@@ -119,7 +119,7 @@ class ExtendedBeanInfo implements BeanInfo {
 				catch (IntrospectionException ex) {
 					// We're only trying to find candidates, can easily ignore extra ones here...
 					if (logger.isDebugEnabled()) {
-						logger.debug("Ignoring candidate write method [" + method + "]: " + ex.getMessage());
+						logger.info("Ignoring candidate write method [" + method + "]: " + ex.getMessage());
 					}
 				}
 			}

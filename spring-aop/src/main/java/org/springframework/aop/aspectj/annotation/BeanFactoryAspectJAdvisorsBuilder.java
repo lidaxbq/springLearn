@@ -114,6 +114,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 								// 获取所有增强方法
 								List<Advisor> classAdvisors = this.advisorFactory.getAdvisors(factory);
 								if (this.beanFactory.isSingleton(beanName)) {
+//									缓存 单例
 									this.advisorsCache.put(beanName, classAdvisors);
 								}
 								else {
@@ -143,7 +144,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 		if (aspectNames.isEmpty()) {
 			return Collections.emptyList();
 		}
-		// 缓存
+		// 从缓存中拿
 		List<Advisor> advisors = new LinkedList<>();
 		for (String aspectName : aspectNames) {
 			List<Advisor> cachedAdvisors = this.advisorsCache.get(aspectName);

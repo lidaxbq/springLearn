@@ -129,7 +129,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 			this.handlerMap.clear();
 			detectResourceHandlers(event.getApplicationContext());
 			if (this.handlerMap.isEmpty() && logger.isDebugEnabled()) {
-				logger.debug("No resource handling mappings found");
+				logger.info("No resource handling mappings found");
 			}
 			if (!this.handlerMap.isEmpty()) {
 				this.autodetect = false;
@@ -139,7 +139,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 
 
 	protected void detectResourceHandlers(ApplicationContext appContext) {
-		logger.debug("Looking for resource handler mappings");
+		logger.info("Looking for resource handler mappings");
 
 		Map<String, SimpleUrlHandlerMapping> beans = appContext.getBeansOfType(SimpleUrlHandlerMapping.class);
 		List<SimpleUrlHandlerMapping> mappings = new ArrayList<>(beans.values());
@@ -151,7 +151,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 				if (handler instanceof ResourceHttpRequestHandler) {
 					ResourceHttpRequestHandler resourceHandler = (ResourceHttpRequestHandler) handler;
 					if (logger.isDebugEnabled()) {
-						logger.debug("Found resource handler mapping: URL pattern=\"" + pattern + "\", " +
+						logger.info("Found resource handler mapping: URL pattern=\"" + pattern + "\", " +
 								"locations=" + resourceHandler.getLocations() + ", " +
 								"resolvers=" + resourceHandler.getResourceResolvers());
 					}
@@ -251,7 +251,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("No matching resource mapping for lookup path \"" + lookupPath + "\"");
+			logger.info("No matching resource mapping for lookup path \"" + lookupPath + "\"");
 		}
 		return null;
 	}

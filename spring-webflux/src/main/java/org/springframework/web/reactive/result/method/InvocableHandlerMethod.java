@@ -146,7 +146,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 				ReactiveAdapter adapter = this.reactiveAdapterRegistry.getAdapter(returnType.getParameterType());
 				boolean asyncVoid = isAsyncVoidReturnType(returnType, adapter);
 				if ((value == null || asyncVoid) && isResponseHandled(args, exchange)) {
-					logger.debug("Response fully handled in controller method");
+					logger.info("Response fully handled in controller method");
 					return asyncVoid ? Mono.from(adapter.toPublisher(value)) : Mono.empty();
 				}
 
@@ -215,7 +215,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 					.defaultIfEmpty(NO_ARG_VALUE)
 					.doOnError(cause -> {
 						if (logger.isDebugEnabled()) {
-							logger.debug(getDetailedErrorMessage("Failed to resolve", parameter), cause);
+							logger.info(getDetailedErrorMessage("Failed to resolve", parameter), cause);
 						}
 					});
 		}

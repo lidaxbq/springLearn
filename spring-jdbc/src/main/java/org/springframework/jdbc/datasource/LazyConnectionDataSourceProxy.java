@@ -402,7 +402,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 			if (this.target == null) {
 				// No target Connection held -> fetch one.
 				if (logger.isDebugEnabled()) {
-					logger.debug("Connecting to database for operation '" + operation.getName() + "'");
+					logger.info("Connecting to database for operation '" + operation.getName() + "'");
 				}
 
 				// Fetch physical Connection from DataSource.
@@ -420,7 +420,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 					}
 					catch (Exception ex) {
 						// "read-only not supported" -> ignore, it's just a hint anyway
-						logger.debug("Could not set JDBC Connection read-only", ex);
+						logger.info("Could not set JDBC Connection read-only", ex);
 					}
 				}
 				if (this.transactionIsolation != null &&
@@ -435,7 +435,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 			else {
 				// Target Connection already held -> return it.
 				if (logger.isDebugEnabled()) {
-					logger.debug("Using existing database connection for operation '" + operation.getName() + "'");
+					logger.info("Using existing database connection for operation '" + operation.getName() + "'");
 				}
 			}
 

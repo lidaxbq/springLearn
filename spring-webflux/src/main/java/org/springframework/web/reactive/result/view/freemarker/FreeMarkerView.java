@@ -168,7 +168,7 @@ public class FreeMarkerView extends AbstractUrlBasedView {
 		}
 		catch (FileNotFoundException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("No FreeMarker view found for URL: " + getUrl());
+				logger.info("No FreeMarker view found for URL: " + getUrl());
 			}
 			return false;
 		}
@@ -189,7 +189,7 @@ public class FreeMarkerView extends AbstractUrlBasedView {
 		// Expose all standard FreeMarker hash models.
 		SimpleHash freeMarkerModel = getTemplateModel(renderAttributes, exchange);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rendering FreeMarker template [" + getUrl() + "].");
+			logger.info("Rendering FreeMarker template [" + getUrl() + "].");
 		}
 
 		Locale locale = LocaleContextHolder.getLocale(exchange.getLocaleContext());

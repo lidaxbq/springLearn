@@ -69,6 +69,7 @@ public interface NamespaceHandler {
 	 * @param parserContext the object encapsulating the current state of the parsing process
 	 * @return the primary {@code BeanDefinition} (can be {@code null} as explained above)
 	 */
+//	 当Spring遇到上面定义的top-level元素(也就是myms)将会被调用,这个方法能够注册bean definitions并且可以返回一个bean definition.
 	@Nullable
 	BeanDefinition parse(Element element, ParserContext parserContext);
 
@@ -91,6 +92,7 @@ public interface NamespaceHandler {
 	 * A {@code null} value is strictly speaking invalid, but will be leniently
 	 * treated like the case where the original bean definition gets returned.
 	 */
+//	,当spring遇到一个attribute或者嵌入到namespace中的元素中将会被调用。
 	@Nullable
 	BeanDefinitionHolder decorate(Node source, BeanDefinitionHolder definition, ParserContext parserContext);
 

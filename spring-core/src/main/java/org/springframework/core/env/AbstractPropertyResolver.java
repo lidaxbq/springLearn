@@ -45,6 +45,10 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	@Nullable
 	private volatile ConfigurableConversionService conversionService;
 
+//	placeholderPrefix 为 ${ 。
+//  placeholderSuffix 为 } 。
+//  valueSeparator 为 : 。
+//  ignoreUnresolvablePlaceholders ，默认为 false ，当然我们也可以使用相应的 setter 方法自定义。
 	@Nullable
 	private PropertyPlaceholderHelper nonStrictHelper;
 
@@ -197,6 +201,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 
 	@Override
 	public String resolvePlaceholders(String text) {
+
 		if (this.nonStrictHelper == null) {
 			this.nonStrictHelper = createPlaceholderHelper(true);
 		}
@@ -255,6 +260,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 		if (conversionServiceToUse == null) {
 			// Avoid initialization of shared DefaultConversionService if
 			// no standard type conversion is needed in the first place...
+//			则判断是否可以通过反射来设置，如果可以则直接强转返回，否则构造一个 DefaultConversionService 实例。
 			if (ClassUtils.isAssignableValue(targetType, value)) {
 				return (T) value;
 			}

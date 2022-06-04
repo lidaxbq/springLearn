@@ -20,6 +20,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
+ * 实现 ServletContextListener 接口，继承 ContextLoader 类，实现 Servlet 容器启动和关闭时，
+ * 分别初始化和销毁 WebApplicationContext 容器
  * Bootstrap listener to start up and shut down Spring's root {@link WebApplicationContext}.
  * Simply delegates to {@link ContextLoader} as well as to {@link ContextCleanupListener}.
  *
@@ -91,6 +93,8 @@ public class ContextLoaderListener extends ContextLoader implements ServletConte
 	 * @see #contextDestroyed(ServletContextEvent)
 	 */
 	public ContextLoaderListener(WebApplicationContext context) {
+//		可以直接传递一个 WebApplicationContext 对象，
+//		ContextLoaderListener 就无需在创建一个新的 WebApplicationContext 对象。😈
 		super(context);
 	}
 

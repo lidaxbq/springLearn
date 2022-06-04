@@ -245,7 +245,7 @@ public abstract class AbstractMethodMessageHandler<T>
 				catch (Throwable ex) {
 					// An unresolvable bean type, probably from a lazy bean - let's ignore it.
 					if (logger.isDebugEnabled()) {
-						logger.debug("Could not resolve target class for bean with name '" + beanName + "'", ex);
+						logger.info("Could not resolve target class for bean with name '" + beanName + "'", ex);
 					}
 				}
 				if (beanType != null && isHandler(beanType)) {
@@ -298,7 +298,7 @@ public abstract class AbstractMethodMessageHandler<T>
 			Map<Method, T> methods = MethodIntrospector.selectMethods(userType,
 					(MethodIntrospector.MetadataLookup<T>) method -> getMappingForMethod(method, userType));
 			if (logger.isDebugEnabled()) {
-				logger.debug(methods.size() + " message handler methods found on " + userType + ": " + methods);
+				logger.info(methods.size() + " message handler methods found on " + userType + ": " + methods);
 			}
 			methods.forEach((key, value) -> registerHandlerMethod(handler, key, value));
 		}
@@ -401,7 +401,7 @@ public abstract class AbstractMethodMessageHandler<T>
 		message = MessageBuilder.createMessage(message.getPayload(), headerAccessor.getMessageHeaders());
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Searching methods to handle " + headerAccessor.getShortLogMessage(message.getPayload()));
+			logger.info("Searching methods to handle " + headerAccessor.getShortLogMessage(message.getPayload()));
 		}
 
 		handleMessageInternal(message, lookupDestination);
@@ -491,7 +491,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	protected abstract T getMatchingMapping(T mapping, Message<?> message);
 
 	protected void handleNoMatch(Set<T> ts, String lookupDestination, Message<?> message) {
-		logger.debug("No matching message handler methods.");
+		logger.info("No matching message handler methods.");
 	}
 
 	/**
@@ -504,7 +504,7 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	protected void handleMatch(T mapping, HandlerMethod handlerMethod, String lookupDestination, Message<?> message) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Invoking " + handlerMethod.getShortLogMessage());
+			logger.info("Invoking " + handlerMethod.getShortLogMessage());
 		}
 		handlerMethod = handlerMethod.createWithResolvedBean();
 		InvocableHandlerMethod invocable = new InvocableHandlerMethod(handlerMethod);
@@ -543,7 +543,7 @@ public abstract class AbstractMethodMessageHandler<T>
 		}
 		invocable.setMessageMethodArgumentResolvers(this.argumentResolvers);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Invoking " + invocable.getShortLogMessage());
+			logger.info("Invoking " + invocable.getShortLogMessage());
 		}
 		try {
 			Object returnValue = invocable.invoke(message, ex, handlerMethod);
@@ -573,7 +573,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	@Nullable
 	protected InvocableHandlerMethod getExceptionHandlerMethod(HandlerMethod handlerMethod, Exception exception) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Searching methods to handle " + exception.getClass().getSimpleName());
+			logger.info("Searching methods to handle " + exception.getClass().getSimpleName());
 		}
 		Class<?> beanType = handlerMethod.getBeanType();
 		AbstractExceptionHandlerMethodResolver resolver = this.exceptionHandlerCache.get(beanType);

@@ -23,6 +23,7 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 直接遍历spring 容器中handler，然后注册
  * Abstract implementation of the {@link org.springframework.web.servlet.HandlerMapping}
  * interface, detecting URL mappings for handler beans through introspection of all
  * defined beans in the application context.
@@ -73,7 +74,7 @@ public abstract class AbstractDetectingUrlHandlerMapping extends AbstractUrlHand
 	protected void detectHandlers() throws BeansException {
 		ApplicationContext applicationContext = obtainApplicationContext();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for URL mappings in application context: " + applicationContext);
+			logger.info("Looking for URL mappings in application context: " + applicationContext);
 		}
 		// 获取ApplicationContext容器中所有bean的Name
 		String[] beanNames = (this.detectHandlersInAncestorContexts ?
@@ -92,7 +93,7 @@ public abstract class AbstractDetectingUrlHandlerMapping extends AbstractUrlHand
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Rejected bean name '" + beanName + "': no URL paths identified");
+					logger.info("Rejected bean name '" + beanName + "': no URL paths identified");
 				}
 			}
 		}

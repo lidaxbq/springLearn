@@ -734,7 +734,7 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 				streamWriter.flush();
 			}
 			catch (Exception ex) {
-				logger.debug("Could not flush HierarchicalStreamWriter", ex);
+				logger.info("Could not flush HierarchicalStreamWriter", ex);
 			}
 		}
 	}

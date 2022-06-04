@@ -153,7 +153,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Failed to parse selector: " + selector, ex);
+					logger.info("Failed to parse selector: " + selector, ex);
 				}
 			}
 		}
@@ -220,11 +220,11 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 				}
 				catch (SpelEvaluationException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Failed to evaluate selector: " + ex.getMessage());
+						logger.info("Failed to evaluate selector: " + ex.getMessage());
 					}
 				}
 				catch (Throwable ex) {
-					logger.debug("Failed to evaluate selector", ex);
+					logger.info("Failed to evaluate selector", ex);
 				}
 			}
 		}

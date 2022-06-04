@@ -69,7 +69,7 @@ public class SpringTemplateLoader implements TemplateLoader {
 	@Nullable
 	public Object findTemplateSource(String name) throws IOException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for FreeMarker template with name [" + name + "]");
+			logger.info("Looking for FreeMarker template with name [" + name + "]");
 		}
 		Resource resource = this.resourceLoader.getResource(this.templateLoaderPath + name);
 		return (resource.exists() ? resource : null);
@@ -83,7 +83,7 @@ public class SpringTemplateLoader implements TemplateLoader {
 		}
 		catch (IOException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Could not find FreeMarker template: " + resource);
+				logger.info("Could not find FreeMarker template: " + resource);
 			}
 			throw ex;
 		}
@@ -97,7 +97,7 @@ public class SpringTemplateLoader implements TemplateLoader {
 		}
 		catch (IOException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Could not obtain last-modified timestamp for FreeMarker template in " +
+				logger.info("Could not obtain last-modified timestamp for FreeMarker template in " +
 						resource + ": " + ex);
 			}
 			return -1;

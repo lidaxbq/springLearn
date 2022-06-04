@@ -162,7 +162,7 @@ public class ExecutorSubscribableChannel extends AbstractSubscribableChannel {
 				if (messageToUse == null) {
 					String name = interceptor.getClass().getSimpleName();
 					if (logger.isDebugEnabled()) {
-						logger.debug(name + " returned null from beforeHandle, i.e. precluding the send.");
+						logger.info(name + " returned null from beforeHandle, i.e. precluding the send.");
 					}
 					triggerAfterMessageHandled(message, null);
 					return null;

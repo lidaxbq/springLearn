@@ -59,7 +59,7 @@ public class HandshakeInterceptorChain {
 			HandshakeInterceptor interceptor = this.interceptors.get(i);
 			if (!interceptor.beforeHandshake(request, response, this.wsHandler, attributes)) {
 				if (logger.isDebugEnabled()) {
-					logger.debug(interceptor + " returns false from beforeHandshake - precluding handshake");
+					logger.info(interceptor + " returns false from beforeHandshake - precluding handshake");
 				}
 				applyAfterHandshake(request, response, null);
 				return false;

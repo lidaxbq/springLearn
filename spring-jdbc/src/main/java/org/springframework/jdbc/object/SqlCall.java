@@ -155,7 +155,7 @@ public abstract class SqlCall extends RdbmsOperation {
 			this.callString += ")}";
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Compiled stored procedure. Call string is [" + this.callString + "]");
+			logger.info("Compiled stored procedure. Call string is [" + this.callString + "]");
 		}
 
 		this.callableStatementFactory = new CallableStatementCreatorFactory(this.callString, getDeclaredParameters());

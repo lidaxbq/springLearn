@@ -177,7 +177,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 			if (!bean.isRunning() &&
 					(!autoStartupOnly || !(bean instanceof SmartLifecycle) || ((SmartLifecycle) bean).isAutoStartup())) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Starting bean '" + beanName + "' of type [" + bean.getClass() + "]");
+					logger.info("Starting bean '" + beanName + "' of type [" + bean.getClass() + "]");
 				}
 				try {
 					bean.start();
@@ -186,7 +186,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 					throw new ApplicationContextException("Failed to start bean '" + beanName + "'", ex);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Successfully started bean '" + beanName + "'");
+					logger.info("Successfully started bean '" + beanName + "'");
 				}
 			}
 		}
@@ -232,24 +232,24 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 				if (bean.isRunning()) {
 					if (bean instanceof SmartLifecycle) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Asking bean '" + beanName + "' of type [" + bean.getClass() + "] to stop");
+							logger.info("Asking bean '" + beanName + "' of type [" + bean.getClass() + "] to stop");
 						}
 						countDownBeanNames.add(beanName);
 						((SmartLifecycle) bean).stop(() -> {
 							latch.countDown();
 							countDownBeanNames.remove(beanName);
 							if (logger.isDebugEnabled()) {
-								logger.debug("Bean '" + beanName + "' completed its stop procedure");
+								logger.info("Bean '" + beanName + "' completed its stop procedure");
 							}
 						});
 					}
 					else {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Stopping bean '" + beanName + "' of type [" + bean.getClass() + "]");
+							logger.info("Stopping bean '" + beanName + "' of type [" + bean.getClass() + "]");
 						}
 						bean.stop();
 						if (logger.isDebugEnabled()) {
-							logger.debug("Successfully stopped bean '" + beanName + "'");
+							logger.info("Successfully stopped bean '" + beanName + "'");
 						}
 					}
 				}

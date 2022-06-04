@@ -269,7 +269,7 @@ public class ServletHttpHandlerAdapter implements Servlet {
 		@Override
 		public void onComplete() {
 			runIfAsyncNotComplete(this.asyncContext, () -> {
-				logger.debug("Successfully completed request");
+				logger.info("Successfully completed request");
 				this.asyncContext.complete();
 			});
 		}

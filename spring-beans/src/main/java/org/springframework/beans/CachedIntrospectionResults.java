@@ -196,7 +196,7 @@ public class CachedIntrospectionResults {
 		}
 		else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Not strongly caching class [" + beanClass.getName() + "] because it is not cache-safe");
+				logger.info("Not strongly caching class [" + beanClass.getName() + "] because it is not cache-safe");
 			}
 			classCacheToUse = softClassCache;
 		}

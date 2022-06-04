@@ -282,7 +282,7 @@ public abstract class CommonsFileUploadSupport {
 				CommonsMultipartFile file = createMultipartFile(fileItem);
 				multipartFiles.add(file.getName(), file);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Found multipart file [" + file.getName() + "] of size " + file.getSize() +
+					logger.info("Found multipart file [" + file.getName() + "] of size " + file.getSize() +
 							" bytes with original filename [" + file.getOriginalFilename() + "], stored " +
 							file.getStorageDescription());
 				}
@@ -319,7 +319,7 @@ public abstract class CommonsFileUploadSupport {
 					CommonsMultipartFile cmf = (CommonsMultipartFile) file;
 					cmf.getFileItem().delete();
 					if (logger.isDebugEnabled()) {
-						logger.debug("Cleaning up multipart file [" + cmf.getName() + "] with original filename [" +
+						logger.info("Cleaning up multipart file [" + cmf.getName() + "] with original filename [" +
 								cmf.getOriginalFilename() + "], stored " + cmf.getStorageDescription());
 					}
 				}

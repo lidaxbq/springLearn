@@ -104,7 +104,7 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 
 		if (logger.isDebugEnabled()) {
 			String phase = (requiredClassMode.name().startsWith("BEFORE") ? "Before" : "After");
-			logger.debug(String.format("%s test method: context %s, class annotated with @DirtiesContext [%s] "
+			logger.info(String.format("%s test method: context %s, class annotated with @DirtiesContext [%s] "
 					+ "with mode [%s], method annotated with @DirtiesContext [%s] with mode [%s].", phase, testContext,
 				classAnnotated, classMode, methodAnnotated, methodMode));
 		}
@@ -139,7 +139,7 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 
 		if (logger.isDebugEnabled()) {
 			String phase = (requiredClassMode.name().startsWith("BEFORE") ? "Before" : "After");
-			logger.debug(String.format(
+			logger.info(String.format(
 				"%s test class: context %s, class annotated with @DirtiesContext [%s] with mode [%s].", phase,
 				testContext, classAnnotated, classMode));
 		}

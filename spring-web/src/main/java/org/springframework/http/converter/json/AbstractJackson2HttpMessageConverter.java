@@ -196,7 +196,7 @@ public abstract class AbstractJackson2HttpMessageConverter extends AbstractGener
 			String msg = "Failed to evaluate Jackson " + (type instanceof JavaType ? "de" : "") +
 					"serialization for type [" + type + "]";
 			if (debugLevel) {
-				logger.debug(msg, cause);
+				logger.info(msg, cause);
 			}
 			else if (logger.isDebugEnabled()) {
 				logger.warn(msg, cause);

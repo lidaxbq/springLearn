@@ -139,13 +139,13 @@ public class MBeanRegistrationSupport {
 			catch (InstanceAlreadyExistsException ex) {
 				if (this.registrationPolicy == RegistrationPolicy.IGNORE_EXISTING) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Ignoring existing MBean at [" + objectName + "]");
+						logger.info("Ignoring existing MBean at [" + objectName + "]");
 					}
 				}
 				else if (this.registrationPolicy == RegistrationPolicy.REPLACE_EXISTING) {
 					try {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Replacing existing MBean at [" + objectName + "]");
+							logger.info("Replacing existing MBean at [" + objectName + "]");
 						}
 						this.server.unregisterMBean(objectName);
 						registeredBean = this.server.registerMBean(mbean, objectName);

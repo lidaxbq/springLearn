@@ -54,6 +54,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 
+//	临时的，用于预处理的
 	private final Map<String, Object> urlMap = new LinkedHashMap<>();
 
 
@@ -100,6 +101,7 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 	@Override
 	public void initApplicationContext() throws BeansException {
 		super.initApplicationContext();
+//		直接将urlMap的数据注册到父类的handlerMap
 		registerHandlers(this.urlMap);
 	}
 

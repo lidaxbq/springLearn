@@ -80,7 +80,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 	@Before
 	public void setUp() throws Exception {
-		logger.debug("Setting up before '" + this.testName.getMethodName() + "'");
+		logger.info("Setting up before '" + this.testName.getMethodName() + "'");
 		this.port = SocketUtils.findAvailableTcpPort(61613);
 		this.responseChannel = new ExecutorSubscribableChannel();
 		this.responseHandler = new TestMessageHandler();
@@ -116,7 +116,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 	@After
 	public void tearDown() throws Exception {
 		try {
-			logger.debug("STOMP broker relay stats: " + this.relay.getStatsInfo());
+			logger.info("STOMP broker relay stats: " + this.relay.getStatsInfo());
 			this.relay.stop();
 		}
 		finally {
@@ -125,9 +125,9 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 	}
 
 	private void stopActiveMqBrokerAndAwait() throws Exception {
-		logger.debug("Stopping ActiveMQ broker and will await shutdown");
+		logger.info("Stopping ActiveMQ broker and will await shutdown");
 		if (!this.activeMQBroker.isStarted()) {
-			logger.debug("Broker not running");
+			logger.info("Broker not running");
 			return;
 		}
 		final CountDownLatch latch = new CountDownLatch(1);
@@ -138,13 +138,13 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 		});
 		this.activeMQBroker.stop();
 		assertTrue("Broker did not stop", latch.await(5, TimeUnit.SECONDS));
-		logger.debug("Broker stopped");
+		logger.info("Broker stopped");
 	}
 
 
 	@Test
 	public void publishSubscribe() throws Exception {
-		logger.debug("Starting test publishSubscribe()");
+		logger.info("Starting test publishSubscribe()");
 
 		String sess1 = "sess1";
 		String sess2 = "sess2";
@@ -169,7 +169,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 	@Test(expected = MessageDeliveryException.class)
 	public void messageDeliveryExceptionIfSystemSessionForwardFails() throws Exception {
 
-		logger.debug("Starting test messageDeliveryExceptionIfSystemSessionForwardFails()");
+		logger.info("Starting test messageDeliveryExceptionIfSystemSessionForwardFails()");
 
 		stopActiveMqBrokerAndAwait();
 		this.eventPublisher.expectBrokerAvailabilityEvent(false);
@@ -180,7 +180,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 	@Test
 	public void brokerBecomingUnvailableTriggersErrorFrame() throws Exception {
-		logger.debug("Starting test brokerBecomingUnvailableTriggersErrorFrame()");
+		logger.info("Starting test brokerBecomingUnvailableTriggersErrorFrame()");
 
 		String sess1 = "sess1";
 		MessageExchange connect = MessageExchangeBuilder.connect(sess1).build();
@@ -195,7 +195,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 	@Test
 	public void brokerAvailabilityEventWhenStopped() throws Exception {
-		logger.debug("Starting test brokerAvailabilityEventWhenStopped()");
+		logger.info("Starting test brokerAvailabilityEventWhenStopped()");
 
 		stopActiveMqBrokerAndAwait();
 		this.eventPublisher.expectBrokerAvailabilityEvent(false);
@@ -203,7 +203,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 	@Test
 	public void relayReconnectsIfBrokerComesBackUp() throws Exception {
-		logger.debug("Starting test relayReconnectsIfBrokerComesBackUp()");
+		logger.info("Starting test relayReconnectsIfBrokerComesBackUp()");
 
 		String sess1 = "sess1";
 		MessageExchange conn1 = MessageExchangeBuilder.connect(sess1).build();
@@ -228,7 +228,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 	@Test
 	public void disconnectWithReceipt() throws Exception {
-		logger.debug("Starting test disconnectWithReceipt()");
+		logger.info("Starting test disconnectWithReceipt()");
 
 		MessageExchange connect = MessageExchangeBuilder.connect("sess1").build();
 		this.relay.handleMessage(connect.message);
@@ -252,7 +252,7 @@ public class StompBrokerRelayMessageHandlerIntegrationTests {
 
 		@Override
 		public void publishEvent(Object event) {
-			logger.debug("Processing ApplicationEvent " + event);
+			logger.info("Processing ApplicationEvent " + event);
 			if (event instanceof BrokerAvailabilityEvent) {
 				this.eventQueue.add((BrokerAvailabilityEvent) event);
 			}

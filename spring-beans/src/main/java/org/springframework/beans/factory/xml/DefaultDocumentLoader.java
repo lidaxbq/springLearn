@@ -72,7 +72,7 @@ public class DefaultDocumentLoader implements DocumentLoader {
 		//创建文件解析器工厂
 		DocumentBuilderFactory factory = createDocumentBuilderFactory(validationMode, namespaceAware);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Using JAXP provider [" + factory.getClass().getName() + "]");
+			logger.info("Using JAXP provider [" + factory.getClass().getName() + "]");
 		}
 		//创建文档解析器
 		DocumentBuilder builder = createDocumentBuilder(factory, entityResolver, errorHandler);

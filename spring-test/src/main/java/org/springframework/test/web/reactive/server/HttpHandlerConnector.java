@@ -105,7 +105,7 @@ public class HttpHandlerConnector implements ClientHttpConnector {
 
 	private void log(String message, HttpMethod httpMethod, URI uri) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("%s %s \"%s\"", message, httpMethod, uri));
+			logger.info(String.format("%s %s \"%s\"", message, httpMethod, uri));
 		}
 	}
 

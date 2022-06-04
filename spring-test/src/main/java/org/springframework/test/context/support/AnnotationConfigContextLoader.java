@@ -189,7 +189,7 @@ public class AnnotationConfigContextLoader extends AbstractGenericContextLoader 
 	protected void loadBeanDefinitions(GenericApplicationContext context, MergedContextConfiguration mergedConfig) {
 		Class<?>[] annotatedClasses = mergedConfig.getClasses();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Registering annotated classes: " + ObjectUtils.nullSafeToString(annotatedClasses));
+			logger.info("Registering annotated classes: " + ObjectUtils.nullSafeToString(annotatedClasses));
 		}
 		new AnnotatedBeanDefinitionReader(context).register(annotatedClasses);
 	}

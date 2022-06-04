@@ -323,7 +323,7 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 		String metaDataSchemaName = metaDataSchemaNameToUse(schemaName);
 		String metaDataProcedureName = procedureNameToUse(procedureName);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Retrieving metadata for " + metaDataCatalogName + '/' +
+			logger.info("Retrieving metadata for " + metaDataCatalogName + '/' +
 					metaDataSchemaName + '/' + metaDataProcedureName);
 		}
 
@@ -368,7 +368,7 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 						columnType == DatabaseMetaData.procedureColumnInOut ||
 						columnType == DatabaseMetaData.procedureColumnOut)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Skipping metadata for: " + columnType + " " + procs.getInt("DATA_TYPE") +
+						logger.info("Skipping metadata for: " + columnType + " " + procs.getInt("DATA_TYPE") +
 							" " + procs.getString("TYPE_NAME") + " " + procs.getInt("NULLABLE") +
 							" (probably a member of a collection)");
 					}
@@ -379,7 +379,7 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 							procs.getInt("NULLABLE") == DatabaseMetaData.procedureNullable);
 					this.callParameterMetaData.add(meta);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Retrieved metadata: " + meta.getParameterName() + " " +
+						logger.info("Retrieved metadata: " + meta.getParameterName() + " " +
 								meta.getParameterType() + " " + meta.getSqlType() + " " +
 								meta.getTypeName() + " " + meta.isNullable());
 					}

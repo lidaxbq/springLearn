@@ -94,7 +94,7 @@ abstract class AbstractExpressionEvaluatingCondition implements ExecutionConditi
 			String reason = String.format("%s is enabled since @%s is not present", element,
 					annotationType.getSimpleName());
 			if (logger.isDebugEnabled()) {
-				logger.debug(reason);
+				logger.info(reason);
 			}
 			return ConditionEvaluationResult.enabled(reason);
 		}
@@ -122,7 +122,7 @@ abstract class AbstractExpressionEvaluatingCondition implements ExecutionConditi
 			String reason = String.format("%s is %s because @%s(\"%s\") did not evaluate to true",
 					element, adjective, annotationType.getSimpleName(), expression);
 			if (logger.isDebugEnabled()) {
-				logger.debug(reason);
+				logger.info(reason);
 			}
 			return (enabledOnTrue ? ConditionEvaluationResult.disabled(reason) :
 					ConditionEvaluationResult.enabled(reason));

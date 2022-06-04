@@ -134,7 +134,7 @@ public abstract class MockMvcResultHandlers {
 				ResultHandler printingResultHandler =
 						new PrintWriterPrintingResultHandler(new PrintWriter(stringWriter));
 				printingResultHandler.handle(result);
-				logger.debug("MvcResult details:\n" + stringWriter);
+				logger.info("MvcResult details:\n" + stringWriter);
 			}
 		}
 	}

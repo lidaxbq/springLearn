@@ -194,11 +194,11 @@ public class JndiRmiClientInterceptor extends JndiObjectLocator implements Metho
 			Object remoteObj = lookupStub();
 			if (logger.isDebugEnabled()) {
 				if (remoteObj instanceof RmiInvocationHandler) {
-					logger.debug("JNDI RMI object [" + getJndiName() + "] is an RMI invoker");
+					logger.info("JNDI RMI object [" + getJndiName() + "] is an RMI invoker");
 				}
 				else if (getServiceInterface() != null) {
 					boolean isImpl = getServiceInterface().isInstance(remoteObj);
-					logger.debug("Using service interface [" + getServiceInterface().getName() +
+					logger.info("Using service interface [" + getServiceInterface().getName() +
 							"] for JNDI RMI object [" + getJndiName() + "] - " +
 							(!isImpl ? "not " : "") + "directly implemented");
 				}
@@ -319,7 +319,7 @@ public class JndiRmiClientInterceptor extends JndiObjectLocator implements Metho
 	private Object handleRemoteConnectFailure(MethodInvocation invocation, Exception ex) throws Throwable {
 		if (this.refreshStubOnConnectFailure) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Could not connect to RMI service [" + getJndiName() + "] - retrying", ex);
+				logger.info("Could not connect to RMI service [" + getJndiName() + "] - retrying", ex);
 			}
 			else if (logger.isWarnEnabled()) {
 				logger.warn("Could not connect to RMI service [" + getJndiName() + "] - retrying");

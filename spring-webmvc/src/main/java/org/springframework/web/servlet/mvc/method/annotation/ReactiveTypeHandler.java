@@ -212,11 +212,11 @@ class ReactiveTypeHandler {
 		public final void onSubscribe(Subscription subscription) {
 			this.subscription = subscription;
 			if (logger.isDebugEnabled()) {
-				logger.debug("Subscribed to Publisher for " + this.emitter);
+				logger.info("Subscribed to Publisher for " + this.emitter);
 			}
 			this.emitter.onTimeout(() -> {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Connection timed out for " + this.emitter);
+					logger.info("Connection timed out for " + this.emitter);
 				}
 				terminate();
 				this.emitter.complete();
@@ -285,7 +285,7 @@ class ReactiveTypeHandler {
 				}
 				catch (final Throwable ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Send error for " + this.emitter, ex);
+						logger.info("Send error for " + this.emitter, ex);
 					}
 					terminate();
 					return;
@@ -298,13 +298,13 @@ class ReactiveTypeHandler {
 				this.error = null;
 				if (ex != null) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Publisher error for " + this.emitter, ex);
+						logger.info("Publisher error for " + this.emitter, ex);
 					}
 					this.emitter.completeWithError(ex);
 				}
 				else {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Publishing completed for " + this.emitter);
+						logger.info("Publishing completed for " + this.emitter);
 					}
 					this.emitter.complete();
 				}

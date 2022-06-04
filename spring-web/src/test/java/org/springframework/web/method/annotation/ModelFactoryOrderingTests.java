@@ -137,7 +137,7 @@ public class ModelFactoryOrderingTests {
 			for (String name : getInvokedMethods()) {
 				sb.append(" >> ").append(name);
 			}
-			logger.debug(sb);
+			logger.info(sb);
 		}
 	}
 

@@ -172,7 +172,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 				transactionAttribute);
 
 			if (logger.isDebugEnabled()) {
-				logger.debug("Explicit transaction definition [" + transactionAttribute + "] found for test context " +
+				logger.info("Explicit transaction definition [" + transactionAttribute + "] found for test context " +
 						testContext);
 			}
 
@@ -236,7 +236,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 			Collections.reverse(methods);
 			for (Method method : methods) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Executing @BeforeTransaction method [" + method + "] for test context " + testContext);
+					logger.info("Executing @BeforeTransaction method [" + method + "] for test context " + testContext);
 				}
 				ReflectionUtils.makeAccessible(method);
 				method.invoke(testContext.getTestInstance());
@@ -266,7 +266,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 		for (Method method : methods) {
 			try {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Executing @AfterTransaction method [" + method + "] for test context " + testContext);
+					logger.info("Executing @AfterTransaction method [" + method + "] for test context " + testContext);
 				}
 				ReflectionUtils.makeAccessible(method);
 				method.invoke(testContext.getTestInstance());
@@ -368,7 +368,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 		if (rollbackPresent) {
 			boolean defaultRollback = rollback.value();
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("Retrieved default @Rollback(%s) for test class [%s].", defaultRollback,
+				logger.info(String.format("Retrieved default @Rollback(%s) for test class [%s].", defaultRollback,
 					testClass.getName()));
 			}
 			return defaultRollback;
@@ -396,7 +396,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 		if (rollbackAnnotation != null) {
 			boolean rollbackOverride = rollbackAnnotation.value();
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format(
+				logger.info(String.format(
 						"Method-level @Rollback(%s) overrides default rollback [%s] for test context %s.",
 						rollbackOverride, rollback, testContext));
 			}
@@ -404,7 +404,7 @@ public class TransactionalTestExecutionListener extends AbstractTestExecutionLis
 		}
 		else {
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format(
+				logger.info(String.format(
 						"No method-level @Rollback override: using default rollback [%s] for test context %s.",
 						rollback, testContext));
 			}

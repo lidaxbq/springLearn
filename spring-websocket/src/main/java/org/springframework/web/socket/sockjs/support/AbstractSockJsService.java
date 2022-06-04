@@ -351,7 +351,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 		try {
 			if (sockJsPath.equals("") || sockJsPath.equals("/")) {
 				if (requestInfo != null) {
-					logger.debug("Processing transport request: " + requestInfo);
+					logger.info("Processing transport request: " + requestInfo);
 				}
 				response.getHeaders().setContentType(new MediaType("text", "plain", StandardCharsets.UTF_8));
 				response.getBody().write("Welcome to SockJS!\n".getBytes(StandardCharsets.UTF_8));
@@ -359,7 +359,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 
 			else if (sockJsPath.equals("/info")) {
 				if (requestInfo != null) {
-					logger.debug("Processing transport request: " + requestInfo);
+					logger.info("Processing transport request: " + requestInfo);
 				}
 				this.infoHandler.handle(request, response);
 			}
@@ -367,7 +367,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 			else if (sockJsPath.matches("/iframe[0-9-.a-z_]*.html")) {
 				if (!this.allowedOrigins.isEmpty() && !this.allowedOrigins.contains("*")) {
 					if (requestInfo != null) {
-						logger.debug("Iframe support is disabled when an origin check is required. " +
+						logger.info("Iframe support is disabled when an origin check is required. " +
 								"Ignoring transport request: " + requestInfo);
 					}
 					response.setStatusCode(HttpStatus.NOT_FOUND);
@@ -377,7 +377,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 					response.getHeaders().add(XFRAME_OPTIONS_HEADER, "SAMEORIGIN");
 				}
 				if (requestInfo != null) {
-					logger.debug("Processing transport request: " + requestInfo);
+					logger.info("Processing transport request: " + requestInfo);
 				}
 				this.iframeHandler.handle(request, response);
 			}
@@ -385,12 +385,12 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 			else if (sockJsPath.equals("/websocket")) {
 				if (isWebSocketEnabled()) {
 					if (requestInfo != null) {
-						logger.debug("Processing transport request: " + requestInfo);
+						logger.info("Processing transport request: " + requestInfo);
 					}
 					handleRawWebSocketRequest(request, response, wsHandler);
 				}
 				else if (requestInfo != null) {
-					logger.debug("WebSocket disabled. Ignoring transport request: " + requestInfo);
+					logger.info("WebSocket disabled. Ignoring transport request: " + requestInfo);
 				}
 			}
 
@@ -401,7 +401,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 						logger.warn("Invalid SockJS path '" + sockJsPath + "' - required to have 3 path segments");
 					}
 					if (requestInfo != null) {
-						logger.debug("Ignoring transport request: " + requestInfo);
+						logger.info("Ignoring transport request: " + requestInfo);
 					}
 					response.setStatusCode(HttpStatus.NOT_FOUND);
 					return;
@@ -413,21 +413,21 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 
 				if (!isWebSocketEnabled() && transport.equals("websocket")) {
 					if (requestInfo != null) {
-						logger.debug("WebSocket disabled. Ignoring transport request: " + requestInfo);
+						logger.info("WebSocket disabled. Ignoring transport request: " + requestInfo);
 					}
 					response.setStatusCode(HttpStatus.NOT_FOUND);
 					return;
 				}
 				else if (!validateRequest(serverId, sessionId, transport) || !validatePath(request)) {
 					if (requestInfo != null) {
-						logger.debug("Ignoring transport request: " + requestInfo);
+						logger.info("Ignoring transport request: " + requestInfo);
 					}
 					response.setStatusCode(HttpStatus.NOT_FOUND);
 					return;
 				}
 
 				if (requestInfo != null) {
-					logger.debug("Processing transport request: " + requestInfo);
+					logger.info("Processing transport request: " + requestInfo);
 				}
 				handleTransportRequest(request, response, wsHandler, sessionId, transport);
 			}

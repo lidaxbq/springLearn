@@ -131,7 +131,7 @@ public abstract class AbstractWebSocketSession<T> implements NativeWebSocketSess
 	public final void close(CloseStatus status) throws IOException {
 		checkNativeSessionInitialized();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Closing " + this);
+			logger.info("Closing " + this);
 		}
 		closeInternal(status);
 	}

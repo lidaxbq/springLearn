@@ -55,6 +55,7 @@ public class DefaultAdvisorAdapterRegistry implements AdvisorAdapterRegistry, Se
 
 	@Override
 	public Advisor wrap(Object adviceObject) throws UnknownAdviceTypeException {
+//		如果拦截器本身就是增强器
 		if (adviceObject instanceof Advisor) {
 			return (Advisor) adviceObject;
 		}

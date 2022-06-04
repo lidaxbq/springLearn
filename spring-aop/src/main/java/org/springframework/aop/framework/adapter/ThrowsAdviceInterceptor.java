@@ -84,7 +84,7 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 				// Have an exception handler
 				this.exceptionHandlerMap.put(method.getParameterTypes()[method.getParameterCount() - 1], method);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Found exception handler method: " + method);
+					logger.info("Found exception handler method: " + method);
 				}
 			}
 		}
@@ -116,7 +116,7 @@ public class ThrowsAdviceInterceptor implements MethodInterceptor, AfterAdvice {
 			handler = this.exceptionHandlerMap.get(exceptionClass);
 		}
 		if (handler != null && logger.isDebugEnabled()) {
-			logger.debug("Found handler for exception of type [" + exceptionClass.getName() + "]: " + handler);
+			logger.info("Found handler for exception of type [" + exceptionClass.getName() + "]: " + handler);
 		}
 		return handler;
 	}

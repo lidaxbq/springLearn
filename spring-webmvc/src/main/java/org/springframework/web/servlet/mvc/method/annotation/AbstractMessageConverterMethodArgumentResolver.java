@@ -198,7 +198,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 				if (genericConverter != null ? genericConverter.canRead(targetType, contextClass, contentType) :
 						(targetClass != null && converter.canRead(targetClass, contentType))) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Read [" + targetType + "] as \"" + contentType + "\" with [" + converter + "]");
+						logger.info("Read [" + targetType + "] as \"" + contentType + "\" with [" + converter + "]");
 					}
 					if (message.hasBody()) {
 						HttpInputMessage msgToUse =

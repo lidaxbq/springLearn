@@ -272,7 +272,7 @@ public abstract class AbstractAdaptableMessageListener
 	protected void handleResult(Object result, Message request, @Nullable Session session) {
 		if (session != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Listener method returned result [" + result +
+				logger.info("Listener method returned result [" + result +
 						"] - generating response message for it");
 			}
 			try {
@@ -482,7 +482,7 @@ public abstract class AbstractAdaptableMessageListener
 				}
 				catch (JMSException ex) {
 					// Continue since the BytesMessage typically won't be used any further.
-					logger.debug("Failed to reset BytesMessage after payload extraction", ex);
+					logger.info("Failed to reset BytesMessage after payload extraction", ex);
 				}
 			}
 			return payload;

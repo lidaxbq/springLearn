@@ -209,7 +209,7 @@ public class DeferredResult<T> {
 			resultHandler.handleResult(resultToHandle);
 		}
 		catch (Throwable ex) {
-			logger.debug("Failed to handle existing result", ex);
+			logger.info("Failed to handle existing result", ex);
 		}
 	}
 
@@ -286,7 +286,7 @@ public class DeferredResult<T> {
 							setResultInternal(timeoutResult);
 						}
 						catch (Throwable ex) {
-							logger.debug("Failed to handle timeout result", ex);
+							logger.info("Failed to handle timeout result", ex);
 						}
 					}
 				}
@@ -304,7 +304,7 @@ public class DeferredResult<T> {
 						setResultInternal(t);
 					}
 					catch (Throwable ex) {
-						logger.debug("Failed to handle error result", ex);
+						logger.info("Failed to handle error result", ex);
 					}
 				}
 				return false;

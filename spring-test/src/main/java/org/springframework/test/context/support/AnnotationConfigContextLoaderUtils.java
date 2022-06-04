@@ -69,7 +69,7 @@ public abstract class AnnotationConfigContextLoaderUtils {
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug(String.format(
+					logger.info(String.format(
 						"Ignoring class [%s]; it must be static, non-private, non-final, and annotated " +
 								"with @Configuration to be considered a default configuration class.",
 						candidate.getName()));

@@ -92,6 +92,7 @@ public class LoadTimeWeaverAwareProcessor implements BeanPostProcessor, BeanFact
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+//		只对LoadTimeWeaverAware进行处理
 		if (bean instanceof LoadTimeWeaverAware) {
 			LoadTimeWeaver ltw = this.loadTimeWeaver;
 			if (ltw == null) {
@@ -100,6 +101,7 @@ public class LoadTimeWeaverAwareProcessor implements BeanPostProcessor, BeanFact
 				ltw = this.beanFactory.getBean(
 						ConfigurableApplicationContext.LOAD_TIME_WEAVER_BEAN_NAME, LoadTimeWeaver.class);
 			}
+//			注入DefaultContextLoadTimeWeaver
 			((LoadTimeWeaverAware) bean).setLoadTimeWeaver(ltw);
 		}
 		return bean;

@@ -118,7 +118,7 @@ public class JndiTemplate {
 				ctx.close();
 			}
 			catch (NamingException ex) {
-				logger.debug("Could not close JNDI InitialContext", ex);
+				logger.info("Could not close JNDI InitialContext", ex);
 			}
 		}
 	}
@@ -151,7 +151,7 @@ public class JndiTemplate {
 	 */
 	public Object lookup(final String name) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking up JNDI object with name [" + name + "]");
+			logger.info("Looking up JNDI object with name [" + name + "]");
 		}
 		Object result = execute(ctx -> ctx.lookup(name));
 		if (result == null) {
@@ -190,7 +190,7 @@ public class JndiTemplate {
 	 */
 	public void bind(final String name, final Object object) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Binding JNDI object with name [" + name + "]");
+			logger.info("Binding JNDI object with name [" + name + "]");
 		}
 		execute(ctx -> {
 			ctx.bind(name, object);
@@ -207,7 +207,7 @@ public class JndiTemplate {
 	 */
 	public void rebind(final String name, final Object object) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rebinding JNDI object with name [" + name + "]");
+			logger.info("Rebinding JNDI object with name [" + name + "]");
 		}
 		execute(ctx -> {
 			ctx.rebind(name, object);
@@ -222,7 +222,7 @@ public class JndiTemplate {
 	 */
 	public void unbind(final String name) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Unbinding JNDI object with name [" + name + "]");
+			logger.info("Unbinding JNDI object with name [" + name + "]");
 		}
 		execute(ctx -> {
 			ctx.unbind(name);

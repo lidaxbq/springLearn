@@ -210,7 +210,7 @@ public abstract class GenericFilterBean implements Filter, BeanNameAware, Enviro
 	public final void init(FilterConfig filterConfig) throws ServletException {
 		Assert.notNull(filterConfig, "FilterConfig must not be null");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Initializing filter '" + filterConfig.getFilterName() + "'");
+			logger.info("Initializing filter '" + filterConfig.getFilterName() + "'");
 		}
 
 		this.filterConfig = filterConfig;
@@ -241,7 +241,7 @@ public abstract class GenericFilterBean implements Filter, BeanNameAware, Enviro
 		initFilterBean();
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Filter '" + filterConfig.getFilterName() + "' configured successfully");
+			logger.info("Filter '" + filterConfig.getFilterName() + "' configured successfully");
 		}
 	}
 

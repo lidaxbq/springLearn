@@ -128,7 +128,7 @@ public abstract class AbstractRemoteSlsbInvokerInterceptor extends AbstractSlsbI
 	private Object handleRemoteConnectFailure(MethodInvocation invocation, Exception ex) throws Throwable {
 		if (this.refreshHomeOnConnectFailure) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Could not connect to remote EJB [" + getJndiName() + "] - retrying", ex);
+				logger.info("Could not connect to remote EJB [" + getJndiName() + "] - retrying", ex);
 			}
 			else if (logger.isWarnEnabled()) {
 				logger.warn("Could not connect to remote EJB [" + getJndiName() + "] - retrying");
@@ -183,11 +183,11 @@ public abstract class AbstractRemoteSlsbInvokerInterceptor extends AbstractSlsbI
 	 */
 	protected Object newSessionBeanInstance() throws NamingException, InvocationTargetException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Trying to create reference to remote EJB");
+			logger.info("Trying to create reference to remote EJB");
 		}
 		Object ejbInstance = create();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Obtained reference to remote EJB: " + ejbInstance);
+			logger.info("Obtained reference to remote EJB: " + ejbInstance);
 		}
 		return ejbInstance;
 	}

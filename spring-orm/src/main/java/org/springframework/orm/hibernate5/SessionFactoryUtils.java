@@ -138,10 +138,10 @@ public abstract class SessionFactoryUtils {
 	 */
 	static void flush(Session session, boolean synch) throws DataAccessException {
 		if (synch) {
-			logger.debug("Flushing Hibernate Session on transaction synchronization");
+			logger.info("Flushing Hibernate Session on transaction synchronization");
 		}
 		else {
-			logger.debug("Flushing Hibernate Session on explicit request");
+			logger.info("Flushing Hibernate Session on explicit request");
 		}
 		try {
 			session.flush();
@@ -170,10 +170,10 @@ public abstract class SessionFactoryUtils {
 				session.close();
 			}
 			catch (HibernateException ex) {
-				logger.debug("Could not close Hibernate Session", ex);
+				logger.info("Could not close Hibernate Session", ex);
 			}
 			catch (Throwable ex) {
-				logger.debug("Unexpected exception on closing Hibernate Session", ex);
+				logger.info("Unexpected exception on closing Hibernate Session", ex);
 			}
 		}
 	}
@@ -206,7 +206,7 @@ public abstract class SessionFactoryUtils {
 			}
 			catch (UnknownServiceException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("No ConnectionProvider found - cannot determine DataSource for SessionFactory: " + ex);
+					logger.info("No ConnectionProvider found - cannot determine DataSource for SessionFactory: " + ex);
 				}
 			}
 		}

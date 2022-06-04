@@ -600,7 +600,7 @@ public class UrlPathHelper {
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not introspect WebSphere web container properties: " + ex);
+					logger.info("Could not introspect WebSphere web container properties: " + ex);
 				}
 			}
 			flagToUse = flag;

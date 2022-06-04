@@ -120,13 +120,13 @@ public class PluggableSchemaResolver implements EntityResolver {
 					source.setPublicId(publicId);
 					source.setSystemId(systemId);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Found XML schema [" + systemId + "] in classpath: " + resourceLocation);
+						logger.info("Found XML schema [" + systemId + "] in classpath: " + resourceLocation);
 					}
 					return source;
 				}
 				catch (FileNotFoundException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Couldn't find XML schema [" + systemId + "]: " + resource, ex);
+						logger.info("Couldn't find XML schema [" + systemId + "]: " + resource, ex);
 					}
 				}
 			}
@@ -144,13 +144,13 @@ public class PluggableSchemaResolver implements EntityResolver {
 				schemaMappings = this.schemaMappings;
 				if (schemaMappings == null) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Loading schema mappings from [" + this.schemaMappingsLocation + "]");
+						logger.info("Loading schema mappings from [" + this.schemaMappingsLocation + "]");
 					}
 					try {
 						Properties mappings =
 								PropertiesLoaderUtils.loadAllProperties(this.schemaMappingsLocation, this.classLoader);
 						if (logger.isDebugEnabled()) {
-							logger.debug("Loaded schema mappings: " + mappings);
+							logger.info("Loaded schema mappings: " + mappings);
 						}
 						Map<String, String> mappingsToUse = new ConcurrentHashMap<>(mappings.size());
 						CollectionUtils.mergePropertiesIntoMap(mappings, mappingsToUse);

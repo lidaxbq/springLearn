@@ -65,15 +65,15 @@ public class WebSocketIntegrationTests extends AbstractWebSocketIntegrationTests
 
 		this.client.execute(getUrl("/echo"),
 				session -> {
-					logger.debug("Starting to send messages");
+					logger.info("Starting to send messages");
 					return session
-							.send(input.doOnNext(s -> logger.debug("outbound " + s)).map(session::textMessage))
+							.send(input.doOnNext(s -> logger.info("outbound " + s)).map(session::textMessage))
 							.thenMany(session.receive().take(count).map(WebSocketMessage::getPayloadAsText))
 							.subscribeWith(output)
-							.doOnNext(s -> logger.debug("inbound " + s))
+							.doOnNext(s -> logger.info("inbound " + s))
 							.then()
 							.doOnSuccessOrError((aVoid, ex) ->
-									logger.debug("Done with " + (ex != null ? ex.getMessage() : "success")));
+									logger.info("Done with " + (ex != null ? ex.getMessage() : "success")));
 				})
 				.block(Duration.ofMillis(5000));
 

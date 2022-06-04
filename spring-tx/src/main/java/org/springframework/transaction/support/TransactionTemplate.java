@@ -163,7 +163,7 @@ public class TransactionTemplate extends DefaultTransactionDefinition
 	private void rollbackOnException(TransactionStatus status, Throwable ex) throws TransactionException {
 		Assert.state(this.transactionManager != null, "No PlatformTransactionManager set");
 
-		logger.debug("Initiating transaction rollback on application exception", ex);
+		logger.info("Initiating transaction rollback on application exception", ex);
 		try {
 			this.transactionManager.rollback(status);
 		}

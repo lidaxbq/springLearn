@@ -174,7 +174,7 @@ public class SQLErrorCodeSQLExceptionTranslator extends AbstractFallbackSQLExcep
 		if (sqlEx instanceof BatchUpdateException && sqlEx.getNextException() != null) {
 			SQLException nestedSqlEx = sqlEx.getNextException();
 			if (nestedSqlEx.getErrorCode() > 0 || nestedSqlEx.getSQLState() != null) {
-				logger.debug("Using nested SQLException from the BatchUpdateException");
+				logger.info("Using nested SQLException from the BatchUpdateException");
 				sqlEx = nestedSqlEx;
 			}
 		}
@@ -282,7 +282,7 @@ public class SQLErrorCodeSQLExceptionTranslator extends AbstractFallbackSQLExcep
 			else {
 				codes = "Error code '" + sqlEx.getErrorCode() + "'";
 			}
-			logger.debug("Unable to translate SQLException with " + codes + ", will now try the fallback translator");
+			logger.info("Unable to translate SQLException with " + codes + ", will now try the fallback translator");
 		}
 
 		return null;
@@ -400,7 +400,7 @@ public class SQLErrorCodeSQLExceptionTranslator extends AbstractFallbackSQLExcep
 	private void logTranslation(String task, @Nullable String sql, SQLException sqlEx, boolean custom) {
 		if (logger.isDebugEnabled()) {
 			String intro = custom ? "Custom translation of" : "Translating";
-			logger.debug(intro + " SQLException with SQL state '" + sqlEx.getSQLState() +
+			logger.info(intro + " SQLException with SQL state '" + sqlEx.getSQLState() +
 					"', error code '" + sqlEx.getErrorCode() + "', message [" + sqlEx.getMessage() + "]" +
 					(sql != null ? "; SQL was [" + sql + "]": "") + " for task [" + task + "]");
 		}

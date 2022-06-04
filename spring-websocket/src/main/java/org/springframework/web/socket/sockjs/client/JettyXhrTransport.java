@@ -230,7 +230,7 @@ public class JettyXhrTransport extends AbstractXhrTransport implements Lifecycle
 			while (true) {
 				if (this.sockJsSession.isDisconnected()) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("SockJS sockJsSession closed, closing response.");
+						logger.info("SockJS sockJsSession closed, closing response.");
 					}
 					response.abort(new SockJsException("Session closed.", this.sockJsSession.getId(), null));
 					return;

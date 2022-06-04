@@ -127,7 +127,7 @@ public class ConcurrencyThrottleInterceptorTests {
 				}
 				catch (RuntimeException ex) {
 					if (ex == this.ex) {
-						logger.debug("Expected exception thrown", ex);
+						logger.info("Expected exception thrown", ex);
 					}
 					else {
 						// should never happen
@@ -136,7 +136,7 @@ public class ConcurrencyThrottleInterceptorTests {
 				}
 				catch (Error err) {
 					if (err == this.ex) {
-						logger.debug("Expected exception thrown", err);
+						logger.info("Expected exception thrown", err);
 					}
 					else {
 						// should never happen
@@ -153,7 +153,7 @@ public class ConcurrencyThrottleInterceptorTests {
 					this.proxy.getName();
 				}
 			}
-			logger.debug("finished");
+			logger.info("finished");
 		}
 	}
 

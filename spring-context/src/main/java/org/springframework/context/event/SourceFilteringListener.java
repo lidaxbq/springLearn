@@ -34,10 +34,15 @@ import org.springframework.lang.Nullable;
  * @author Stephane Nicoll
  * @since 2.0.5
  */
+//实现 GenericApplicationListener、SmartApplicationListener 监听器，实现将原始对象触发的事件，转发给指定监听器
 public class SourceFilteringListener implements GenericApplicationListener, SmartApplicationListener {
-
+	/**
+	 * 原始类 就是 wac 对象。
+	 */
 	private final Object source;
-
+	/**
+	 * 代理的监听器  就是 ContextRefreshListener 对象。
+	 */
 	@Nullable
 	private GenericApplicationListener delegate;
 
@@ -67,8 +72,10 @@ public class SourceFilteringListener implements GenericApplicationListener, Smar
 	}
 
 
+//	核心
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
+		// 判断来源
 		if (event.getSource() == this.source) {
 			onApplicationEventInternal(event);
 		}
@@ -101,6 +108,7 @@ public class SourceFilteringListener implements GenericApplicationListener, Smar
 	 * <p>The default implementation invokes the specified delegate, if any.
 	 * @param event the event to process (matching the specified source)
 	 */
+//	将事件转发给 delegate 监听器。
 	protected void onApplicationEventInternal(ApplicationEvent event) {
 		if (this.delegate == null) {
 			throw new IllegalStateException(

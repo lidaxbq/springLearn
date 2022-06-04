@@ -132,7 +132,7 @@ public class SpringClassRule implements TestRule {
 	public Statement apply(Statement base, Description description) {
 		Class<?> testClass = description.getTestClass();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Applying SpringClassRule to test class [" + testClass.getName() + "]");
+			logger.info("Applying SpringClassRule to test class [" + testClass.getName() + "]");
 		}
 		validateSpringMethodRuleConfiguration(testClass);
 		TestContextManager testContextManager = getTestContextManager(testClass);

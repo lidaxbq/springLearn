@@ -55,6 +55,7 @@ class LoadTimeWeaverBeanDefinitionParser extends AbstractSingleBeanDefinitionPar
 
 	private static final String ASPECTJ_WEAVING_ATTRIBUTE = "aspectj-weaving";
 
+//	产生一个DefaultContextLoadTimeWeaver bean
 
 	@Override
 	protected String getBeanClassName(Element element) {
@@ -68,12 +69,15 @@ class LoadTimeWeaverBeanDefinitionParser extends AbstractSingleBeanDefinitionPar
 	protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
 		return ConfigurableApplicationContext.LOAD_TIME_WEAVER_BEAN_NAME;
 	}
-
+// 解析入口
 	@Override
 	protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
 		builder.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
-
+//		是否开启Aspectj。配置了<context:load-time-weaver>，默认会自动去探测是否可以使用aspectj功能。
+//		检测依据是 META-INF/aop.xml是否存在
+//		除非设置aspectj-weaving属性为on,强制使用
 		if (isAspectJWeavingEnabled(element.getAttribute(ASPECTJ_WEAVING_ATTRIBUTE), parserContext)) {
+//			容器中没有internalAspectJWeavingEnabler BeanDefinition,就创建一个
 			if (!parserContext.getRegistry().containsBeanDefinition(ASPECTJ_WEAVING_ENABLER_BEAN_NAME)) {
 				RootBeanDefinition def = new RootBeanDefinition(ASPECTJ_WEAVING_ENABLER_CLASS_NAME);
 				parserContext.registerBeanComponent(

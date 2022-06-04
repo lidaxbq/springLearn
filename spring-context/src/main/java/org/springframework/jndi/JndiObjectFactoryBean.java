@@ -245,7 +245,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 		catch (NamingException ex) {
 			if (this.defaultObject != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("JNDI lookup failed - returning specified default object instead", ex);
+					logger.info("JNDI lookup failed - returning specified default object instead", ex);
 				}
 				else if (logger.isInfoEnabled()) {
 					logger.info("JNDI lookup failed - returning specified default object instead: " + ex);

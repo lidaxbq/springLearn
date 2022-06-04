@@ -40,7 +40,7 @@ public class ResponseStatusExceptionHandler implements WebExceptionHandler {
 	public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
 		if (ex instanceof ResponseStatusException) {
 			exchange.getResponse().setStatusCode(((ResponseStatusException) ex).getStatus());
-			logger.debug(ex.getMessage());
+			logger.info(ex.getMessage());
 			return exchange.getResponse().setComplete();
 		}
 		return Mono.error(ex);

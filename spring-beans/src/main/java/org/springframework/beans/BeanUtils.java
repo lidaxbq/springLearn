@@ -17,6 +17,11 @@
 package org.springframework.beans;
 
 
+import kotlin.jvm.JvmClassMappingKt;
+import kotlin.reflect.KClasses;
+import kotlin.reflect.KFunction;
+import kotlin.reflect.KParameter;
+import kotlin.reflect.jvm.ReflectJvmMapping;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.KotlinDetector;
@@ -142,7 +147,9 @@ public abstract class BeanUtils {
 	public static <T> T instantiateClass(Constructor<T> ctor, Object... args) throws BeanInstantiationException {
 		Assert.notNull(ctor, "Constructor must not be null");
 		try {
+			// 设置构造方法，可访问
 			ReflectionUtils.makeAccessible(ctor);
+			// 使用构造方法，创建对象
 			return (KotlinDetector.isKotlinType(ctor.getDeclaringClass()) ?
 					KotlinDelegate.instantiateClass(ctor, args) : ctor.newInstance(args));
 		}
@@ -464,7 +471,7 @@ public abstract class BeanUtils {
 			catch (Throwable ex) {
 				// e.g. AccessControlException on Google App Engine
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not access system ClassLoader: " + ex);
+					logger.info("Could not access system ClassLoader: " + ex);
 				}
 				return null;
 			}
@@ -484,7 +491,7 @@ public abstract class BeanUtils {
 		}
 		catch (ClassNotFoundException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("No property editor [" + editorName + "] found for type " +
+				logger.info("No property editor [" + editorName + "] found for type " +
 						targetType.getName() + " according to 'Editor' suffix convention");
 			}
 			unknownEditorTypes.add(targetType);

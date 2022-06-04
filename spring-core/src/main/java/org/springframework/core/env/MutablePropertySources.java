@@ -95,7 +95,7 @@ public class MutablePropertySources implements PropertySources {
 	 */
 	public void addFirst(PropertySource<?> propertySource) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding PropertySource '" + propertySource.getName() + "' with highest search precedence");
+			logger.info("Adding PropertySource '" + propertySource.getName() + "' with highest search precedence");
 		}
 		removeIfPresent(propertySource);
 		this.propertySourceList.add(0, propertySource);
@@ -106,7 +106,7 @@ public class MutablePropertySources implements PropertySources {
 	 */
 	public void addLast(PropertySource<?> propertySource) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding PropertySource '" + propertySource.getName() + "' with lowest search precedence");
+			logger.info("Adding PropertySource '" + propertySource.getName() + "' with lowest search precedence");
 		}
 		removeIfPresent(propertySource);
 		this.propertySourceList.add(propertySource);
@@ -118,7 +118,7 @@ public class MutablePropertySources implements PropertySources {
 	 */
 	public void addBefore(String relativePropertySourceName, PropertySource<?> propertySource) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding PropertySource '" + propertySource.getName() +
+			logger.info("Adding PropertySource '" + propertySource.getName() +
 					"' with search precedence immediately higher than '" + relativePropertySourceName + "'");
 		}
 		assertLegalRelativeAddition(relativePropertySourceName, propertySource);
@@ -133,7 +133,7 @@ public class MutablePropertySources implements PropertySources {
 	 */
 	public void addAfter(String relativePropertySourceName, PropertySource<?> propertySource) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding PropertySource '" + propertySource.getName() +
+			logger.info("Adding PropertySource '" + propertySource.getName() +
 					"' with search precedence immediately lower than '" + relativePropertySourceName + "'");
 		}
 		assertLegalRelativeAddition(relativePropertySourceName, propertySource);
@@ -156,7 +156,7 @@ public class MutablePropertySources implements PropertySources {
 	@Nullable
 	public PropertySource<?> remove(String name) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Removing PropertySource '" + name + "'");
+			logger.info("Removing PropertySource '" + name + "'");
 		}
 		int index = this.propertySourceList.indexOf(PropertySource.named(name));
 		return (index != -1 ? this.propertySourceList.remove(index) : null);
@@ -171,7 +171,7 @@ public class MutablePropertySources implements PropertySources {
 	 */
 	public void replace(String name, PropertySource<?> propertySource) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Replacing PropertySource '" + name + "' with '" + propertySource.getName() + "'");
+			logger.info("Replacing PropertySource '" + name + "' with '" + propertySource.getName() + "'");
 		}
 		int index = assertPresentAndGetIndex(name);
 		this.propertySourceList.set(index, propertySource);

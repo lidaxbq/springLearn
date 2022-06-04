@@ -65,11 +65,11 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	/** Cache of singleton objects: bean name --> bean instance
-	 * 三级缓存： 成品bean*/
+	 * 一级缓存： 成品bean*/
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
 	/** Cache of singleton factories: bean name --> ObjectFactory
-	 * 一级缓存，用来生成原始bean */
+	 * 三级缓存，用来生成原始bean */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
 	/** Cache of early singleton objects: bean name --> bean instance
@@ -101,10 +101,14 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/** Map between containing bean names: bean name --> Set of bean names that the bean contains */
 	private final Map<String, Set<String>> containedBeanMap = new ConcurrentHashMap<>(16);
 
-	/** Map between dependent bean names: bean name --> Set of dependent bean names */
+	/** Map between dependent bean names: bean name --> Set of dependent bean names
+	 * 保存的是依赖 beanName 之间的映射关系：被依赖的beanName - > 依赖 beanName 的集合
+	 * */
 	private final Map<String, Set<String>> dependentBeanMap = new ConcurrentHashMap<>(64);
 
-	/** Map between depending bean names: bean name --> Set of bean names for the bean's dependencies */
+	/** Map between depending bean names: bean name --> Set of bean names for the bean's dependencies
+	 * 保存的是依赖 beanName 之间的映射关系：依赖 beanName - > 被依赖beanName 的集合
+	 * */
 	private final Map<String, Set<String>> dependenciesForBeanMap = new ConcurrentHashMap<>(64);
 
 
@@ -217,7 +221,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 							"(Do not request a bean from a BeanFactory in a destroy method implementation!)");
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Creating shared instance of singleton bean '" + beanName + "'");
+					logger.info("Creating shared instance of singleton bean '" + beanName + "'");
 				}
 				// 记录该bean正在创建
 				beforeSingletonCreation(beanName);
@@ -251,11 +255,11 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					if (recordSuppressedExceptions) {
 						this.suppressedExceptions = null;
 					}
-					//移除
+					//移除  正在创建中的集合
 					afterSingletonCreation(beanName);
 				}
 				if (newSingleton) {
-					// 加入三级缓存，移除一二级缓存
+					// 加入一级缓存，移除二、三级缓存
 					addSingleton(beanName, singletonObject);
 				}
 			}
@@ -410,8 +414,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/**
 	 * Register a dependent bean for the given bean,
 	 * to be destroyed before the given bean is destroyed.
-	 * @param beanName the name of the bean
-	 * @param dependentBeanName the name of the dependent bean
+	 * @param beanName the name of the bean   被依赖
+	 * @param dependentBeanName the name of the dependent bean  依赖主动者
 	 */
 	//为指定的Bean注入依赖的Bean
 	public void registerDependentBean(String beanName, String dependentBeanName) {
@@ -523,7 +527,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
 	public void destroySingletons() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Destroying singletons in " + this);
+			logger.info("Destroying singletons in " + this);
 		}
 		synchronized (this.singletonObjects) {
 			this.singletonsCurrentlyInDestruction = true;
@@ -579,7 +583,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		Set<String> dependencies = this.dependentBeanMap.remove(beanName);
 		if (dependencies != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Retrieved dependent beans for bean '" + beanName + "': " + dependencies);
+				logger.info("Retrieved dependent beans for bean '" + beanName + "': " + dependencies);
 			}
 			for (String dependentBeanName : dependencies) {
 				destroySingleton(dependentBeanName);

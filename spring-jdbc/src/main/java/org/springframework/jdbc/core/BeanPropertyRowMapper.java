@@ -297,7 +297,7 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 				try {
 					Object value = getColumnValue(rs, index, pd);
 					if (rowNumber == 0 && logger.isDebugEnabled()) {
-						logger.debug("Mapping column '" + column + "' to property '" + pd.getName() +
+						logger.info("Mapping column '" + column + "' to property '" + pd.getName() +
 								"' of type '" + ClassUtils.getQualifiedName(pd.getPropertyType()) + "'");
 					}
 					try {
@@ -306,7 +306,7 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 					catch (TypeMismatchException ex) {
 						if (value == null && this.primitivesDefaultedForNullValue) {
 							if (logger.isDebugEnabled()) {
-								logger.debug("Intercepted TypeMismatchException for row " + rowNumber +
+								logger.info("Intercepted TypeMismatchException for row " + rowNumber +
 										" and column '" + column + "' with null value when setting property '" +
 										pd.getName() + "' of type '" +
 										ClassUtils.getQualifiedName(pd.getPropertyType()) +
@@ -329,7 +329,7 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 			else {
 				// No PropertyDescriptor found
 				if (rowNumber == 0 && logger.isDebugEnabled()) {
-					logger.debug("No property found for column '" + column + "' mapped to field '" + field + "'");
+					logger.info("No property found for column '" + column + "' mapped to field '" + field + "'");
 				}
 			}
 		}

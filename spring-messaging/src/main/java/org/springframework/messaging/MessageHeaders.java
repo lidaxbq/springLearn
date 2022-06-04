@@ -291,7 +291,7 @@ public class MessageHeaders implements Map<String, Object>, Serializable {
 		else {
 			// Some non-serializable entries -> serialize a temporary MessageHeaders copy
 			if (logger.isDebugEnabled()) {
-				logger.debug("Ignoring non-serializable message headers: " + keysToIgnore);
+				logger.info("Ignoring non-serializable message headers: " + keysToIgnore);
 			}
 			out.writeObject(new MessageHeaders(this, keysToIgnore));
 		}

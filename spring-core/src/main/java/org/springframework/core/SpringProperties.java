@@ -109,7 +109,7 @@ public abstract class SpringProperties {
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not retrieve system property '" + key + "': " + ex);
+					logger.info("Could not retrieve system property '" + key + "': " + ex);
 				}
 			}
 		}

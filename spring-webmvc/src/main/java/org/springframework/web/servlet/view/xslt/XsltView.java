@@ -429,7 +429,7 @@ public class XsltView extends AbstractUrlBasedView {
 		try {
 			Templates templates = getTransformerFactory().newTemplates(stylesheetSource);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Loading templates '" + templates + "'");
+				logger.info("Loading templates '" + templates + "'");
 			}
 			return templates;
 		}
@@ -466,7 +466,7 @@ public class XsltView extends AbstractUrlBasedView {
 		Assert.state(url != null, "'url' not set");
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Loading XSLT stylesheet from '" + url + "'");
+			logger.info("Loading XSLT stylesheet from '" + url + "'");
 		}
 		try {
 			Resource resource = obtainApplicationContext().getResource(url);

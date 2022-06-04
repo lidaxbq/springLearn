@@ -65,7 +65,7 @@ public class Spr3775InitDestroyLifecycleTests {
 
 	private void debugMethods(Class<?> clazz, String category, List<String> methodNames) {
 		if (logger.isDebugEnabled()) {
-			logger.debug(clazz.getSimpleName() + ": " + category + ": " + methodNames);
+			logger.info(clazz.getSimpleName() + ": " + category + ": " + methodNames);
 		}
 	}
 

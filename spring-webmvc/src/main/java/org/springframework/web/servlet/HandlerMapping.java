@@ -129,6 +129,7 @@ public interface HandlerMapping {
 	 * @throws Exception if there is an internal error
 	 */
 	@Nullable
+//	获得请求对应的处理器和拦截器们,HandlerExecutionChain ，它包含处理器( handler )和拦截器们( HandlerInterceptor 数组 )。
 	HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception;
 
 }

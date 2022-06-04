@@ -139,7 +139,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 				}
 				catch (Exception ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug(getArgumentResolutionErrorMessage("Failed to resolve", i), ex);
+						logger.info(getArgumentResolutionErrorMessage("Failed to resolve", i), ex);
 					}
 					throw ex;
 				}

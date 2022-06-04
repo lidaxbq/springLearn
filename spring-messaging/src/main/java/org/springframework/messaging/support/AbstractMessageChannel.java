@@ -162,7 +162,7 @@ public abstract class AbstractMessageChannel implements MessageChannel, Intercep
 				if (resolvedMessage == null) {
 					String name = interceptor.getClass().getSimpleName();
 					if (logger.isDebugEnabled()) {
-						logger.debug(name + " returned null from preSend, i.e. precluding the send.");
+						logger.info(name + " returned null from preSend, i.e. precluding the send.");
 					}
 					triggerAfterSendCompletion(messageToUse, channel, false, null);
 					return null;

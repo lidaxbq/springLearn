@@ -269,7 +269,7 @@ public class ExceptionHandlerExceptionResolver extends AbstractHandlerMethodExce
 			return;
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for exception mappings: " + getApplicationContext());
+			logger.info("Looking for exception mappings: " + getApplicationContext());
 		}
 
 		List<ControllerAdviceBean> adviceBeans = ControllerAdviceBean.findAnnotatedBeans(getApplicationContext());
@@ -391,7 +391,7 @@ public class ExceptionHandlerExceptionResolver extends AbstractHandlerMethodExce
 
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Invoking @ExceptionHandler method: " + exceptionHandlerMethod);
+				logger.info("Invoking @ExceptionHandler method: " + exceptionHandlerMethod);
 			}
 			Throwable cause = exception.getCause();
 			if (cause != null) {

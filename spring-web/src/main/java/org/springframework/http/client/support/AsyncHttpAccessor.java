@@ -84,7 +84,7 @@ public class AsyncHttpAccessor {
 		org.springframework.http.client.AsyncClientHttpRequest request =
 				getAsyncRequestFactory().createAsyncRequest(url, method);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Created asynchronous " + method.name() + " request for \"" + url + "\"");
+			logger.info("Created asynchronous " + method.name() + " request for \"" + url + "\"");
 		}
 		return request;
 	}

@@ -163,7 +163,7 @@ public class MethodMapTransactionAttributeSource
 				// No already registered method name, or more specific
 				// method name specification now -> (re-)register method.
 				if (logger.isDebugEnabled() && regMethodName != null) {
-					logger.debug("Replacing attribute for transactional method [" + method + "]: current name '" +
+					logger.info("Replacing attribute for transactional method [" + method + "]: current name '" +
 							name + "' is more specific than '" + regMethodName + "'");
 				}
 				this.methodNameMap.put(method, name);
@@ -171,7 +171,7 @@ public class MethodMapTransactionAttributeSource
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Keeping attribute for transactional method [" + method + "]: current name '" +
+					logger.info("Keeping attribute for transactional method [" + method + "]: current name '" +
 							name + "' is not more specific than '" + regMethodName + "'");
 				}
 			}
@@ -187,7 +187,7 @@ public class MethodMapTransactionAttributeSource
 		Assert.notNull(method, "Method must not be null");
 		Assert.notNull(attr, "TransactionAttribute must not be null");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding transactional method [" + method + "] with attribute [" + attr + "]");
+			logger.info("Adding transactional method [" + method + "] with attribute [" + attr + "]");
 		}
 		this.transactionAttributeMap.put(method, attr);
 	}

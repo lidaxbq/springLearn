@@ -79,7 +79,7 @@ public abstract class AbstractWebSocketClient implements WebSocketClient {
 		assertUri(uri);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Connecting to " + uri);
+			logger.info("Connecting to " + uri);
 		}
 
 		HttpHeaders headersToUse = new HttpHeaders();

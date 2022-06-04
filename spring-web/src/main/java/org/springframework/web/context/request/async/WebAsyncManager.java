@@ -289,7 +289,7 @@ public final class WebAsyncManager {
 		final CallableInterceptorChain interceptorChain = new CallableInterceptorChain(interceptors);
 
 		this.asyncWebRequest.addTimeoutHandler(() -> {
-			logger.debug("Processing timeout");
+			logger.info("Processing timeout");
 			Object result = interceptorChain.triggerAfterTimeout(this.asyncWebRequest, callable);
 			if (result != CallableProcessingInterceptor.RESULT_NONE) {
 				setConcurrentResultAndDispatch(result);
@@ -297,7 +297,7 @@ public final class WebAsyncManager {
 		});
 
 		this.asyncWebRequest.addErrorHandler(ex -> {
-			logger.debug("Processing error");
+			logger.info("Processing error");
 			Object result = interceptorChain.triggerAfterError(this.asyncWebRequest, callable, ex);
 			result = (result != CallableProcessingInterceptor.RESULT_NONE ? result : ex);
 			setConcurrentResultAndDispatch(result);
@@ -346,7 +346,7 @@ public final class WebAsyncManager {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Concurrent result value [" + this.concurrentResult +
+			logger.info("Concurrent result value [" + this.concurrentResult +
 					"] - dispatching request to resume processing");
 		}
 
@@ -433,7 +433,7 @@ public final class WebAsyncManager {
 			HttpServletRequest request = this.asyncWebRequest.getNativeRequest(HttpServletRequest.class);
 			if (request != null) {
 				String requestUri = urlPathHelper.getRequestUri(request);
-				logger.debug("Concurrent handling starting for " + request.getMethod() + " [" + requestUri + "]");
+				logger.info("Concurrent handling starting for " + request.getMethod() + " [" + requestUri + "]");
 			}
 		}
 	}

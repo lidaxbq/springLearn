@@ -117,7 +117,7 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
 								"but concurrency limit still does not allow for entering");
 					}
 					if (debug) {
-						logger.debug("Concurrency count " + this.concurrencyCount +
+						logger.info("Concurrency count " + this.concurrencyCount +
 								" has reached limit " + this.concurrencyLimit + " - blocking");
 					}
 					try {
@@ -130,7 +130,7 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
 					}
 				}
 				if (debug) {
-					logger.debug("Entering throttle at concurrency count " + this.concurrencyCount);
+					logger.info("Entering throttle at concurrency count " + this.concurrencyCount);
 				}
 				this.concurrencyCount++;
 			}
@@ -146,7 +146,7 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
 			synchronized (this.monitor) {
 				this.concurrencyCount--;
 				if (logger.isDebugEnabled()) {
-					logger.debug("Returning from throttle at concurrency count " + this.concurrencyCount);
+					logger.info("Returning from throttle at concurrency count " + this.concurrencyCount);
 				}
 				this.monitor.notify();
 			}

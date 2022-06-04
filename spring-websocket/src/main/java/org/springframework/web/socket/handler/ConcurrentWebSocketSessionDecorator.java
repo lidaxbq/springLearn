@@ -204,7 +204,7 @@ public class ConcurrentWebSocketSessionDecorator extends WebSocketSessionDecorat
 				}
 				if (this.limitExceeded) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Changing close status " + status + " to SESSION_NOT_RELIABLE.");
+						logger.info("Changing close status " + status + " to SESSION_NOT_RELIABLE.");
 					}
 					status = CloseStatus.SESSION_NOT_RELIABLE;
 				}

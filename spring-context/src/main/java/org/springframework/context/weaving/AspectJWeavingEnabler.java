@@ -46,7 +46,7 @@ public class AspectJWeavingEnabler
 
 	public static final String ASPECTJ_AOP_XML_RESOURCE = "META-INF/aop.xml";
 
-
+//	DefaultContextLoadTimeWeaver
 	@Nullable
 	private ClassLoader beanClassLoader;
 
@@ -91,6 +91,7 @@ public class AspectJWeavingEnabler
 				throw new IllegalStateException("No LoadTimeWeaver available");
 			}
 		}
+//		使用DefaultContextLoadTimeWeaver中addTransformer（）做属性注册转换
 		weaverToUse.addTransformer(
 				new AspectJClassBypassingClassFileTransformer(new ClassPreProcessorAgentAdapter()));
 	}
@@ -116,6 +117,7 @@ public class AspectJWeavingEnabler
 			if (className.startsWith("org.aspectj") || className.startsWith("org/aspectj")) {
 				return classfileBuffer;
 			}
+//			委托给aspectj 来转换
 			return this.delegate.transform(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
 		}
 	}

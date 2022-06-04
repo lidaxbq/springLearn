@@ -206,7 +206,7 @@ public abstract class StatementCreatorUtils {
 		if (inValue instanceof SqlParameterValue) {
 			SqlParameterValue parameterValue = (SqlParameterValue) inValue;
 			if (logger.isDebugEnabled()) {
-				logger.debug("Overriding type info with runtime info from SqlParameterValue: column index " + paramIndex +
+				logger.info("Overriding type info with runtime info from SqlParameterValue: column index " + paramIndex +
 						", SQL type " + parameterValue.getSqlType() + ", type name " + parameterValue.getTypeName());
 			}
 			if (parameterValue.getSqlType() != SqlTypeValue.TYPE_UNKNOWN) {
@@ -249,7 +249,7 @@ public abstract class StatementCreatorUtils {
 				}
 				catch (SQLException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("JDBC getParameterType call failed - using fallback method instead: " + ex);
+						logger.info("JDBC getParameterType call failed - using fallback method instead: " + ex);
 					}
 				}
 			}

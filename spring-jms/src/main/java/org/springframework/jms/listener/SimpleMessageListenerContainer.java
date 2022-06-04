@@ -198,7 +198,7 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
 				establishSharedConnection();
 			}
 			catch (JMSException ex) {
-				logger.debug("Could not connect on initialization - registering message consumers lazily", ex);
+				logger.info("Could not connect on initialization - registering message consumers lazily", ex);
 				return;
 			}
 			initializeConsumers();
@@ -249,7 +249,7 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
 			logger.info("Successfully refreshed JMS Connection");
 		}
 		catch (JMSException recoverEx) {
-			logger.debug("Failed to recover JMS Connection", recoverEx);
+			logger.info("Failed to recover JMS Connection", recoverEx);
 			logger.error("Encountered non-recoverable JMSException", ex);
 		}
 	}
@@ -335,12 +335,12 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
 	protected void doShutdown() throws JMSException {
 		synchronized (this.consumersMonitor) {
 			if (this.consumers != null) {
-				logger.debug("Closing JMS MessageConsumers");
+				logger.info("Closing JMS MessageConsumers");
 				for (MessageConsumer consumer : this.consumers) {
 					JmsUtils.closeMessageConsumer(consumer);
 				}
 				if (this.sessions != null) {
-					logger.debug("Closing JMS Sessions");
+					logger.info("Closing JMS Sessions");
 					for (Session session : this.sessions) {
 						JmsUtils.closeSession(session);
 					}

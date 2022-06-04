@@ -69,7 +69,7 @@ public class NameMatchCacheOperationSource implements CacheOperationSource, Seri
 	 */
 	public void addCacheMethod(String methodName, Collection<CacheOperation> ops) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Adding method [" + methodName + "] with cache operations [" + ops + "]");
+			logger.info("Adding method [" + methodName + "] with cache operations [" + ops + "]");
 		}
 		this.nameMap.put(methodName, ops);
 	}

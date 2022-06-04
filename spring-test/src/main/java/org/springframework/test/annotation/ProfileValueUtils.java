@@ -67,7 +67,7 @@ public abstract class ProfileValueUtils {
 		Class<ProfileValueSourceConfiguration> annotationType = ProfileValueSourceConfiguration.class;
 		ProfileValueSourceConfiguration config = AnnotatedElementUtils.findMergedAnnotation(testClass, annotationType);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Retrieved @ProfileValueSourceConfiguration [" + config + "] for test class [" +
+			logger.info("Retrieved @ProfileValueSourceConfiguration [" + config + "] for test class [" +
 					testClass.getName() + "]");
 		}
 
@@ -80,7 +80,7 @@ public abstract class ProfileValueUtils {
 			Assert.state(profileValueSourceType != null, "No default ProfileValueSource class");
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Retrieved ProfileValueSource type [" + profileValueSourceType + "] for class [" +
+			logger.info("Retrieved ProfileValueSource type [" + profileValueSourceType + "] for class [" +
 					testClass.getName() + "]");
 		}
 

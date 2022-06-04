@@ -70,7 +70,7 @@ class ClassFileTransformerAdapter implements ClassFileTransformer {
 				byte[] transformed = this.classTransformer.transform(
 						loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
 				if (transformed != null && logger.isDebugEnabled()) {
-					logger.debug("Transformer of class [" + this.classTransformer.getClass().getName() +
+					logger.info("Transformer of class [" + this.classTransformer.getClass().getName() +
 							"] transformed class [" + className + "]; bytes in=" +
 							classfileBuffer.length + "; bytes out=" + transformed.length);
 				}

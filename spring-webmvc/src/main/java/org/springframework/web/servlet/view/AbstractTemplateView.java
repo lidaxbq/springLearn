@@ -123,7 +123,7 @@ public abstract class AbstractTemplateView extends AbstractUrlBasedView {
 				}
 				Object attributeValue = request.getAttribute(attribute);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Exposing request attribute '" + attribute +
+					logger.info("Exposing request attribute '" + attribute +
 							"' with value [" + attributeValue + "] to model");
 				}
 				model.put(attribute, attributeValue);
@@ -141,7 +141,7 @@ public abstract class AbstractTemplateView extends AbstractUrlBasedView {
 					}
 					Object attributeValue = session.getAttribute(attribute);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Exposing session attribute '" + attribute +
+						logger.info("Exposing session attribute '" + attribute +
 								"' with value [" + attributeValue + "] to model");
 					}
 					model.put(attribute, attributeValue);

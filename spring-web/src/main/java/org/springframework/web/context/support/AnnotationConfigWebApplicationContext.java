@@ -242,7 +242,7 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 				}
 				catch (ClassNotFoundException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Could not load class for config location [" + configLocation +
+						logger.info("Could not load class for config location [" + configLocation +
 								"] - trying package scan. " + ex);
 					}
 					//如果容器类加载器加载定义路径的Bean定义资源失败

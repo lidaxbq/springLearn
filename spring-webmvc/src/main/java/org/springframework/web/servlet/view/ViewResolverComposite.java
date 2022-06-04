@@ -34,6 +34,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 
 /**
+ * 复合的 ViewResolver 实现类。 直接根据ViewResolvers来解析
  * A {@link org.springframework.web.servlet.ViewResolver} that delegates to others.
  *
  * @author Sebastien Deleuze
@@ -42,9 +43,13 @@ import org.springframework.web.servlet.ViewResolver;
  */
 public class ViewResolverComposite implements ViewResolver, Ordered, InitializingBean,
 		ApplicationContextAware, ServletContextAware {
-
+	/**
+	 * ViewResolver 数组
+	 */
 	private final List<ViewResolver> viewResolvers = new ArrayList<>();
-
+	/**
+	 * 顺序，优先级最低
+	 */
 	private int order = Ordered.LOWEST_PRECEDENCE;
 
 
@@ -92,6 +97,7 @@ public class ViewResolverComposite implements ViewResolver, Ordered, Initializin
 		}
 	}
 
+//	回调viewResolver的InitializingBean方法
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		for (ViewResolver viewResolver : this.viewResolvers) {

@@ -475,7 +475,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			}
 			else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Skipping transactional joinpoint [" + joinpointIdentification +
+					logger.info("Skipping transactional joinpoint [" + joinpointIdentification +
 							"] because no transaction manager has been configured");
 				}
 			}

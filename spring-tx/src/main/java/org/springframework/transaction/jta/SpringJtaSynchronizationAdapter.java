@@ -148,7 +148,7 @@ public class SpringJtaSynchronizationAdapter implements Synchronization {
 			}
 			catch (UnsupportedOperationException ex) {
 				// Probably Hibernate's WebSphereExtendedJTATransactionLookup pseudo JTA stuff...
-				logger.debug("JTA transaction handle does not support setRollbackOnly method - " +
+				logger.info("JTA transaction handle does not support setRollbackOnly method - " +
 						"relying on JTA provider to mark the transaction as rollback-only based on " +
 						"the exception thrown from beforeCompletion", ex);
 			}
@@ -157,7 +157,7 @@ public class SpringJtaSynchronizationAdapter implements Synchronization {
 			}
 		}
 		else {
-			logger.debug("No JTA transaction handle available and/or running on WebLogic - " +
+			logger.info("No JTA transaction handle available and/or running on WebLogic - " +
 						"relying on JTA provider to mark the transaction as rollback-only based on " +
 						"the exception thrown from beforeCompletion");
 			}

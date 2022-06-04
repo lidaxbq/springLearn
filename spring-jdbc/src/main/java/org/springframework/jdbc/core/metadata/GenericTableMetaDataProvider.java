@@ -147,11 +147,11 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 	public void initializeWithMetaData(DatabaseMetaData databaseMetaData) throws SQLException {
 		try {
 			if (databaseMetaData.supportsGetGeneratedKeys()) {
-				logger.debug("GetGeneratedKeys is supported");
+				logger.info("GetGeneratedKeys is supported");
 				setGetGeneratedKeysSupported(true);
 			}
 			else {
-				logger.debug("GetGeneratedKeys is not supported");
+				logger.info("GetGeneratedKeys is not supported");
 				setGetGeneratedKeysSupported(false);
 			}
 		}
@@ -164,14 +164,14 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 			String databaseProductName = databaseMetaData.getDatabaseProductName();
 			if (this.productsNotSupportingGeneratedKeysColumnNameArray.contains(databaseProductName)) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("GeneratedKeysColumnNameArray is not supported for " + databaseProductName);
+					logger.info("GeneratedKeysColumnNameArray is not supported for " + databaseProductName);
 				}
 				setGeneratedKeysColumnNameArraySupported(false);
 			}
 			else {
 				if (isGetGeneratedKeysSupported()) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("GeneratedKeysColumnNameArray is supported for " + databaseProductName);
+						logger.info("GeneratedKeysColumnNameArray is supported for " + databaseProductName);
 					}
 					setGeneratedKeysColumnNameArraySupported(true);
 				}
@@ -389,7 +389,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 		String metaDataSchemaName = metaDataSchemaNameToUse(tmd.getSchemaName());
 		String metaDataTableName = tableNameToUse(tmd.getTableName());
 		if (logger.isDebugEnabled()) {
-			logger.debug("Retrieving metadata for " + metaDataCatalogName + '/' +
+			logger.info("Retrieving metadata for " + metaDataCatalogName + '/' +
 					metaDataSchemaName + '/' + metaDataTableName);
 		}
 		try {
@@ -407,7 +407,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 					if ("NUMBER".equals(typeName) && decimalDigits == 0) {
 						dataType = Types.NUMERIC;
 						if (logger.isDebugEnabled()) {
-							logger.debug("Overriding metadata: " + columnName + " now NUMERIC instead of DECIMAL");
+							logger.info("Overriding metadata: " + columnName + " now NUMERIC instead of DECIMAL");
 						}
 					}
 				}
@@ -415,7 +415,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 				TableParameterMetaData meta = new TableParameterMetaData(columnName, dataType, nullable);
 				this.tableParameterMetaData.add(meta);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Retrieved metadata: " + meta.getParameterName() + " " +
+					logger.info("Retrieved metadata: " + meta.getParameterName() + " " +
 							meta.getSqlType() + " " + meta.isNullable());
 				}
 			}

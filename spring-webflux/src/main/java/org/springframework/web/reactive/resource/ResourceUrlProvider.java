@@ -97,13 +97,13 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 		if (this.handlerMap.isEmpty()) {
 			detectResourceHandlers(event.getApplicationContext());
 			if(logger.isDebugEnabled()) {
-				logger.debug("No resource handling mappings found");
+				logger.info("No resource handling mappings found");
 			}
 		}
 	}
 
 	private void detectResourceHandlers(ApplicationContext context) {
-		logger.debug("Looking for resource handler mappings");
+		logger.info("Looking for resource handler mappings");
 
 		Map<String, SimpleUrlHandlerMapping> beans = context.getBeansOfType(SimpleUrlHandlerMapping.class);
 		List<SimpleUrlHandlerMapping> mappings = new ArrayList<>(beans.values());
@@ -114,7 +114,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 				if (handler instanceof ResourceWebHandler) {
 					ResourceWebHandler resourceHandler = (ResourceWebHandler) handler;
 					if (logger.isDebugEnabled()) {
-						logger.debug("Found resource handler mapping: URL pattern=\"" + pattern + "\", " +
+						logger.info("Found resource handler mapping: URL pattern=\"" + pattern + "\", " +
 								"locations=" + resourceHandler.getLocations() + ", " +
 								"resolvers=" + resourceHandler.getResourceResolvers());
 					}

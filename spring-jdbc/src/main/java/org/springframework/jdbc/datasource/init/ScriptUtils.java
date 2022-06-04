@@ -471,10 +471,10 @@ public abstract class ScriptUtils {
 						stmt.execute(statement);
 						int rowsAffected = stmt.getUpdateCount();
 						if (logger.isDebugEnabled()) {
-							logger.debug(rowsAffected + " returned as update count for SQL: " + statement);
+							logger.info(rowsAffected + " returned as update count for SQL: " + statement);
 							SQLWarning warningToLog = stmt.getWarnings();
 							while (warningToLog != null) {
-								logger.debug("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() +
+								logger.info("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() +
 										"', error code '" + warningToLog.getErrorCode() +
 										"', message [" + warningToLog.getMessage() + "]");
 								warningToLog = warningToLog.getNextWarning();
@@ -485,7 +485,7 @@ public abstract class ScriptUtils {
 						boolean dropStatement = StringUtils.startsWithIgnoreCase(statement.trim(), "drop");
 						if (continueOnError || (dropStatement && ignoreFailedDrops)) {
 							if (logger.isDebugEnabled()) {
-								logger.debug(ScriptStatementFailedException.buildErrorMessage(statement, stmtNumber, resource), ex);
+								logger.info(ScriptStatementFailedException.buildErrorMessage(statement, stmtNumber, resource), ex);
 							}
 						}
 						else {
@@ -499,7 +499,7 @@ public abstract class ScriptUtils {
 					stmt.close();
 				}
 				catch (Throwable ex) {
-					logger.debug("Could not close JDBC Statement", ex);
+					logger.info("Could not close JDBC Statement", ex);
 				}
 			}
 

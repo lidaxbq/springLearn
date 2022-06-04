@@ -259,7 +259,7 @@ public abstract class AbstractJdbcInsert {
 			compileInternal();
 			this.compiled = true;
 			if (logger.isDebugEnabled()) {
-				logger.debug("JdbcInsert for table [" + getTableName() + "] compiled");
+				logger.info("JdbcInsert for table [" + getTableName() + "] compiled");
 			}
 		}
 	}
@@ -276,7 +276,7 @@ public abstract class AbstractJdbcInsert {
 		this.insertString = this.tableMetaDataContext.createInsertString(getGeneratedKeyNames());
 		this.insertTypes = this.tableMetaDataContext.createInsertTypes();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Compiled insert object: insert string is [" + this.insertString + "]");
+			logger.info("Compiled insert object: insert string is [" + this.insertString + "]");
 		}
 		onCompileInternal();
 	}
@@ -303,7 +303,7 @@ public abstract class AbstractJdbcInsert {
 	 */
 	protected void checkCompiled() {
 		if (!isCompiled()) {
-			logger.debug("JdbcInsert not compiled before execution - invoking compile");
+			logger.info("JdbcInsert not compiled before execution - invoking compile");
 			compile();
 		}
 	}
@@ -351,7 +351,7 @@ public abstract class AbstractJdbcInsert {
 	 */
 	private int executeInsertInternal(List<?> values) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("The following parameters are used for insert " + getInsertString() + " with: " + values);
+			logger.info("The following parameters are used for insert " + getInsertString() + " with: " + values);
 		}
 		return getJdbcTemplate().update(getInsertString(), values.toArray(), getInsertTypes());
 	}
@@ -423,7 +423,7 @@ public abstract class AbstractJdbcInsert {
 	 */
 	private KeyHolder executeInsertAndReturnKeyHolderInternal(final List<?> values) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("The following parameters are used for call " + getInsertString() + " with: " + values);
+			logger.info("The following parameters are used for call " + getInsertString() + " with: " + values);
 		}
 		final KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -518,13 +518,13 @@ public abstract class AbstractJdbcInsert {
 		PreparedStatement ps;
 		if (this.tableMetaDataContext.isGeneratedKeysColumnNameArraySupported()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using generated keys support with array of column names.");
+				logger.info("Using generated keys support with array of column names.");
 			}
 			ps = con.prepareStatement(getInsertString(), getGeneratedKeyNames());
 		}
 		else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using generated keys support with Statement.RETURN_GENERATED_KEYS.");
+				logger.info("Using generated keys support with Statement.RETURN_GENERATED_KEYS.");
 			}
 			ps = con.prepareStatement(getInsertString(), Statement.RETURN_GENERATED_KEYS);
 		}
@@ -565,7 +565,7 @@ public abstract class AbstractJdbcInsert {
 	 */
 	private int[] executeBatchInternal(final List<List<Object>> batchValues) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing statement " + getInsertString() + " with batch of size: " + batchValues.size());
+			logger.info("Executing statement " + getInsertString() + " with batch of size: " + batchValues.size());
 		}
 		return getJdbcTemplate().batchUpdate(getInsertString(),
 				new BatchPreparedStatementSetter() {

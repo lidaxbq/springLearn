@@ -94,7 +94,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	public void registerBeanDefinitions(Document doc, XmlReaderContext readerContext) {
 		//获得XML描述符
 		this.readerContext = readerContext;
-		logger.debug("Loading bean definitions");
+		logger.info("Loading bean definitions");
 		//获得Document的根元素
 		Element root = doc.getDocumentElement();
 		doRegisterBeanDefinitions(root);
@@ -152,7 +152,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
-		// 扩展点
+		// lida扩展点
 		//在解析Bean定义之前，进行自定义的解析，增强解析过程的可扩展性，留给子类去实现
 		preProcessXml(root);
 		//从Document的根元素开始进行Bean定义的Document对象
@@ -271,7 +271,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				//使用资源读入器加载给定路径的Bean定义资源
 				int importCount = getReaderContext().getReader().loadBeanDefinitions(location, actualResources);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Imported " + importCount + " bean definitions from URL location [" + location + "]");
+					logger.info("Imported " + importCount + " bean definitions from URL location [" + location + "]");
 				}
 			}
 			catch (BeanDefinitionStoreException ex) {
@@ -301,7 +301,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 							StringUtils.applyRelativePath(baseLocation, location), actualResources);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Imported " + importCount + " bean definitions from relative location [" + location + "]");
+					logger.info("Imported " + importCount + " bean definitions from relative location [" + location + "]");
 				}
 			}
 			catch (IOException ex) {
@@ -372,7 +372,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						bdHolder.getBeanName() + "'", ele, ex);
 			}
 			// Send registration event.
-			//在完成向Spring IOC容器注册解析得到的Bean定义之后，发送注册完成事件，通知相关监听器
+			//在完成向Spring IOC容器注册解析得到的Bean定义之后，发送注册完成事件，通知相关监听器  lida扩展点
 			getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
 		}
 	}

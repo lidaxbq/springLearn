@@ -274,7 +274,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 				return pointcutExpression.couldMatchJoinPointsInType(targetClass);
 			}
 			catch (ReflectionWorldException ex) {
-				logger.debug("PointcutExpression matching rejected target class - trying fallback expression", ex);
+				logger.info("PointcutExpression matching rejected target class - trying fallback expression", ex);
 				// Actually this is still a "maybe" - treat the pointcut as dynamic if we don't know enough yet
 				PointcutExpression fallbackExpression = getFallbackPointcutExpression(targetClass);
 				if (fallbackExpression != null) {
@@ -283,7 +283,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 			}
 		}
 		catch (Throwable ex) {
-			logger.debug("PointcutExpression matching rejected target class", ex);
+			logger.info("PointcutExpression matching rejected target class", ex);
 		}
 		return false;
 	}
@@ -351,7 +351,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 		catch (IllegalStateException ex) {
 			// No current invocation...
 			if (logger.isDebugEnabled()) {
-				logger.debug("Could not access current invocation - matching with limited context: " + ex);
+				logger.info("Could not access current invocation - matching with limited context: " + ex);
 			}
 		}
 
@@ -380,7 +380,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to evaluate join point for arguments " + Arrays.asList(args) +
+				logger.info("Failed to evaluate join point for arguments " + Arrays.asList(args) +
 						" - falling back to non-match", ex);
 			}
 			return false;
@@ -405,7 +405,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 			}
 		}
 		catch (Throwable ex) {
-			logger.debug("Failed to create fallback PointcutExpression", ex);
+			logger.info("Failed to create fallback PointcutExpression", ex);
 		}
 		return null;
 	}
@@ -476,7 +476,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 					}
 					catch (Throwable ex) {
 						// Possibly AspectJ 1.8.10 encountering an invalid signature
-						logger.debug("PointcutExpression matching rejected target method", ex);
+						logger.info("PointcutExpression matching rejected target method", ex);
 						fallbackExpression = null;
 					}
 					if (shadowMatch == null) {

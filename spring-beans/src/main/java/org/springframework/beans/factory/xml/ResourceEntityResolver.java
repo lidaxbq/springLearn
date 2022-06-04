@@ -88,7 +88,7 @@ public class ResourceEntityResolver extends DelegatingEntityResolver {
 			catch (Exception ex) {
 				// Typically a MalformedURLException or AccessControlException.
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not resolve XML entity [" + systemId + "] against system root URL", ex);
+					logger.info("Could not resolve XML entity [" + systemId + "] against system root URL", ex);
 				}
 				// No URL (or no resolvable URL) -> try relative to resource base.
 				resourcePath = systemId;
@@ -102,7 +102,7 @@ public class ResourceEntityResolver extends DelegatingEntityResolver {
 				source.setPublicId(publicId);
 				source.setSystemId(systemId);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Found XML entity [" + systemId + "]: " + resource);
+					logger.info("Found XML entity [" + systemId + "]: " + resource);
 				}
 			}
 		}

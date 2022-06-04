@@ -441,14 +441,14 @@ public abstract class AbstractView extends WebApplicationObjectSupport implement
 			if (modelValue != null) {
 				request.setAttribute(modelName, modelValue);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Added model object '" + modelName + "' of type [" + modelValue.getClass().getName() +
+					logger.info("Added model object '" + modelName + "' of type [" + modelValue.getClass().getName() +
 							"] to request in view with name '" + getBeanName() + "'");
 				}
 			}
 			else {
 				request.removeAttribute(modelName);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Removed model object '" + modelName +
+					logger.info("Removed model object '" + modelName +
 							"' from request in view with name '" + getBeanName() + "'");
 				}
 			}

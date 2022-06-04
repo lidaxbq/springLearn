@@ -104,7 +104,7 @@ public class DefaultManagedAwareThreadFactory extends CustomizableThreadFactory 
 			}
 			catch (NamingException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Failed to retrieve [" + this.jndiName + "] from JNDI", ex);
+					logger.info("Failed to retrieve [" + this.jndiName + "] from JNDI", ex);
 				}
 				logger.info("Could not find default managed thread factory in JNDI - " +
 						"proceeding with default local thread factory");

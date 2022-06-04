@@ -42,4 +42,5 @@ rootProject.children.each {project ->
 }
 include 'mytest'
 include 'mytestWEB'
+include 'mytestWEB'
 

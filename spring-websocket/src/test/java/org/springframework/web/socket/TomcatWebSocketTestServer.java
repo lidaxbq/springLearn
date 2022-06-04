@@ -115,7 +115,7 @@ public class TomcatWebSocketTestServer implements WebSocketTestServer {
 		this.port = this.tomcatServer.getConnector().getLocalPort();
 		this.context.addLifecycleListener(event -> {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Event: " + event.getType());
+				logger.info("Event: " + event.getType());
 			}
 		});
 	}

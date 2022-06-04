@@ -353,7 +353,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 		}
 		catch (Throwable ex) {
 			// Could be part of normal workflow (e.g. browser tab closed)
-			logger.debug("Failed to send STOMP ERROR to client", ex);
+			logger.info("Failed to send STOMP ERROR to client", ex);
 		}
 	}
 
@@ -460,7 +460,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 		catch (Throwable ex) {
 			// Could be part of normal workflow (e.g. browser tab closed)
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to send WebSocket message to client in session " + session.getId(), ex);
+				logger.info("Failed to send WebSocket message to client in session " + session.getId(), ex);
 			}
 			command = StompCommand.ERROR;
 		}

@@ -166,6 +166,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	private Supplier<?> instanceSupplier;
 // 允许访问非公开的构造器和方法
 	private boolean nonPublicAccessAllowed = true;
+
 //  是否已宽松模式解析bean的构造函数
 	private boolean lenientConstructorResolution = true;
 
@@ -175,6 +176,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private String factoryMethodName;
 
+//	构造函数的参数
 	@Nullable
 	private ConstructorArgumentValues constructorArgumentValues;
 
@@ -1071,6 +1073,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 		if (hasMethodOverrides()) {
 			Set<MethodOverride> overrides = getMethodOverrides().getOverrides();
 			synchronized (overrides) {
+				// 循环，执行 prepareMethodOverride
 				for (MethodOverride mo : overrides) {
 					prepareMethodOverride(mo);
 				}
@@ -1094,8 +1097,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 		}
 		else if (count == 1) {
 			// Mark override as not overloaded, to avoid the overhead of arg type checking.
-			// 方法存在，且方法只有一个，后续不用通过方法参数校验的方式来定位使用哪个方法，
-			// 该方法暂未覆盖
+			// 方法存在，且方法只有一个，后续不用通过方法参数校验的方式来定位使用哪个方法，该方法暂未覆盖
+
+			// 若一个类中存在多个重载方法，则在方法调用的时候还需要根据参数类型来判断到底重载的是哪个方法。在设置重载的时候其实这里做了一个小小优化，
+			// 那就是当 count == 1 时，设置 overloaded = false ，这样表示该方法没有重载。这样，在后续调用的时候，便可以直接找到方法而不需要进行方法参数的校验。
 			mo.setOverloaded(false);
 		}
 	}

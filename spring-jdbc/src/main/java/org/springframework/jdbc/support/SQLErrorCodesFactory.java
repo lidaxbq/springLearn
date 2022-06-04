@@ -175,14 +175,14 @@ public class SQLErrorCodesFactory {
 		if (sec != null) {
 			checkCustomTranslatorRegistry(databaseName, sec);
 			if (logger.isDebugEnabled()) {
-				logger.debug("SQL error codes for '" + databaseName + "' found");
+				logger.info("SQL error codes for '" + databaseName + "' found");
 			}
 			return sec;
 		}
 
 		// Could not find the database among the defined ones.
 		if (logger.isDebugEnabled()) {
-			logger.debug("SQL error codes for '" + databaseName + "' not found");
+			logger.info("SQL error codes for '" + databaseName + "' not found");
 		}
 		return new SQLErrorCodes();
 	}
@@ -199,7 +199,7 @@ public class SQLErrorCodesFactory {
 	public SQLErrorCodes getErrorCodes(DataSource dataSource) {
 		Assert.notNull(dataSource, "DataSource must not be null");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking up default SQLErrorCodes for DataSource [" + identify(dataSource) + "]");
+			logger.info("Looking up default SQLErrorCodes for DataSource [" + identify(dataSource) + "]");
 		}
 
 		// Try efficient lock-free access for existing cache entry
@@ -226,7 +226,7 @@ public class SQLErrorCodesFactory {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("SQLErrorCodes found in cache for DataSource [" + identify(dataSource) + "]");
+			logger.info("SQLErrorCodes found in cache for DataSource [" + identify(dataSource) + "]");
 		}
 
 		return sec;
@@ -243,7 +243,7 @@ public class SQLErrorCodesFactory {
 	public SQLErrorCodes registerDatabase(DataSource dataSource, String databaseName) {
 		SQLErrorCodes sec = getErrorCodes(databaseName);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Caching SQL error codes for DataSource [" + identify(dataSource) +
+			logger.info("Caching SQL error codes for DataSource [" + identify(dataSource) +
 					"]: database product name is '" + databaseName + "'");
 		}
 		this.dataSourceCache.put(dataSource, sec);

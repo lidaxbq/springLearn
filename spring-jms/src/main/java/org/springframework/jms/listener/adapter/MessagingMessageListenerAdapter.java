@@ -72,7 +72,7 @@ public class MessagingMessageListenerAdapter extends AbstractAdaptableMessageLis
 	public void onMessage(javax.jms.Message jmsMessage, @Nullable Session session) throws JMSException {
 		Message<?> message = toMessagingMessage(jmsMessage);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Processing [" + message + "]");
+			logger.info("Processing [" + message + "]");
 		}
 		Object result = invokeHandler(jmsMessage, session, message);
 		if (result != null) {

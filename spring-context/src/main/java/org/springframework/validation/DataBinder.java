@@ -474,7 +474,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	public void setRequiredFields(@Nullable String... requiredFields) {
 		this.requiredFields = PropertyAccessorUtils.canonicalPropertyNames(requiredFields);
 		if (logger.isDebugEnabled()) {
-			logger.debug("DataBinder requires binding of required fields [" +
+			logger.info("DataBinder requires binding of required fields [" +
 					StringUtils.arrayToCommaDelimitedString(requiredFields) + "]");
 		}
 	}
@@ -749,7 +749,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 				mpvs.removePropertyValue(pv);
 				getBindingResult().recordSuppressedField(field);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Field [" + field + "] has been removed from PropertyValues " +
+					logger.info("Field [" + field + "] has been removed from PropertyValues " +
 							"and will not be bound, because it has not been found in the list of allowed fields");
 				}
 			}

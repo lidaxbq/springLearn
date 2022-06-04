@@ -74,7 +74,7 @@ public abstract class ValidationUtils {
 		Assert.notNull(errors, "Errors object must not be null");
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Invoking validator [" + validator + "]");
+			logger.info("Invoking validator [" + validator + "]");
 		}
 		if (obj != null && !validator.supports(obj.getClass())) {
 			throw new IllegalArgumentException(
@@ -90,10 +90,10 @@ public abstract class ValidationUtils {
 
 		if (logger.isDebugEnabled()) {
 			if (errors.hasErrors()) {
-				logger.debug("Validator found " + errors.getErrorCount() + " errors");
+				logger.info("Validator found " + errors.getErrorCount() + " errors");
 			}
 			else {
-				logger.debug("Validator found no errors");
+				logger.info("Validator found no errors");
 			}
 		}
 	}

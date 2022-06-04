@@ -409,7 +409,7 @@ class ConfigurationClassParser {
 				}
 			}
 			catch (IOException ex) {
-				logger.debug("Failed to read class file via ASM for determining @Bean method order", ex);
+				logger.info("Failed to read class file via ASM for determining @Bean method order", ex);
 				// No worries, let's continue with the reflection metadata we started with...
 			}
 		}
@@ -855,7 +855,7 @@ class ConfigurationClassParser {
 				catch (IOException ex) {
 					// Let's skip it if it's not resolvable - we're just looking for candidates
 					if (logger.isDebugEnabled()) {
-						logger.debug("Failed to resolve member class [" + memberClassName +
+						logger.info("Failed to resolve member class [" + memberClassName +
 								"] - not considering it as a configuration class candidate");
 					}
 				}

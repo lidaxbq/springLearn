@@ -85,7 +85,7 @@ public class OpenEntityManagerInViewInterceptor extends EntityManagerFactoryAcce
 			request.setAttribute(getParticipateAttributeName(), newCount, WebRequest.SCOPE_REQUEST);
 		}
 		else {
-			logger.debug("Opening JPA EntityManager in OpenEntityManagerInViewInterceptor");
+			logger.info("Opening JPA EntityManager in OpenEntityManagerInViewInterceptor");
 			try {
 				EntityManager em = createEntityManager();
 				EntityManagerHolder emHolder = new EntityManagerHolder(em);
@@ -110,7 +110,7 @@ public class OpenEntityManagerInViewInterceptor extends EntityManagerFactoryAcce
 		if (!decrementParticipateCount(request)) {
 			EntityManagerHolder emHolder = (EntityManagerHolder)
 					TransactionSynchronizationManager.unbindResource(obtainEntityManagerFactory());
-			logger.debug("Closing JPA EntityManager in OpenEntityManagerInViewInterceptor");
+			logger.info("Closing JPA EntityManager in OpenEntityManagerInViewInterceptor");
 			EntityManagerFactoryUtils.closeEntityManager(emHolder.getEntityManager());
 		}
 	}

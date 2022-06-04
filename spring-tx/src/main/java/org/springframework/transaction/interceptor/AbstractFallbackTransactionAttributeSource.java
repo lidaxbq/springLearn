@@ -114,7 +114,7 @@ public abstract class AbstractFallbackTransactionAttributeSource implements Tran
 					((DefaultTransactionAttribute) txAttr).setDescriptor(methodIdentification);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Adding transactional method '" + methodIdentification + "' with attribute: " + txAttr);
+					logger.info("Adding transactional method '" + methodIdentification + "' with attribute: " + txAttr);
 				}
 				this.attributeCache.put(cacheKey, txAttr);
 			}

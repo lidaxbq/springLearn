@@ -140,7 +140,7 @@ public class SpringMethodRule implements MethodRule {
 	public Statement apply(Statement base, FrameworkMethod frameworkMethod, Object testInstance) {
 		Method testMethod = frameworkMethod.getMethod();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Applying SpringMethodRule to test method [" + testMethod + "]");
+			logger.info("Applying SpringMethodRule to test method [" + testMethod + "]");
 		}
 		Class<?> testClass = testInstance.getClass();
 		validateSpringClassRuleConfiguration(testClass);

@@ -274,7 +274,7 @@ public abstract class ExtendedEntityManagerCreator {
 				return false;
 			}
 			catch (IllegalStateException ex) {
-				logger.debug("Cannot access EntityTransaction handle - assuming we're in a JTA environment");
+				logger.info("Cannot access EntityTransaction handle - assuming we're in a JTA environment");
 				return true;
 			}
 		}
@@ -364,11 +364,11 @@ public abstract class ExtendedEntityManagerCreator {
 				// Let's try whether we're in a JTA transaction.
 				try {
 					this.target.joinTransaction();
-					logger.debug("Joined JTA transaction");
+					logger.info("Joined JTA transaction");
 				}
 				catch (TransactionRequiredException ex) {
 					if (!enforce) {
-						logger.debug("No JTA transaction to join: " + ex);
+						logger.info("No JTA transaction to join: " + ex);
 					}
 					else {
 						throw ex;
@@ -381,11 +381,11 @@ public abstract class ExtendedEntityManagerCreator {
 							!this.target.getTransaction().isActive()) {
 						enlistInCurrentTransaction();
 					}
-					logger.debug("Joined local transaction");
+					logger.info("Joined local transaction");
 				}
 				else {
 					if (!enforce) {
-						logger.debug("No local transaction to join");
+						logger.info("No local transaction to join");
 					}
 					else {
 						throw new TransactionRequiredException("No local transaction to join");
@@ -403,7 +403,7 @@ public abstract class ExtendedEntityManagerCreator {
 			EntityTransaction et = this.target.getTransaction();
 			et.begin();
 			if (logger.isDebugEnabled()) {
-				logger.debug("Starting resource-local transaction on application-managed " +
+				logger.info("Starting resource-local transaction on application-managed " +
 						"EntityManager [" + this.target + "]");
 			}
 			ExtendedEntityManagerSynchronization extendedEntityManagerSynchronization =

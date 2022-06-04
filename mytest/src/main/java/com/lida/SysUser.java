@@ -1,9 +1,8 @@
 package com.lida;
 
-public class SysUser {
+public class SysUser implements Comparable<SysUser> {
 	private String username;
 	private String password;
-
 
 
 	public SysUser() {
@@ -35,5 +34,11 @@ public class SysUser {
 				"username='" + username + '\'' +
 				", password='" + password + '\'' +
 				'}';
+	}
+
+
+	@Override
+	public int compareTo(SysUser o) {
+		return 0;
 	}
 }

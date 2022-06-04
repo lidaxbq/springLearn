@@ -482,7 +482,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	 */
 	protected void closeConnection(Connection con) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Closing shared JMS Connection: " + con);
+			logger.info("Closing shared JMS Connection: " + con);
 		}
 		try {
 			try {
@@ -495,10 +495,10 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 			}
 		}
 		catch (javax.jms.IllegalStateException ex) {
-			logger.debug("Ignoring Connection state exception - assuming already closed: " + ex);
+			logger.info("Ignoring Connection state exception - assuming already closed: " + ex);
 		}
 		catch (Throwable ex) {
-			logger.debug("Could not close shared JMS Connection", ex);
+			logger.info("Could not close shared JMS Connection", ex);
 		}
 	}
 

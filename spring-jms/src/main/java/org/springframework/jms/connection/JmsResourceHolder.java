@@ -212,7 +212,7 @@ public class JmsResourceHolder extends ResourceHolderSupport {
 					}
 					catch (Throwable ex2) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("No working getDataSource method found on ConnectionFactory: " + ex2);
+							logger.info("No working getDataSource method found on ConnectionFactory: " + ex2);
 						}
 						// No working getDataSource method - cannot perform DataSource transaction check
 					}
@@ -228,7 +228,7 @@ public class JmsResourceHolder extends ResourceHolderSupport {
 				session.close();
 			}
 			catch (Throwable ex) {
-				logger.debug("Could not close synchronized JMS Session after transaction", ex);
+				logger.info("Could not close synchronized JMS Session after transaction", ex);
 			}
 		}
 		for (Connection con : this.connections) {

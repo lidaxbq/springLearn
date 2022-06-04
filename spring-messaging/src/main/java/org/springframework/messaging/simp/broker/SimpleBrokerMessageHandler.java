@@ -319,7 +319,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 		if (logger.isDebugEnabled()) {
 			SimpMessageHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, SimpMessageHeaderAccessor.class);
 			accessor = (accessor != null ? accessor : SimpMessageHeaderAccessor.wrap(message));
-			logger.debug("Processing " + accessor.getShortLogMessage(message.getPayload()));
+			logger.info("Processing " + accessor.getShortLogMessage(message.getPayload()));
 		}
 	}
 
@@ -348,7 +348,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 	protected void sendMessageToSubscribers(@Nullable String destination, Message<?> message) {
 		MultiValueMap<String,String> subscriptions = this.subscriptionRegistry.findSubscriptions(message);
 		if (!subscriptions.isEmpty() && logger.isDebugEnabled()) {
-			logger.debug("Broadcasting to " + subscriptions.size() + " sessions.");
+			logger.info("Broadcasting to " + subscriptions.size() + " sessions.");
 		}
 		long now = System.currentTimeMillis();
 		for (Map.Entry<String, List<String>> subscriptionEntry : subscriptions.entrySet()) {

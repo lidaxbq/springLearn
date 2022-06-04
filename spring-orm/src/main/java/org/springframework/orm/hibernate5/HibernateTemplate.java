@@ -366,7 +366,7 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 			session = obtainSessionFactory().getCurrentSession();
 		}
 		catch (HibernateException ex) {
-			logger.debug("Could not retrieve pre-bound Hibernate session", ex);
+			logger.info("Could not retrieve pre-bound Hibernate session", ex);
 		}
 		if (session == null) {
 			session = obtainSessionFactory().openSession();

@@ -406,7 +406,7 @@ public abstract class RouterFunctions {
 		public Mono<HandlerFunction<T>> route(ServerRequest request) {
 			if (this.predicate.test(request)) {
 				if (logger.isDebugEnabled()) {
-					logger.debug(String.format("Predicate \"%s\" matches against \"%s\"",
+					logger.info(String.format("Predicate \"%s\" matches against \"%s\"",
 							this.predicate, request));
 				}
 				return Mono.just(this.handlerFunction);
@@ -441,7 +441,7 @@ public abstract class RouterFunctions {
 			return this.predicate.nest(serverRequest)
 					.map(nestedRequest -> {
 								if (logger.isDebugEnabled()) {
-									logger.debug(
+									logger.info(
 											String.format(
 													"Nested predicate \"%s\" matches against \"%s\"",
 													this.predicate, serverRequest));

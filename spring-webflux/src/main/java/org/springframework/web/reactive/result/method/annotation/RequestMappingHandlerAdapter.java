@@ -208,7 +208,7 @@ public class RequestMappingHandlerAdapter implements HandlerAdapter, Application
 		if (invocable != null) {
 			try {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Invoking @ExceptionHandler method: " + invocable.getMethod());
+					logger.info("Invoking @ExceptionHandler method: " + invocable.getMethod());
 				}
 				bindingContext.getModel().asMap().clear();
 				Throwable cause = exception.getCause();

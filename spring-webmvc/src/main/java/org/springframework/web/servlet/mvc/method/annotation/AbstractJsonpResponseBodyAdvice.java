@@ -76,7 +76,7 @@ public abstract class AbstractJsonpResponseBodyAdvice extends AbstractMappingJac
 			if (value != null) {
 				if (!isValidJsonpQueryParam(value)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Ignoring invalid jsonp parameter value: " + value);
+						logger.info("Ignoring invalid jsonp parameter value: " + value);
 					}
 					continue;
 				}

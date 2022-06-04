@@ -72,7 +72,7 @@ public class WebSocketStompClientIntegrationTests {
 	@Before
 	public void setUp() throws Exception {
 
-		logger.debug("Setting up before '" + this.testName.getMethodName() + "'");
+		logger.info("Setting up before '" + this.testName.getMethodName() + "'");
 
 		this.wac = new AnnotationConfigWebApplicationContext();
 		this.wac.register(TestConfig.class);
@@ -189,7 +189,7 @@ public class WebSocketStompClientIntegrationTests {
 
 		public boolean awaitForMessageCount(int expected, long millisToWait) throws InterruptedException {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Awaiting for message count: " + expected);
+				logger.info("Awaiting for message count: " + expected);
 			}
 			long startTime = System.currentTimeMillis();
 			while (this.received.size() < expected) {

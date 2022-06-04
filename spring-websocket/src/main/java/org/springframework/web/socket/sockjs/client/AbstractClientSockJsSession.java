@@ -161,7 +161,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 	public final void close(CloseStatus status) {
 		Assert.isTrue(isUserSetStatus(status), "Invalid close status: " + status);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Closing session with " +  status + " in " + this);
+			logger.info("Closing session with " +  status + " in " + this);
 		}
 		closeInternal(status);
 	}
@@ -178,7 +178,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 		}
 		if (isDisconnected()) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Ignoring close (already closing or closed): current state " + this.state);
+				logger.info("Ignoring close (already closing or closed): current state " + this.state);
 			}
 			return;
 		}
@@ -218,7 +218,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 
 	private void handleOpenFrame() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Processing SockJS open frame in " + this);
+			logger.info("Processing SockJS open frame in " + this);
 		}
 		if (this.state == State.NEW) {
 			this.state = State.OPEN;
@@ -234,7 +234,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 		}
 		else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Open frame received in " + getId() + " but we're not connecting (current state " +
+				logger.info("Open frame received in " + getId() + " but we're not connecting (current state " +
 						this.state + "). The server might have been restarted and lost track of the session.");
 			}
 			closeInternal(new CloseStatus(1006, "Server lost session"));
@@ -292,7 +292,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 					closeStatus = new CloseStatus(Integer.valueOf(data[0]), data[1]);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Processing SockJS close frame with " + closeStatus + " in " + this);
+					logger.info("Processing SockJS close frame with " + closeStatus + " in " + this);
 				}
 			}
 		}
@@ -324,7 +324,7 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 		}
 		Assert.state(cs != null, "CloseStatus not available");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Transport closed with " + cs + " in " + this);
+			logger.info("Transport closed with " + cs + " in " + this);
 		}
 
 		this.state = State.CLOSED;

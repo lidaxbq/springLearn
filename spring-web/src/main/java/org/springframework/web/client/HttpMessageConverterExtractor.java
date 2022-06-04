@@ -94,7 +94,7 @@ public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 							(GenericHttpMessageConverter<?>) messageConverter;
 					if (genericMessageConverter.canRead(this.responseType, null, contentType)) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Reading [" + this.responseType + "] as \"" +
+							logger.info("Reading [" + this.responseType + "] as \"" +
 									contentType + "\" using [" + messageConverter + "]");
 						}
 						return (T) genericMessageConverter.read(this.responseType, null, responseWrapper);
@@ -103,7 +103,7 @@ public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 				if (this.responseClass != null) {
 					if (messageConverter.canRead(this.responseClass, contentType)) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Reading [" + this.responseClass.getName() + "] as \"" +
+							logger.info("Reading [" + this.responseClass.getName() + "] as \"" +
 									contentType + "\" using [" + messageConverter + "]");
 						}
 						return (T) messageConverter.read((Class) this.responseClass, responseWrapper);

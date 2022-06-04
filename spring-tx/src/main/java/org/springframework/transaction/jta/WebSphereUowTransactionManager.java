@@ -168,7 +168,7 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 	protected UOWManager lookupUowManager(String uowManagerName) throws TransactionSystemException {
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Retrieving WebSphere UOWManager from JNDI location [" + uowManagerName + "]");
+				logger.info("Retrieving WebSphere UOWManager from JNDI location [" + uowManagerName + "]");
 			}
 			return getJndiTemplate().lookup(uowManagerName, UOWManager.class);
 		}
@@ -187,11 +187,11 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 	 */
 	protected UOWManager lookupDefaultUowManager() throws TransactionSystemException {
 		try {
-			logger.debug("Retrieving WebSphere UOWManager from default JNDI location [" + DEFAULT_UOW_MANAGER_NAME + "]");
+			logger.info("Retrieving WebSphere UOWManager from default JNDI location [" + DEFAULT_UOW_MANAGER_NAME + "]");
 			return getJndiTemplate().lookup(DEFAULT_UOW_MANAGER_NAME, UOWManager.class);
 		}
 		catch (NamingException ex) {
-			logger.debug("WebSphere UOWManager is not available at default JNDI location [" +
+			logger.info("WebSphere UOWManager is not available at default JNDI location [" +
 					DEFAULT_UOW_MANAGER_NAME + "] - falling back to UOWManagerFactory lookup");
 			return UOWManagerFactory.getUOWManager();
 		}
@@ -292,7 +292,7 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 
 		boolean debug = logger.isDebugEnabled();
 		if (debug) {
-			logger.debug("Creating new transaction with name [" + definition.getName() + "]: " + definition);
+			logger.info("Creating new transaction with name [" + definition.getName() + "]: " + definition);
 		}
 		SuspendedResourcesHolder suspendedResources = (!joinTx ? suspend(null) : null);
 		UOWActionAdapter<T> action = null;
@@ -301,13 +301,13 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 				uowManager.setUOWTimeout(uowType, definition.getTimeout());
 			}
 			if (debug) {
-				logger.debug("Invoking WebSphere UOW action: type=" + uowType + ", join=" + joinTx);
+				logger.info("Invoking WebSphere UOW action: type=" + uowType + ", join=" + joinTx);
 			}
 			action = new UOWActionAdapter<>(
 					definition, callback, (uowType == UOWManager.UOW_TYPE_GLOBAL_TRANSACTION), !joinTx, newSynch, debug);
 			uowManager.runUnderUOW(uowType, joinTx, action);
 			if (debug) {
-				logger.debug("Returned from WebSphere UOW action: type=" + uowType + ", join=" + joinTx);
+				logger.info("Returned from WebSphere UOW action: type=" + uowType + ", join=" + joinTx);
 			}
 			return action.getResult();
 		}
@@ -376,14 +376,14 @@ public class WebSphereUowTransactionManager extends JtaTransactionManager
 			catch (Throwable ex) {
 				this.exception = ex;
 				if (status.isDebug()) {
-					logger.debug("Rolling back on application exception from transaction callback", ex);
+					logger.info("Rolling back on application exception from transaction callback", ex);
 				}
 				uowManager.setRollbackOnly();
 			}
 			finally {
 				if (status.isLocalRollbackOnly()) {
 					if (status.isDebug()) {
-						logger.debug("Transaction callback has explicitly requested rollback");
+						logger.info("Transaction callback has explicitly requested rollback");
 					}
 					uowManager.setRollbackOnly();
 				}

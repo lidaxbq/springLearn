@@ -64,7 +64,7 @@ public abstract class AbstractPrototypeBasedTargetSource extends AbstractBeanFac
 	 */
 	protected Object newPrototypeInstance() throws BeansException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Creating new instance of bean '" + getTargetBeanName() + "'");
+			logger.info("Creating new instance of bean '" + getTargetBeanName() + "'");
 		}
 		return getBeanFactory().getBean(getTargetBeanName());
 	}
@@ -75,7 +75,7 @@ public abstract class AbstractPrototypeBasedTargetSource extends AbstractBeanFac
 	 */
 	protected void destroyPrototypeInstance(Object target) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Destroying instance of bean '" + getTargetBeanName() + "'");
+			logger.info("Destroying instance of bean '" + getTargetBeanName() + "'");
 		}
 		if (getBeanFactory() instanceof ConfigurableBeanFactory) {
 			((ConfigurableBeanFactory) getBeanFactory()).destroyBean(getTargetBeanName(), target);
@@ -110,7 +110,7 @@ public abstract class AbstractPrototypeBasedTargetSource extends AbstractBeanFac
 	 */
 	protected Object writeReplace() throws ObjectStreamException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Disconnecting TargetSource [" + this + "]");
+			logger.info("Disconnecting TargetSource [" + this + "]");
 		}
 		try {
 			// Create disconnected SingletonTargetSource/EmptyTargetSource.

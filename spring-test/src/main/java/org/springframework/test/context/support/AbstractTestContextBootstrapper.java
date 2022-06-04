@@ -126,7 +126,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 		// Use defaults?
 		if (descriptor == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(String.format("@TestExecutionListeners is not present for class [%s]: using defaults.",
+				logger.info(String.format("@TestExecutionListeners is not present for class [%s]: using defaults.",
 						clazz.getName()));
 			}
 			usingDefaults = true;
@@ -152,7 +152,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 				if ((!inheritListeners || superDescriptor == null) &&
 						testExecutionListeners.mergeMode() == MergeMode.MERGE_WITH_DEFAULTS) {
 					if (logger.isDebugEnabled()) {
-						logger.debug(String.format("Merging default listeners with listeners configured via " +
+						logger.info(String.format("Merging default listeners with listeners configured via " +
 								"@TestExecutionListeners for class [%s].", descriptor.getRootDeclaringClass().getName()));
 					}
 					usingDefaults = true;
@@ -231,7 +231,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Could not load default TestExecutionListener class [" + className +
+					logger.info("Could not load default TestExecutionListener class [" + className +
 							"]. Specify custom listener classes or make the default listener classes available.", ex);
 				}
 			}
@@ -501,7 +501,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 			Class<? extends ContextLoader> contextLoaderClass = configAttributes.getContextLoaderClass();
 			if (ContextLoader.class != contextLoaderClass) {
 				if (logger.isDebugEnabled()) {
-					logger.debug(String.format(
+					logger.info(String.format(
 							"Found explicit ContextLoader class [%s] for context configuration attributes %s",
 							contextLoaderClass.getName(), configAttributes));
 				}

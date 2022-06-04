@@ -425,7 +425,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 		if (ph == null || !ph.isWritable()) {
 			if (pv.isOptional()) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Ignoring optional value for property '" + tokens.actualName +
+					logger.info("Ignoring optional value for property '" + tokens.actualName +
 							"' - property not found on bean class [" + getRootClass().getName() + "]");
 				}
 				return;
@@ -453,7 +453,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 								ex = ((PrivilegedActionException) ex).getException();
 							}
 							if (logger.isDebugEnabled()) {
-								logger.debug("Could not read previous value of property '" +
+								logger.info("Could not read previous value of property '" +
 										this.nestedPath + tokens.canonicalName + "'", ex);
 							}
 						}

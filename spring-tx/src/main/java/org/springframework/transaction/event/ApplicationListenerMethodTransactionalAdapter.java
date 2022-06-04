@@ -73,7 +73,7 @@ class ApplicationListenerMethodTransactionalAdapter extends ApplicationListenerM
 		else {
 			// No transactional event execution at all
 			if (logger.isDebugEnabled()) {
-				logger.debug("No transaction is active - skipping " + event);
+				logger.info("No transaction is active - skipping " + event);
 			}
 		}
 	}

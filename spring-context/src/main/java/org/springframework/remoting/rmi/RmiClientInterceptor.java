@@ -148,11 +148,11 @@ public class RmiClientInterceptor extends RemoteInvocationBasedAccessor
 			Remote remoteObj = lookupStub();
 			if (logger.isDebugEnabled()) {
 				if (remoteObj instanceof RmiInvocationHandler) {
-					logger.debug("RMI stub [" + getServiceUrl() + "] is an RMI invoker");
+					logger.info("RMI stub [" + getServiceUrl() + "] is an RMI invoker");
 				}
 				else if (getServiceInterface() != null) {
 					boolean isImpl = getServiceInterface().isInstance(remoteObj);
-					logger.debug("Using service interface [" + getServiceInterface().getName() +
+					logger.info("Using service interface [" + getServiceInterface().getName() +
 						"] for RMI stub [" + getServiceUrl() + "] - " +
 						(!isImpl ? "not " : "") + "directly implemented");
 				}
@@ -201,7 +201,7 @@ public class RmiClientInterceptor extends RemoteInvocationBasedAccessor
 				stub = Naming.lookup(getServiceUrl());
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Located RMI stub with URL [" + getServiceUrl() + "]");
+				logger.info("Located RMI stub with URL [" + getServiceUrl() + "]");
 			}
 			return stub;
 		}

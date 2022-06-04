@@ -760,7 +760,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 		boolean hasError = errorHandler.hasError(response);
 		if (logger.isDebugEnabled()) {
 			try {
-				logger.debug(method.name() + " request for \"" + url + "\" resulted in " +
+				logger.info(method.name() + " request for \"" + url + "\" resulted in " +
 						response.getRawStatusCode() + " (" + response.getStatusText() + ")" +
 						(hasError ? "; invoking error handler" : ""));
 			}
@@ -854,7 +854,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 				if (!allSupportedMediaTypes.isEmpty()) {
 					MediaType.sortBySpecificity(allSupportedMediaTypes);
 					if (logger.isDebugEnabled()) {
-						logger.debug("Setting request Accept header to " + allSupportedMediaTypes);
+						logger.info("Setting request Accept header to " + allSupportedMediaTypes);
 					}
 					request.getHeaders().setAccept(allSupportedMediaTypes);
 				}
@@ -931,11 +931,11 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 							}
 							if (logger.isDebugEnabled()) {
 								if (requestContentType != null) {
-									logger.debug("Writing [" + requestBody + "] as \"" + requestContentType +
+									logger.info("Writing [" + requestBody + "] as \"" + requestContentType +
 											"\" using [" + messageConverter + "]");
 								}
 								else {
-									logger.debug("Writing [" + requestBody + "] using [" + messageConverter + "]");
+									logger.info("Writing [" + requestBody + "] using [" + messageConverter + "]");
 								}
 
 							}
@@ -949,11 +949,11 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 						}
 						if (logger.isDebugEnabled()) {
 							if (requestContentType != null) {
-								logger.debug("Writing [" + requestBody + "] as \"" + requestContentType +
+								logger.info("Writing [" + requestBody + "] as \"" + requestContentType +
 										"\" using [" + messageConverter + "]");
 							}
 							else {
-								logger.debug("Writing [" + requestBody + "] using [" + messageConverter + "]");
+								logger.info("Writing [" + requestBody + "] using [" + messageConverter + "]");
 							}
 
 						}

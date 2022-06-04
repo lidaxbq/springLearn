@@ -116,7 +116,7 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 	@Override
 	protected void handleMatch(RequestMappingInfo info, String lookupPath, HttpServletRequest request) {
 		super.handleMatch(info, lookupPath, request);
-
+// 获得 bestPattern 和 uriVariables
 		String bestPattern;
 		Map<String, String> uriVariables;
 		Map<String, String> decodedUriVariables;
@@ -132,10 +132,10 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 			uriVariables = getPathMatcher().extractUriTemplateVariables(bestPattern, lookupPath);
 			decodedUriVariables = getUrlPathHelper().decodePathVariables(request, uriVariables);
 		}
-
+// 设置 MATRIX_VARIABLES_ATTRIBUTE 属性，到请求中
 		request.setAttribute(BEST_MATCHING_PATTERN_ATTRIBUTE, bestPattern);
 		request.setAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, decodedUriVariables);
-
+// 设置 URI_TEMPLATE_VARIABLES_ATTRIBUTE 属性，到请求中
 		if (isMatrixVariableContentAvailable()) {
 			Map<String, MultiValueMap<String, String>> matrixVars = extractMatrixVariables(request, uriVariables);
 			request.setAttribute(HandlerMapping.MATRIX_VARIABLES_ATTRIBUTE, matrixVars);

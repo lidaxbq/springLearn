@@ -556,7 +556,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 		ClassPathJaxb2TypeScanner scanner = new ClassPathJaxb2TypeScanner(this.beanClassLoader, packagesToScan);
 		Class<?>[] jaxb2Classes = scanner.scanPackages();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Found JAXB2 classes: [" + StringUtils.arrayToCommaDelimitedString(jaxb2Classes) + "]");
+			logger.info("Found JAXB2 classes: [" + StringUtils.arrayToCommaDelimitedString(jaxb2Classes) + "]");
 		}
 		this.classesToBeBound = jaxb2Classes;
 		if (this.jaxbContextProperties != null) {
@@ -570,7 +570,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	@SuppressWarnings("deprecation")  // on JDK 9
 	private Schema loadSchema(Resource[] resources, String schemaLanguage) throws IOException, SAXException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Setting validation schema to " +
+			logger.info("Setting validation schema to " +
 					StringUtils.arrayToCommaDelimitedString(this.schemaResources));
 		}
 		Assert.notEmpty(resources, "No resources given");

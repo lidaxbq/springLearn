@@ -95,7 +95,7 @@ public class SQLStateSQLExceptionTranslator extends AbstractFallbackSQLException
 		if (sqlState != null && sqlState.length() >= 2) {
 			String classCode = sqlState.substring(0, 2);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Extracted SQL state class '" + classCode + "' from value '" + sqlState + "'");
+				logger.info("Extracted SQL state class '" + classCode + "' from value '" + sqlState + "'");
 			}
 			if (BAD_SQL_GRAMMAR_CODES.contains(classCode)) {
 				return new BadSqlGrammarException(task, (sql != null ? sql : ""), ex);

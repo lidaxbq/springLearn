@@ -83,7 +83,7 @@ public class WebSocketTransport implements Transport, Lifecycle {
 		URI url = request.getTransportUrl();
 		WebSocketHttpHeaders headers = new WebSocketHttpHeaders(request.getHandshakeHeaders());
 		if (logger.isDebugEnabled()) {
-			logger.debug("Starting WebSocket session on " + url);
+			logger.info("Starting WebSocket session on " + url);
 		}
 		this.webSocketClient.doHandshake(handler, headers, url).addCallback(
 				new ListenableFutureCallback<WebSocketSession>() {

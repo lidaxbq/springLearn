@@ -170,7 +170,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			Class<?> fileLocatorClass = ClassUtils.forName("org.eclipse.core.runtime.FileLocator",
 					PathMatchingResourcePatternResolver.class.getClassLoader());
 			equinoxResolveMethod = fileLocatorClass.getMethod("resolve", URL.class);
-			logger.debug("Found Equinox FileLocator for OSGi bundle URL resolution");
+			logger.info("Found Equinox FileLocator for OSGi bundle URL resolution");
 		}
 		catch (Throwable ex) {
 			equinoxResolveMethod = null;
@@ -298,7 +298,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		}
 		Set<Resource> result = doFindAllClassPathResources(path);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Resolved classpath location [" + location + "] to resources " + result);
+			logger.info("Resolved classpath location [" + location + "] to resources " + result);
 		}
 		return result.toArray(new Resource[result.size()]);
 	}
@@ -358,7 +358,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 					}
 					catch (MalformedURLException ex) {
 						if (logger.isDebugEnabled()) {
-							logger.debug("Cannot search for matching files underneath [" + url +
+							logger.info("Cannot search for matching files underneath [" + url +
 									"] because it cannot be converted to a valid 'jar:' URL: " + ex.getMessage());
 						}
 					}
@@ -366,7 +366,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			}
 			catch (Exception ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Cannot introspect jar files since ClassLoader [" + classLoader +
+					logger.info("Cannot introspect jar files since ClassLoader [" + classLoader +
 							"] does not support 'getURLs()': " + ex);
 				}
 			}
@@ -384,7 +384,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			}
 			catch (Exception ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Cannot introspect jar files in parent ClassLoader since [" + classLoader +
+					logger.info("Cannot introspect jar files in parent ClassLoader since [" + classLoader +
 							"] does not support 'getParent()': " + ex);
 				}
 			}
@@ -418,7 +418,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 				}
 				catch (MalformedURLException ex) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Cannot search for matching files underneath [" + path +
+						logger.info("Cannot search for matching files underneath [" + path +
 								"] because it cannot be converted to a valid 'jar:' URL: " + ex.getMessage());
 					}
 				}
@@ -426,7 +426,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		}
 		catch (Exception ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to evaluate 'java.class.path' manifest entries: " + ex);
+				logger.info("Failed to evaluate 'java.class.path' manifest entries: " + ex);
 			}
 		}
 	}
@@ -493,7 +493,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Resolved location pattern [" + locationPattern + "] to resources " + result);
+			logger.info("Resolved location pattern [" + locationPattern + "] to resources " + result);
 		}
 		return result.toArray(new Resource[result.size()]);
 	}
@@ -608,7 +608,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			}
 			catch (ZipException ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Skipping invalid jar classpath entry [" + urlFile + "]");
+					logger.info("Skipping invalid jar classpath entry [" + urlFile + "]");
 				}
 				return Collections.emptySet();
 			}
@@ -616,7 +616,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Looking for matching resources in jar file [" + jarFileUrl + "]");
+				logger.info("Looking for matching resources in jar file [" + jarFileUrl + "]");
 			}
 			if (!"".equals(rootEntryPath) && !rootEntryPath.endsWith("/")) {
 				// Root entry path must end with slash to allow for proper matching.
@@ -700,7 +700,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 */
 	protected Set<Resource> doFindMatchingFileSystemResources(File rootDir, String subPattern) throws IOException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for matching resources in directory tree [" + rootDir.getPath() + "]");
+			logger.info("Looking for matching resources in directory tree [" + rootDir.getPath() + "]");
 		}
 		Set<File> matchingFiles = retrieveMatchingFiles(rootDir, subPattern);
 		Set<Resource> result = new LinkedHashSet<>(matchingFiles.size());
@@ -723,7 +723,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		if (!rootDir.exists()) {
 			// Silently skip non-existing directories.
 			if (logger.isDebugEnabled()) {
-				logger.debug("Skipping [" + rootDir.getAbsolutePath() + "] because it does not exist");
+				logger.info("Skipping [" + rootDir.getAbsolutePath() + "] because it does not exist");
 			}
 			return Collections.emptySet();
 		}
@@ -762,7 +762,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 */
 	protected void doRetrieveMatchingFiles(String fullPattern, File dir, Set<File> result) throws IOException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Searching directory [" + dir.getAbsolutePath() +
+			logger.info("Searching directory [" + dir.getAbsolutePath() +
 					"] for files matching pattern [" + fullPattern + "]");
 		}
 		File[] dirContents = dir.listFiles();
@@ -778,7 +778,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			if (content.isDirectory() && getPathMatcher().matchStart(fullPattern, currPath + "/")) {
 				if (!content.canRead()) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Skipping subdirectory [" + dir.getAbsolutePath() +
+						logger.info("Skipping subdirectory [" + dir.getAbsolutePath() +
 								"] because the application is not allowed to read the directory");
 					}
 				}

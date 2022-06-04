@@ -86,7 +86,7 @@ public class BeanFactoryAdvisorRetrievalHelper {
 			if (isEligibleBean(name)) {
 				if (this.beanFactory.isCurrentlyInCreation(name)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Skipping currently created advisor '" + name + "'");
+						logger.info("Skipping currently created advisor '" + name + "'");
 					}
 				}
 				else {
@@ -100,7 +100,7 @@ public class BeanFactoryAdvisorRetrievalHelper {
 							String bceBeanName = bce.getBeanName();
 							if (bceBeanName != null && this.beanFactory.isCurrentlyInCreation(bceBeanName)) {
 								if (logger.isDebugEnabled()) {
-									logger.debug("Skipping advisor '" + name +
+									logger.info("Skipping advisor '" + name +
 											"' with dependency on currently created bean: " + ex.getMessage());
 								}
 								// Ignore: indicates a reference back to the bean we're trying to advise.

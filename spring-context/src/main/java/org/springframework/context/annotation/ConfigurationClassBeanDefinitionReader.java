@@ -162,7 +162,7 @@ class ConfigurationClassBeanDefinitionReader {
 		configClass.setBeanName(configBeanName);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Registered bean definition for imported class '" + configBeanName + "'");
+			logger.info("Registered bean definition for imported class '" + configBeanName + "'");
 		}
 	}
 
@@ -260,7 +260,7 @@ class ConfigurationClassBeanDefinitionReader {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Registering bean definition for @Bean method %s.%s()",
+			logger.info(String.format("Registering bean definition for @Bean method %s.%s()",
 					configClass.getMetadata().getClassName(), beanName));
 		}
 

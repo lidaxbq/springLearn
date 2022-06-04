@@ -77,7 +77,7 @@ public class StaticMessageSource extends AbstractMessageSource {
 		Assert.notNull(msg, "Message must not be null");
 		this.messages.put(code + '_' + locale.toString(), msg);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Added message [" + msg + "] for code [" + code + "] and Locale [" + locale + "]");
+			logger.info("Added message [" + msg + "] for code [" + code + "] and Locale [" + locale + "]");
 		}
 	}
 

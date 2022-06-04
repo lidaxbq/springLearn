@@ -105,7 +105,7 @@ public class LocalVariableTableParameterNameDiscoverer implements ParameterNameD
 			// We couldn't load the class file, which is not fatal as it
 			// simply means this method of discovering parameter names won't work.
 			if (logger.isDebugEnabled()) {
-				logger.debug("Cannot find '.class' file for class [" + clazz +
+				logger.info("Cannot find '.class' file for class [" + clazz +
 						"] - unable to determine constructor/method parameter names");
 			}
 			return NO_DEBUG_INFO_MAP;
@@ -118,13 +118,13 @@ public class LocalVariableTableParameterNameDiscoverer implements ParameterNameD
 		}
 		catch (IOException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Exception thrown while reading '.class' file for class [" + clazz +
+				logger.info("Exception thrown while reading '.class' file for class [" + clazz +
 						"] - unable to determine constructor/method parameter names", ex);
 			}
 		}
 		catch (IllegalArgumentException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("ASM ClassReader failed to parse class file [" + clazz +
+				logger.info("ASM ClassReader failed to parse class file [" + clazz +
 						"], probably due to a new Java class file version that isn't supported yet " +
 						"- unable to determine constructor/method parameter names", ex);
 			}

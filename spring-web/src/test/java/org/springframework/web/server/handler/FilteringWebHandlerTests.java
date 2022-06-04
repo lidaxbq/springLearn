@@ -165,7 +165,7 @@ public class FilteringWebHandlerTests {
 		@Override
 		public Mono<Void> doFilter(ServerWebExchange exchange, WebFilterChain chain) {
 			return doAsyncWork().flatMap(asyncResult -> {
-				logger.debug("Async result: " + asyncResult);
+				logger.info("Async result: " + asyncResult);
 				return chain.filter(exchange);
 			});
 		}

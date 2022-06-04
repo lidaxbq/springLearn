@@ -153,7 +153,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	 */
 	protected void initHandlerMethods() {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking for request mappings in application context: " + getApplicationContext());
+			logger.info("Looking for request mappings in application context: " + getApplicationContext());
 		}
 		String[] beanNames = obtainApplicationContext().getBeanNamesForType(Object.class);
 
@@ -166,7 +166,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 				catch (Throwable ex) {
 					// An unresolvable bean type, probably from a lazy bean - let's ignore it.
 					if (logger.isDebugEnabled()) {
-						logger.debug("Could not resolve target class for bean with name '" + beanName + "'", ex);
+						logger.info("Could not resolve target class for bean with name '" + beanName + "'", ex);
 					}
 				}
 				if (beanType != null && isHandler(beanType)) {
@@ -190,7 +190,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			Map<Method, T> methods = MethodIntrospector.selectMethods(userType,
 					(MethodIntrospector.MetadataLookup<T>) method -> getMappingForMethod(method, userType));
 			if (logger.isDebugEnabled()) {
-				logger.debug(methods.size() + " request handler methods found on " + userType + ": " + methods);
+				logger.info(methods.size() + " request handler methods found on " + userType + ": " + methods);
 			}
 			methods.forEach((key, mapping) -> {
 				Method invocableMethod = AopUtils.selectInvocableMethod(key, userType);
@@ -256,7 +256,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	@Override
 	public Mono<HandlerMethod> getHandlerInternal(ServerWebExchange exchange) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Looking up handler method for path " +
+			logger.info("Looking up handler method for path " +
 					exchange.getRequest().getPath().value());
 		}
 		this.mappingRegistry.acquireReadLock();
@@ -270,10 +270,10 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			}
 			if (logger.isDebugEnabled()) {
 				if (handlerMethod != null) {
-					logger.debug("Returning handler method [" + handlerMethod + "]");
+					logger.info("Returning handler method [" + handlerMethod + "]");
 				}
 				else {
-					logger.debug("Did not find handler method for " +
+					logger.info("Did not find handler method for " +
 							"[" + exchange.getRequest().getPath().value() + "]");
 				}
 			}

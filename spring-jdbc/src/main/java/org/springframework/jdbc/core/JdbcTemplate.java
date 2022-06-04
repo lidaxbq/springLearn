@@ -396,7 +396,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	@Override
 	public void execute(final String sql) throws DataAccessException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL statement [" + sql + "]");
+			logger.info("Executing SQL statement [" + sql + "]");
 		}
 
 		class ExecuteStatementCallback implements StatementCallback<Object>, SqlProvider {
@@ -421,7 +421,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 		Assert.notNull(sql, "SQL must not be null");
 		Assert.notNull(rse, "ResultSetExtractor must not be null");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL query [" + sql + "]");
+			logger.info("Executing SQL query [" + sql + "]");
 		}
 
 		class QueryStatementCallback implements StatementCallback<T>, SqlProvider {
@@ -493,7 +493,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	public int update(final String sql) throws DataAccessException {
 		Assert.notNull(sql, "SQL must not be null");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL update [" + sql + "]");
+			logger.info("Executing SQL update [" + sql + "]");
 		}
 
 		class UpdateStatementCallback implements StatementCallback<Integer>, SqlProvider {
@@ -501,7 +501,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			public Integer doInStatement(Statement stmt) throws SQLException {
 				int rows = stmt.executeUpdate(sql);
 				if (logger.isDebugEnabled()) {
-					logger.debug("SQL update affected " + rows + " rows");
+					logger.info("SQL update affected " + rows + " rows");
 				}
 				return rows;
 			}
@@ -518,7 +518,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	public int[] batchUpdate(final String... sql) throws DataAccessException {
 		Assert.notEmpty(sql, "SQL array must not be empty");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL batch update of " + sql.length + " statements");
+			logger.info("Executing SQL batch update of " + sql.length + " statements");
 		}
 
 		class BatchUpdateStatementCallback implements StatementCallback<int[]>, SqlProvider {
@@ -594,7 +594,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 		Assert.notNull(action, "Callback object must not be null");
 		if (logger.isDebugEnabled()) {
 			String sql = getSql(psc);
-			logger.debug("Executing prepared SQL statement" + (sql != null ? " [" + sql + "]" : ""));
+			logger.info("Executing prepared SQL statement" + (sql != null ? " [" + sql + "]" : ""));
 		}
 		//获取数据库连接
 		Connection con = DataSourceUtils.getConnection(obtainDataSource());
@@ -656,7 +656,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			throws DataAccessException {
 
 		Assert.notNull(rse, "ResultSetExtractor must not be null");
-		logger.debug("Executing prepared SQL query");
+		logger.info("Executing prepared SQL query");
 
 		return execute(psc, new PreparedStatementCallback<T>() {
 			@Override
@@ -849,7 +849,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	protected int update(final PreparedStatementCreator psc, @Nullable final PreparedStatementSetter pss)
 			throws DataAccessException {
 
-		logger.debug("Executing prepared SQL update");
+		logger.info("Executing prepared SQL update");
 
 		return updateCount(execute(psc, ps -> {
 			try {
@@ -859,7 +859,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 				}
 				int rows = ps.executeUpdate();
 				if (logger.isDebugEnabled()) {
-					logger.debug("SQL update affected " + rows + " rows");
+					logger.info("SQL update affected " + rows + " rows");
 				}
 				return rows;
 			}
@@ -881,7 +881,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			throws DataAccessException {
 
 		Assert.notNull(generatedKeyHolder, "KeyHolder must not be null");
-		logger.debug("Executing SQL update and returning generated keys");
+		logger.info("Executing SQL update and returning generated keys");
 
 		return updateCount(execute(psc, ps -> {
 			int rows = ps.executeUpdate();
@@ -899,7 +899,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 				}
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("SQL update affected " + rows + " rows and returned " + generatedKeys.size() + " keys");
+				logger.info("SQL update affected " + rows + " rows and returned " + generatedKeys.size() + " keys");
 			}
 			return rows;
 		}));
@@ -923,7 +923,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	@Override
 	public int[] batchUpdate(String sql, final BatchPreparedStatementSetter pss) throws DataAccessException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL batch update [" + sql + "]");
+			logger.info("Executing SQL batch update [" + sql + "]");
 		}
 
 		int[] result = execute(sql, (PreparedStatementCallback<int[]>) ps -> {
@@ -984,7 +984,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			final ParameterizedPreparedStatementSetter<T> pss) throws DataAccessException {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL batch update [" + sql + "] with a batch size of " + batchSize);
+			logger.info("Executing SQL batch update [" + sql + "] with a batch size of " + batchSize);
 		}
 		int[][] result = execute(sql, (PreparedStatementCallback<int[][]>) ps -> {
 			List<int[]> rowsAffected = new ArrayList<>();
@@ -1004,7 +1004,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 							if (logger.isDebugEnabled()) {
 								int batchIdx = (n % batchSize == 0) ? n / batchSize : (n / batchSize) + 1;
 								int items = n - ((n % batchSize == 0) ? n / batchSize - 1 : (n / batchSize)) * batchSize;
-								logger.debug("Sending SQL batch update #" + batchIdx + " with " + items + " items");
+								logger.info("Sending SQL batch update #" + batchIdx + " with " + items + " items");
 							}
 							rowsAffected.add(ps.executeBatch());
 						}
@@ -1044,7 +1044,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 		Assert.notNull(action, "Callback object must not be null");
 		if (logger.isDebugEnabled()) {
 			String sql = getSql(csc);
-			logger.debug("Calling stored procedure" + (sql != null ? " [" + sql  + "]" : ""));
+			logger.info("Calling stored procedure" + (sql != null ? " [" + sql  + "]" : ""));
 		}
 
 		Connection con = DataSourceUtils.getConnection(obtainDataSource());
@@ -1110,8 +1110,8 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			boolean retVal = cs.execute();
 			int updateCount = cs.getUpdateCount();
 			if (logger.isDebugEnabled()) {
-				logger.debug("CallableStatement.execute() returned '" + retVal + "'");
-				logger.debug("CallableStatement.getUpdateCount() returned " + updateCount);
+				logger.info("CallableStatement.execute() returned '" + retVal + "'");
+				logger.info("CallableStatement.getUpdateCount() returned " + updateCount);
 			}
 			Map<String, Object> returnedResults = createResultsMap();
 			if (retVal || updateCount != -1) {
@@ -1153,7 +1153,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 							String rsName = RETURN_RESULT_SET_PREFIX + (rsIndex + 1);
 							SqlReturnResultSet undeclaredRsParam = new SqlReturnResultSet(rsName, getColumnMapRowMapper());
 							if (logger.isDebugEnabled()) {
-								logger.debug("Added default SqlReturnResultSet parameter named '" + rsName + "'");
+								logger.info("Added default SqlReturnResultSet parameter named '" + rsName + "'");
 							}
 							returnedResults.putAll(processResultSet(cs.getResultSet(), undeclaredRsParam));
 							rsIndex++;
@@ -1171,7 +1171,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 						if (!this.skipUndeclaredResults) {
 							String undeclaredName = RETURN_UPDATE_COUNT_PREFIX + (updateIndex + 1);
 							if (logger.isDebugEnabled()) {
-								logger.debug("Added default SqlReturnUpdateCount parameter named '" + undeclaredName + "'");
+								logger.info("Added default SqlReturnUpdateCount parameter named '" + undeclaredName + "'");
 							}
 							returnedResults.put(undeclaredName, updateCount);
 							updateIndex++;
@@ -1181,7 +1181,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 				moreResults = cs.getMoreResults();
 				updateCount = cs.getUpdateCount();
 				if (logger.isDebugEnabled()) {
-					logger.debug("CallableStatement.getUpdateCount() returned " + updateCount);
+					logger.info("CallableStatement.getUpdateCount() returned " + updateCount);
 				}
 			}
 			while (moreResults || updateCount != -1);
@@ -1220,7 +1220,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 							SqlReturnResultSet rsParam = new SqlReturnResultSet(rsName, getColumnMapRowMapper());
 							returnedResults.putAll(processResultSet((ResultSet) out, rsParam));
 							if (logger.isDebugEnabled()) {
-								logger.debug("Added default SqlReturnResultSet parameter named '" + rsName + "'");
+								logger.info("Added default SqlReturnResultSet parameter named '" + rsName + "'");
 							}
 						}
 					}
@@ -1374,7 +1374,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			if (logger.isDebugEnabled()) {
 				SQLWarning warningToLog = stmt.getWarnings();
 				while (warningToLog != null) {
-					logger.debug("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() + "', error code '" +
+					logger.info("SQLWarning ignored: SQL state '" + warningToLog.getSQLState() + "', error code '" +
 							warningToLog.getErrorCode() + "', message [" + warningToLog.getMessage() + "]");
 					warningToLog = warningToLog.getNextWarning();
 				}

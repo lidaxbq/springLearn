@@ -97,7 +97,7 @@ public class SimpleNamingContext implements Context {
 	@Override
 	public NamingEnumeration<NameClassPair> list(String root) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Listing name/class pairs under [" + root + "]");
+			logger.info("Listing name/class pairs under [" + root + "]");
 		}
 		return new NameClassPairEnumeration(this, root);
 	}
@@ -105,7 +105,7 @@ public class SimpleNamingContext implements Context {
 	@Override
 	public NamingEnumeration<Binding> listBindings(String root) throws NamingException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Listing bindings under [" + root + "]");
+			logger.info("Listing bindings under [" + root + "]");
 		}
 		return new BindingEnumeration(this, root);
 	}
@@ -120,7 +120,7 @@ public class SimpleNamingContext implements Context {
 	public Object lookup(String lookupName) throws NameNotFoundException {
 		String name = this.root + lookupName;
 		if (logger.isDebugEnabled()) {
-			logger.debug("Static JNDI lookup: [" + name + "]");
+			logger.info("Static JNDI lookup: [" + name + "]");
 		}
 		if ("".equals(name)) {
 			return new SimpleNamingContext(this.root, this.boundObjects, this.environment);

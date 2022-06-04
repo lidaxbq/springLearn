@@ -67,13 +67,13 @@ public class DefaultCorsProcessor implements CorsProcessor {
 
 		ServletServerHttpResponse serverResponse = new ServletServerHttpResponse(response);
 		if (responseHasCors(serverResponse)) {
-			logger.debug("Skip CORS processing: response already contains \"Access-Control-Allow-Origin\" header");
+			logger.info("Skip CORS processing: response already contains \"Access-Control-Allow-Origin\" header");
 			return true;
 		}
 
 		ServletServerHttpRequest serverRequest = new ServletServerHttpRequest(request);
 		if (WebUtils.isSameOrigin(serverRequest)) {
-			logger.debug("Skip CORS processing: request is from same origin");
+			logger.info("Skip CORS processing: request is from same origin");
 			return true;
 		}
 
@@ -124,7 +124,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 		responseHeaders.add(HttpHeaders.VARY, HttpHeaders.ORIGIN);
 
 		if (allowOrigin == null) {
-			logger.debug("Rejecting CORS request because '" + requestOrigin + "' origin is not allowed");
+			logger.info("Rejecting CORS request because '" + requestOrigin + "' origin is not allowed");
 			rejectRequest(response);
 			return false;
 		}
@@ -132,7 +132,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 		HttpMethod requestMethod = getMethodToUse(request, preFlightRequest);
 		List<HttpMethod> allowMethods = checkMethods(config, requestMethod);
 		if (allowMethods == null) {
-			logger.debug("Rejecting CORS request because '" + requestMethod + "' request method is not allowed");
+			logger.info("Rejecting CORS request because '" + requestMethod + "' request method is not allowed");
 			rejectRequest(response);
 			return false;
 		}
@@ -140,7 +140,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 		List<String> requestHeaders = getHeadersToUse(request, preFlightRequest);
 		List<String> allowHeaders = checkHeaders(config, requestHeaders);
 		if (preFlightRequest && allowHeaders == null) {
-			logger.debug("Rejecting CORS request because '" + requestHeaders + "' request headers are not allowed");
+			logger.info("Rejecting CORS request because '" + requestHeaders + "' request headers are not allowed");
 			rejectRequest(response);
 			return false;
 		}

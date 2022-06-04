@@ -296,7 +296,7 @@ public class WebDataBinder extends DataBinder {
 		}
 		catch (IllegalArgumentException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Failed to create default value - falling back to null: " + ex.getMessage());
+				logger.info("Failed to create default value - falling back to null: " + ex.getMessage());
 			}
 		}
 		// Default value: null.

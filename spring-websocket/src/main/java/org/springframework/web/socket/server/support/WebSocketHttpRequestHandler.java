@@ -158,7 +158,7 @@ public class WebSocketHttpRequestHandler implements HttpRequestHandler, Lifecycl
 
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.debug(servletRequest.getMethod() + " " + servletRequest.getRequestURI());
+				logger.info(servletRequest.getMethod() + " " + servletRequest.getRequestURI());
 			}
 			Map<String, Object> attributes = new HashMap<>();
 			if (!chain.applyBeforeHandshake(request, response, attributes)) {

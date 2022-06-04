@@ -100,7 +100,7 @@ public abstract class AbstractXhrTransport implements XhrTransport {
 
 		URI receiveUrl = request.getTransportUrl();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Starting XHR " +
+			logger.info("Starting XHR " +
 					(isXhrStreamingDisabled() ? "Polling" : "Streaming") + "session url=" + receiveUrl);
 		}
 
@@ -121,7 +121,7 @@ public abstract class AbstractXhrTransport implements XhrTransport {
 	@Override
 	public String executeInfoRequest(URI infoUrl, @Nullable HttpHeaders headers) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SockJS Info request, url=" + infoUrl);
+			logger.info("Executing SockJS Info request, url=" + infoUrl);
 		}
 		HttpHeaders infoRequestHeaders = new HttpHeaders();
 		if (headers != null) {

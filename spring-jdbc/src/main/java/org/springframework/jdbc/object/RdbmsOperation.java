@@ -354,7 +354,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 			this.compiled = true;
 
 			if (logger.isDebugEnabled()) {
-				logger.debug("RdbmsOperation with SQL [" + getSql() + "] compiled");
+				logger.info("RdbmsOperation with SQL [" + getSql() + "] compiled");
 			}
 		}
 	}
@@ -377,7 +377,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 	 */
 	protected void checkCompiled() {
 		if (!isCompiled()) {
-			logger.debug("SQL operation not compiled before execution - invoking compile");
+			logger.info("SQL operation not compiled before execution - invoking compile");
 			compile();
 		}
 	}

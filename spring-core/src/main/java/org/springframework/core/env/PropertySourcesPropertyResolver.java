@@ -74,6 +74,17 @@ public class PropertySourcesPropertyResolver extends AbstractPropertyResolver {
 		return getProperty(key, String.class, false);
 	}
 
+	/**
+	 * key ：获取的 key 。
+	 * targetValueType ： 目标 value 的类型。
+	 * resolveNestedPlaceholders ：是否解决嵌套占位符。
+	 *
+	 * @param key
+	 * @param targetValueType
+	 * @param resolveNestedPlaceholders
+	 * @param <T>
+	 * @return
+	 */
 	@Nullable
 	protected <T> T getProperty(String key, Class<T> targetValueType, boolean resolveNestedPlaceholders) {
 		if (this.propertySources != null) {
@@ -84,16 +95,18 @@ public class PropertySourcesPropertyResolver extends AbstractPropertyResolver {
 				}
 				Object value = propertySource.getProperty(key);
 				if (value != null) {
+					// 如果解决嵌套占位符，解析占位符
 					if (resolveNestedPlaceholders && value instanceof String) {
 						value = resolveNestedPlaceholders((String) value);
 					}
 					logKeyFound(key, propertySource, value);
+					// value 的类型转换
 					return convertValueIfNecessary(value, targetValueType);
 				}
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug("Could not find key '" + key + "' in any property source");
+			logger.info("Could not find key '" + key + "' in any property source");
 		}
 		return null;
 	}
@@ -112,7 +125,7 @@ public class PropertySourcesPropertyResolver extends AbstractPropertyResolver {
 	 */
 	protected void logKeyFound(String key, PropertySource<?> propertySource, Object value) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("Found key '" + key + "' in PropertySource '" + propertySource.getName() +
+			logger.info("Found key '" + key + "' in PropertySource '" + propertySource.getName() +
 					"' with value of type " + value.getClass().getSimpleName());
 		}
 	}

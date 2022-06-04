@@ -76,7 +76,7 @@ abstract class ActiveProfilesUtils {
 		AnnotationDescriptor<ActiveProfiles> descriptor =
 				MetaAnnotationUtils.findAnnotationDescriptor(testClass, annotationType);
 		if (descriptor == null && logger.isDebugEnabled()) {
-			logger.debug(String.format(
+			logger.info(String.format(
 					"Could not find an 'annotation declaring class' for annotation type [%s] and class [%s]",
 					annotationType.getName(), testClass.getName()));
 		}

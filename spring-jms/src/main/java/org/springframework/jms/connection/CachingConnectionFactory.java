@@ -224,7 +224,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 		else {
 			Session targetSession = createSession(con, mode);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Registering cached JMS Session for mode " + mode + ": " + targetSession);
+				logger.info("Registering cached JMS Session for mode " + mode + ": " + targetSession);
 			}
 			session = getCachedSessionProxy(targetSession, sessionList);
 		}
@@ -391,7 +391,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 			else {
 				producer = this.target.createProducer(dest);
 				if (logger.isDebugEnabled()) {
-					logger.debug("Registering cached JMS MessageProducer for destination [" + dest + "]: " + producer);
+					logger.info("Registering cached JMS MessageProducer for destination [" + dest + "]: " + producer);
 				}
 				this.cachedProducers.put(cacheKey, producer);
 			}
@@ -425,7 +425,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 					consumer = this.target.createConsumer(dest, selector);
 				}
 				if (logger.isDebugEnabled()) {
-					logger.debug("Registering cached JMS MessageConsumer for destination [" + dest + "]: " + consumer);
+					logger.info("Registering cached JMS MessageConsumer for destination [" + dest + "]: " + consumer);
 				}
 				this.cachedConsumers.put(cacheKey, consumer);
 			}
@@ -461,7 +461,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 
 		private void physicalClose() throws JMSException {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Closing cached Session: " + this.target);
+				logger.info("Closing cached Session: " + this.target);
 			}
 			// Explicitly close all MessageProducers and MessageConsumers that
 			// this Session happens to cache...

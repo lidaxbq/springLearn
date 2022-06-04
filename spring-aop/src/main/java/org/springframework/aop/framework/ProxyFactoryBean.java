@@ -392,7 +392,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 					// The target isn't an interceptor.
 					this.targetName = finalName;
 					if (logger.isDebugEnabled()) {
-						logger.debug("Bean with name '" + finalName + "' concluding interceptor chain " +
+						logger.info("Bean with name '" + finalName + "' concluding interceptor chain " +
 								"is not an advisor class: treating it as a target or TargetSource");
 					}
 					String[] newNames = new String[this.interceptorNames.length - 1];
@@ -418,7 +418,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 		}
 		// Treat it as an target bean if we can't tell.
 		if (logger.isDebugEnabled()) {
-			logger.debug("Could not determine type of bean with name '" + beanName +
+			logger.info("Could not determine type of bean with name '" + beanName +
 					"' - assuming it is neither an Advisor nor an Advice");
 		}
 		return false;
@@ -496,7 +496,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 			if (advisor instanceof PrototypePlaceholderAdvisor) {
 				PrototypePlaceholderAdvisor pa = (PrototypePlaceholderAdvisor) advisor;
 				if (logger.isDebugEnabled()) {
-					logger.debug("Refreshing bean named '" + pa.getBeanName() + "'");
+					logger.info("Refreshing bean named '" + pa.getBeanName() + "'");
 				}
 				// Replace the placeholder with a fresh prototype instance resulting
 				// from a getBean() lookup
@@ -583,7 +583,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 						"- cannot resolve target with name '" + this.targetName + "'");
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Refreshing target with name '" + this.targetName + "'");
+				logger.info("Refreshing target with name '" + this.targetName + "'");
 			}
 			Object target = this.beanFactory.getBean(this.targetName);
 			return (target instanceof TargetSource ? (TargetSource) target : new SingletonTargetSource(target));
@@ -614,7 +614,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	protected void adviceChanged() {
 		super.adviceChanged();
 		if (this.singleton) {
-			logger.debug("Advice has changed; recaching singleton instance");
+			logger.info("Advice has changed; recaching singleton instance");
 			synchronized (this) {
 				this.singletonInstance = null;
 			}

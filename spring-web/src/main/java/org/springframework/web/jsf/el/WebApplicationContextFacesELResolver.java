@@ -78,7 +78,7 @@ public class WebApplicationContextFacesELResolver extends ELResolver {
 				}
 				if (wac.containsBean(beanName)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Successfully resolved property '" + beanName + "' in root WebApplicationContext");
+						logger.info("Successfully resolved property '" + beanName + "' in root WebApplicationContext");
 					}
 					elContext.setPropertyResolved(true);
 					try {
@@ -112,11 +112,11 @@ public class WebApplicationContextFacesELResolver extends ELResolver {
 				WebApplicationContext wac = (WebApplicationContext) base;
 				String beanName = property.toString();
 				if (logger.isDebugEnabled()) {
-					logger.debug("Attempting to resolve property '" + beanName + "' in root WebApplicationContext");
+					logger.info("Attempting to resolve property '" + beanName + "' in root WebApplicationContext");
 				}
 				if (wac.containsBean(beanName)) {
 					if (logger.isDebugEnabled()) {
-						logger.debug("Successfully resolved property '" + beanName + "' in root WebApplicationContext");
+						logger.info("Successfully resolved property '" + beanName + "' in root WebApplicationContext");
 					}
 					elContext.setPropertyResolved(true);
 					try {

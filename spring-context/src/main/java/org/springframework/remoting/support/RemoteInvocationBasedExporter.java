@@ -91,7 +91,7 @@ public abstract class RemoteInvocationBasedExporter extends RemoteExporter {
 		}
 		catch (InvocationTargetException ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Target method failed for " + invocation, ex.getTargetException());
+				logger.info("Target method failed for " + invocation, ex.getTargetException());
 			}
 			throw ex;
 		}

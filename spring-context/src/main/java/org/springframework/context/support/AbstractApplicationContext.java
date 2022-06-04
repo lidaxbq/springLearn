@@ -132,6 +132,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/** Logger used by this class. Available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+
 	/** Unique id for this context, if any */
 	private String id = ObjectUtils.identityToString(this);
 
@@ -506,7 +507,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				//4、为容器的某些子类指定特殊的BeanPost事件处理器
+				//4、为容器的某些子类指定特殊的BeanPost处理器  lida扩展点
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
@@ -528,7 +529,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
-				//9、调用子类的某些特殊Bean初始化方法
+				//9、调用子类的某些特殊Bean初始化方法  lida扩展点,,,  嵌入式tomcat启动
 				onRefresh();
 
 				// Check for listener beans and register them.
@@ -590,7 +591,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Validate that all properties marked as required are resolvable
 		// see ConfigurablePropertyResolver#setRequiredProperties
-		// 扩展点
+		// 扩展点     校验必需的属性是否已经提供
 		getEnvironment().validateRequiredProperties();
 
 		// Allow for the collection of early ApplicationEvents,
@@ -615,11 +616,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
 		//这里使用了委派设计模式，父类定义了抽象的refreshBeanFactory()方法，具体实现调用子类容器的refreshBeanFactory()方法
-		// 初始化beanFactory，xml配置文件的读取，
+		// 初始化beanFactory，xml配置文件的读取`，
 		refreshBeanFactory();
 		ConfigurableListableBeanFactory beanFactory = getBeanFactory();
 		if (logger.isDebugEnabled()) {
-			logger.debug("Bean factory for " + getDisplayName() + ": " + beanFactory);
+			logger.info("Bean factory for " + getDisplayName() + ": " + beanFactory);
 		}
 		return beanFactory;
 	}
@@ -696,7 +697,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Must be called before singleton instantiation.
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-		// 调用BeanFactoryPostProcessor系列的后置处理器
+		// 调用BeanFactoryPostProcessor系列和 BeanDefinitionRegistryPostProcessor 的后置处理器
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// 检测LoadTimeWeaver并准备编织
@@ -737,7 +738,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				}
 			}
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using MessageSource [" + this.messageSource + "]");
+				logger.info("Using MessageSource [" + this.messageSource + "]");
 			}
 		}
 		else {
@@ -748,7 +749,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			this.messageSource = dms;
 			beanFactory.registerSingleton(MESSAGE_SOURCE_BEAN_NAME, this.messageSource);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Unable to locate MessageSource with name '" + MESSAGE_SOURCE_BEAN_NAME +
+				logger.info("Unable to locate MessageSource with name '" + MESSAGE_SOURCE_BEAN_NAME +
 						"': using default [" + this.messageSource + "]");
 			}
 		}
@@ -766,7 +767,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			this.applicationEventMulticaster =
 					beanFactory.getBean(APPLICATION_EVENT_MULTICASTER_BEAN_NAME, ApplicationEventMulticaster.class);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using ApplicationEventMulticaster [" + this.applicationEventMulticaster + "]");
+				logger.info("Using ApplicationEventMulticaster [" + this.applicationEventMulticaster + "]");
 			}
 		}
 		else {
@@ -774,7 +775,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			this.applicationEventMulticaster = new SimpleApplicationEventMulticaster(beanFactory);
 			beanFactory.registerSingleton(APPLICATION_EVENT_MULTICASTER_BEAN_NAME, this.applicationEventMulticaster);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Unable to locate ApplicationEventMulticaster with name '" +
+				logger.info("Unable to locate ApplicationEventMulticaster with name '" +
 						APPLICATION_EVENT_MULTICASTER_BEAN_NAME +
 						"': using default [" + this.applicationEventMulticaster + "]");
 			}
@@ -792,7 +793,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			this.lifecycleProcessor =
 					beanFactory.getBean(LIFECYCLE_PROCESSOR_BEAN_NAME, LifecycleProcessor.class);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Using LifecycleProcessor [" + this.lifecycleProcessor + "]");
+				logger.info("Using LifecycleProcessor [" + this.lifecycleProcessor + "]");
 			}
 		}
 		else {
@@ -801,7 +802,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			this.lifecycleProcessor = defaultProcessor;
 			beanFactory.registerSingleton(LIFECYCLE_PROCESSOR_BEAN_NAME, this.lifecycleProcessor);
 			if (logger.isDebugEnabled()) {
-				logger.debug("Unable to locate LifecycleProcessor with name '" +
+				logger.info("Unable to locate LifecycleProcessor with name '" +
 						LIFECYCLE_PROCESSOR_BEAN_NAME +
 						"': using default [" + this.lifecycleProcessor + "]");
 			}

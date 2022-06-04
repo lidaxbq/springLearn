@@ -156,7 +156,7 @@ class TypeConverterDelegate {
 		PropertyEditor editor = this.propertyEditorRegistry.findCustomEditor(requiredType, propertyName);
 
 		ConversionFailedException conversionAttemptEx = null;
-
+		// 如果没有自定义的编辑器则使用 ConversionService
 		// No custom editor but custom ConversionService specified?
 		ConversionService conversionService = this.propertyEditorRegistry.getConversionService();
 		if (editor == null && conversionService != null && newValue != null && typeDescriptor != null) {
@@ -242,7 +242,7 @@ class TypeConverterDelegate {
 						}
 						catch (Exception ex) {
 							if (logger.isDebugEnabled()) {
-								logger.debug("Construction via String failed for type [" + requiredType.getName() + "]", ex);
+								logger.info("Construction via String failed for type [" + requiredType.getName() + "]", ex);
 							}
 						}
 					}
@@ -305,7 +305,7 @@ class TypeConverterDelegate {
 			if (editor == null && !standardConversion && requiredType != null && Object.class != requiredType) {
 				throw conversionAttemptEx;
 			}
-			logger.debug("Original ConversionService attempt failed - ignored since " +
+			logger.info("Original ConversionService attempt failed - ignored since " +
 					"PropertyEditor based conversion eventually succeeded", conversionAttemptEx);
 		}
 
@@ -410,7 +410,7 @@ class TypeConverterDelegate {
 			}
 			catch (Exception ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("PropertyEditor [" + editor.getClass().getName() + "] does not support setValue call", ex);
+					logger.info("PropertyEditor [" + editor.getClass().getName() + "] does not support setValue call", ex);
 				}
 				// Swallow and proceed.
 			}
@@ -458,7 +458,7 @@ class TypeConverterDelegate {
 		}
 		catch (Exception ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("PropertyEditor [" + editor.getClass().getName() + "] does not support setValue call", ex);
+				logger.info("PropertyEditor [" + editor.getClass().getName() + "] does not support setValue call", ex);
 			}
 			// Swallow and proceed.
 		}
@@ -515,7 +515,7 @@ class TypeConverterDelegate {
 		boolean approximable = CollectionFactory.isApproximableCollectionType(requiredType);
 		if (!approximable && !canCreateCopy(requiredType)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Custom Collection type [" + original.getClass().getName() +
+				logger.info("Custom Collection type [" + original.getClass().getName() +
 						"] does not allow for creating a copy - injecting original Collection as-is");
 			}
 			return original;
@@ -534,7 +534,7 @@ class TypeConverterDelegate {
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Cannot access Collection of type [" + original.getClass().getName() +
+				logger.info("Cannot access Collection of type [" + original.getClass().getName() +
 						"] - injecting original Collection as-is: " + ex);
 			}
 			return original;
@@ -552,7 +552,7 @@ class TypeConverterDelegate {
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Cannot create copy of Collection type [" + original.getClass().getName() +
+				logger.info("Cannot create copy of Collection type [" + original.getClass().getName() +
 						"] - injecting original Collection as-is: " + ex);
 			}
 			return original;
@@ -569,7 +569,7 @@ class TypeConverterDelegate {
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Collection type [" + original.getClass().getName() +
+					logger.info("Collection type [" + original.getClass().getName() +
 							"] seems to be read-only - injecting original Collection as-is: " + ex);
 				}
 				return original;
@@ -590,7 +590,7 @@ class TypeConverterDelegate {
 		boolean approximable = CollectionFactory.isApproximableMapType(requiredType);
 		if (!approximable && !canCreateCopy(requiredType)) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Custom Map type [" + original.getClass().getName() +
+				logger.info("Custom Map type [" + original.getClass().getName() +
 						"] does not allow for creating a copy - injecting original Map as-is");
 			}
 			return original;
@@ -610,7 +610,7 @@ class TypeConverterDelegate {
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Cannot access Map of type [" + original.getClass().getName() +
+				logger.info("Cannot access Map of type [" + original.getClass().getName() +
 						"] - injecting original Map as-is: " + ex);
 			}
 			return original;
@@ -628,7 +628,7 @@ class TypeConverterDelegate {
 		}
 		catch (Throwable ex) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Cannot create copy of Map type [" + original.getClass().getName() +
+				logger.info("Cannot create copy of Map type [" + original.getClass().getName() +
 						"] - injecting original Map as-is: " + ex);
 			}
 			return original;
@@ -648,7 +648,7 @@ class TypeConverterDelegate {
 			}
 			catch (Throwable ex) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Map type [" + original.getClass().getName() +
+					logger.info("Map type [" + original.getClass().getName() +
 							"] seems to be read-only - injecting original Map as-is: " + ex);
 				}
 				return original;

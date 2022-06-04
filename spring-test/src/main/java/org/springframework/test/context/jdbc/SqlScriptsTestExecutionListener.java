@@ -162,7 +162,7 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 
 		MergedSqlConfig mergedSqlConfig = new MergedSqlConfig(sql.config(), testContext.getTestClass());
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Processing %s for execution phase [%s] and test context %s.",
+			logger.info(String.format("Processing %s for execution phase [%s] and test context %s.",
 					mergedSqlConfig, executionPhase, testContext));
 		}
 
@@ -187,7 +187,7 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 		}
 		populator.setScripts(scriptResources.toArray(new Resource[scriptResources.size()]));
 		if (logger.isDebugEnabled()) {
-			logger.debug("Executing SQL scripts: " + ObjectUtils.nullSafeToString(scriptResources));
+			logger.info("Executing SQL scripts: " + ObjectUtils.nullSafeToString(scriptResources));
 		}
 
 		String dsName = mergedSqlConfig.getDataSource();

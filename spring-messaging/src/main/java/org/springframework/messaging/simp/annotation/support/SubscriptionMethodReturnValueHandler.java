@@ -126,7 +126,7 @@ public class SubscriptionMethodReturnValueHandler implements HandlerMethodReturn
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Reply to @SubscribeMapping: " + returnValue);
+			logger.info("Reply to @SubscribeMapping: " + returnValue);
 		}
 		MessageHeaders headersToSend = createHeaders(sessionId, subscriptionId, returnType);
 		this.messagingTemplate.convertAndSend(destination, returnValue, headersToSend);
